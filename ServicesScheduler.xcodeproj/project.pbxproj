@@ -3,18 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
-		5C96DEE822ED13CC00BB643A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* ContentView.swift */; };
+		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
 		5C96DEEA22ED13D000BB643A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEE922ED13D000BB643A /* Assets.xcassets */; };
 		5C96DEED22ED13D000BB643A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEC22ED13D000BB643A /* Preview Assets.xcassets */; };
 		5C96DEF022ED13D000BB643A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */; };
 		5C96DEFB22ED13D000BB643A /* ServicesSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEFA22ED13D000BB643A /* ServicesSchedulerTests.swift */; };
 		5C96DF0622ED13D000BB643A /* ServicesSchedulerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */; };
+		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
+		5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 		5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServicesScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5C96DEE722ED13CC00BB643A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5C96DEE722ED13CC00BB643A /* FolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentView.swift; sourceTree = "<group>"; };
 		5C96DEE922ED13D000BB643A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C96DEEC22ED13D000BB643A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5C96DEEF22ED13D000BB643A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 		5C96DF0122ED13D000BB643A /* ServicesSchedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServicesSchedulerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSchedulerUITests.swift; sourceTree = "<group>"; };
 		5C96DF0722ED13D000BB643A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +105,8 @@
 			children = (
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
-				5C96DEE722ED13CC00BB643A /* ContentView.swift */,
+				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
+				5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
 				5C96DEF122ED13D000BB643A /* Info.plist */,
@@ -150,8 +155,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				5CF87847233341E200B8A2DF /* PBXTargetDependency */,
 			);
 			name = ServicesScheduler;
+			packageProductDependencies = (
+				5CF8784423332A5900B8A2DF /* PlanningCenterSwift */,
+			);
 			productName = ServicesScheduler;
 			productReference = 5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +233,9 @@
 				Base,
 			);
 			mainGroup = 5C96DED722ED13CC00BB643A;
+			packageReferences = (
+				5CF8784323332A5900B8A2DF /* XCRemoteSwiftPackageReference "PlanningCenterSwift" */,
+			);
 			productRefGroup = 5C96DEE122ED13CC00BB643A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,9 +279,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
-				5C96DEE822ED13CC00BB643A /* ContentView.swift in Sources */,
+				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +314,10 @@
 			isa = PBXTargetDependency;
 			target = 5C96DEDF22ED13CC00BB643A /* ServicesScheduler */;
 			targetProxy = 5C96DF0222ED13D000BB643A /* PBXContainerItemProxy */;
+		};
+		5CF87847233341E200B8A2DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 5CF87846233341E200B8A2DF /* PlanningCenterSwift */;
 		};
 /* End PBXTargetDependency section */
 
@@ -592,6 +609,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CF8784323332A5900B8A2DF /* XCRemoteSwiftPackageReference "PlanningCenterSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/javb99/PlanningCenterSwift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5CF8784423332A5900B8A2DF /* PlanningCenterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CF8784323332A5900B8A2DF /* XCRemoteSwiftPackageReference "PlanningCenterSwift" */;
+			productName = PlanningCenterSwift;
+		};
+		5CF87846233341E200B8A2DF /* PlanningCenterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CF8784323332A5900B8A2DF /* XCRemoteSwiftPackageReference "PlanningCenterSwift" */;
+			productName = PlanningCenterSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5C96DED822ED13CC00BB643A /* Project object */;
 }

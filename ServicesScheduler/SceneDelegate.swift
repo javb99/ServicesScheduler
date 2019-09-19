@@ -9,6 +9,15 @@
 import UIKit
 import SwiftUI
 
+struct RecursiveFolderFactory: FolderDestinationFactory {
+    func destination(forFolder folder: String) -> some View {
+        FolderContentView(destinationFactory: Self(), folderName: folder)
+    }
+    func destination(forServiceType serviceType: String) -> some View {
+        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", name: "Band"), .init(id: "2", name: "Tech")], serviceTypeName: serviceType)
+    }
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -22,7 +31,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView())
+            
+            window.rootViewController = UIHostingController(rootView:
+                NavigationView {
+                    FolderContentView(destinationFactory: RecursiveFolderFactory(), folderName: "Crossroads")
+                })
             self.window = window
             window.makeKeyAndVisible()
         }
