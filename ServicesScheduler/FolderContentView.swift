@@ -44,7 +44,7 @@ struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
         NavigationLink(destination: destinationFactory.destination(forFolder: folder)) {
             HStack(spacing: 15) {
                 Image(systemName: "folder")
-                    .foregroundColor(.green)
+                    .foregroundColor(Color.green)
                 Text(folder)
             }
         }
@@ -64,8 +64,5 @@ struct FolderContentView_Previews : PreviewProvider {
             FolderContentView(destinationFactory: RecursiveFolderFactory(), folderName: "Crossroads")
         }
     }
-}
-func viewForString(_ string: String) -> some View {
-    Text(string).navigationBarTitle(string)
 }
 #endif
