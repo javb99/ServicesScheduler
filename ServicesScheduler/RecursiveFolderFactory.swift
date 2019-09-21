@@ -16,6 +16,6 @@ struct RecursiveFolderFactory: FolderDestinationFactory {
     }
     
     func destination(forServiceType serviceType: String) -> some View {
-        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", name: "Band"), .init(id: "2", name: "Tech")], serviceTypeName: serviceType)
+        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", value: "Band"), .init(id: "2", value: "Tech")], serviceTypeName: serviceType)
     }
 }

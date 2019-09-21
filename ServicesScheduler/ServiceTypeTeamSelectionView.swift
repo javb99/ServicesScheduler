@@ -8,11 +8,7 @@
 
 import SwiftUI
 
-struct Team: Identifiable {
-    typealias ID = String
-    var id: ID
-    var name: String
-}
+typealias Team = Identified<String, String>
 
 struct ServiceTypeTeamSelectionView: View {
     
@@ -22,7 +18,7 @@ struct ServiceTypeTeamSelectionView: View {
     
     var body: some View {
         List(teams, selection: $selection) { team in
-            Text(team.name)
+            Text(team.value)
         }
         .environment(\.editMode, .constant(EditMode.active))
         .navigationBarTitle(serviceTypeName)
@@ -33,7 +29,7 @@ struct ServiceTypeTeamSelectionView: View {
 struct ServiceTypeTeamSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", name:"Band")], serviceTypeName: "STUDENTS Wednesdays")
+            ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", value:"Band")], serviceTypeName: "STUDENTS Wednesdays")
         }
     }
 }
