@@ -12,15 +12,15 @@ typealias Team = Identified<String, String>
 
 struct ServiceTypeTeamSelectionView: View {
     
-    @Binding var selection: Set<Team.ID>
+    var selection: Binding<Set<Team.ID>>?
     var teams: [Team]
     var serviceTypeName: String
     
     var body: some View {
-        List(teams, selection: $selection) { team in
+        List(teams, selection: selection) { team in
             Text(team.value)
         }
-        .environment(\.editMode, .constant(EditMode.active))
+        .environment(\.editMode, .constant(.active))
         .navigationBarTitle(serviceTypeName)
     }
 }
@@ -28,8 +28,12 @@ struct ServiceTypeTeamSelectionView: View {
 #if DEBUG
 struct ServiceTypeTeamSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init("Band", id: "1")], serviceTypeName: "STUDENTS Wednesdays")
+        return NavigationView {
+            ServiceTypeTeamSelectionView(
+                selection: .constant(["1"]),
+                teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
+                serviceTypeName: "STUDENTS Wednesdays"
+            )
         }
     }
 }

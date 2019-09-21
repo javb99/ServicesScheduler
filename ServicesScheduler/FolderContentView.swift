@@ -63,10 +63,7 @@ struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
 struct FolderContentView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FolderContentView(destinationFactory: RecursiveFolderFactory(),
-                              folderName: "Crossroads",
-                              folderNames: [.init("STUDENTS", id: "1"), .init("YA", id: "2")],
-                              serviceTypeNames: [.init("Sunday Mornings", id: "1")])
+            RecursiveFolderFactory().destination(forFolder: .init("", id: "1"))
         }
     }
 }

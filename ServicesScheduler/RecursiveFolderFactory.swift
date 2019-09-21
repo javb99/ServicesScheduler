@@ -12,12 +12,19 @@ import PlanningCenterSwift
 struct RecursiveFolderFactory: FolderDestinationFactory {
     
     func destination(forFolder folder: PresentableFolder) -> some View {
-        FolderContentView(destinationFactory: Self(), folderName: folder.value, folderNames: [.init("STUDENTS", id: "1"), .init("YA", id: "2"), .init("Sanctuary", id: "3")], serviceTypeNames: [.init("Online", id:"1")])
+        FolderContentView(
+            destinationFactory: Self(),
+            folderName: folder.value,
+            folderNames: [.init("STUDENTS", id: "1"), .init("YA", id: "2"), .init("Sanctuary", id: "3")],
+            serviceTypeNames: [.init("Online", id:"1")]
+        )
     }
     
     func destination(forServiceType serviceType: PresentableServiceType) -> some View {
-        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}),
-                                     teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-                                     serviceTypeName: serviceType.value)
+        ServiceTypeTeamSelectionView(
+            selection: .constant(["1"]),
+            teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
+            serviceTypeName: serviceType.value
+        )
     }
 }
