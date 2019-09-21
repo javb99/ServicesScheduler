@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window.rootViewController = UIHostingController(rootView:
                 NavigationView {
-                    NetworkRecursiveFolderFactory(network: service, provider: FolderLoader(network: service)).destination(forFolder: "Crossroads")
+                    NetworkRecursiveFolderFactory(network: service, provider: FolderLoader(network: service)).destination(forFolder: .init("Crossroads", id: "1"))
                 })
             self.window = window
             window.makeKeyAndVisible()

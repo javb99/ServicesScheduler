@@ -9,9 +9,9 @@
 import SwiftUI
 
 protocol FolderContentProvider: ObservableObject {
-    var folderName: String         { get }
-    var folderNames: [String]      { get }
-    var serviceTypeNames: [String] { get }
+    var folderName: String { get }
+    var folderNames: [PresentableFolder] { get }
+    var serviceTypeNames: [PresentableServiceType] { get }
     func load()
 }
 

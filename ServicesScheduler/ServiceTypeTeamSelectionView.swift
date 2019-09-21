@@ -29,7 +29,7 @@ struct ServiceTypeTeamSelectionView: View {
 struct ServiceTypeTeamSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", value:"Band")], serviceTypeName: "STUDENTS Wednesdays")
+            ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init("Band", id: "1")], serviceTypeName: "STUDENTS Wednesdays")
         }
     }
 }

@@ -26,17 +26,21 @@ class FolderLoader: FolderContentProvider {
             objectWillChange.send()
         }
         didSet {
-            folderNames = folders.map{ $0.name ?? "" }
+            folderNames = folders.map{ .init($0.name!, id: $0.identifer.id) }
         }
+    }
+    
+    func folder(for presentableFolder: PresentableFolder) -> Resource<Models.Folder>? {
+        folders.first(where: {$0.identifer.id == presentableFolder.id})
     }
     
     var folderName: String {
         parent?.name ?? ""
     }
     
-    var folderNames: [String] = []
+    var folderNames: [PresentableFolder] = []
     
-    var serviceTypeNames: [String] = [] {
+    var serviceTypeNames: [PresentableServiceType] = [] {
         willSet {
             objectWillChange.send()
         }
@@ -78,7 +82,7 @@ class FolderLoader: FolderContentProvider {
             switch result {
             case let .success(_, _, document):
                 print("Received service types: \(document.data!.map{$0.name})")
-                self.serviceTypeNames = document.data!.map { $0.name! }
+                self.serviceTypeNames = document.data!.map { .init($0.name!, id: $0.identifer.id) }
             case let .failure(error):
                 print("Received Failed: \(error)")
                 self.serviceTypeNames = []

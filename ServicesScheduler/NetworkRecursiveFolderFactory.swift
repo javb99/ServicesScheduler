@@ -14,13 +14,15 @@ struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
     let network: URLSessionService
     let provider: FolderLoader
     
-    func destination(forFolder folder: String) -> some View {
-        let newParent = provider.folders.first(where: {$0.name==folder})
+    func destination(forFolder folder: PresentableFolder) -> some View {
+        let newParent = provider.folder(for: folder)
         let newProvider = FolderLoader(network: network, parent: newParent)
         return DynamicFolderContentView(destinationFactory: Self(network: network, provider: newProvider), provider: newProvider)
     }
     
-    func destination(forServiceType serviceType: String) -> some View {
-        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}), teams: [.init(id: "1", value: "Band"), .init(id: "2", value: "Tech")], serviceTypeName: serviceType)
+    func destination(forServiceType serviceType: PresentableServiceType) -> some View {
+        ServiceTypeTeamSelectionView(selection: Binding(get: {Set<String>()}, set: {_ in}),
+                                     teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
+                                     serviceTypeName: serviceType.value)
     }
 }

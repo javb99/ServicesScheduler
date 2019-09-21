@@ -12,4 +12,9 @@ import Foundation
 struct Identified<ID: Hashable, Value>: Identifiable {
     var id: ID
     var value: Value
+    
+    init(_ value: Value, id: ID) {
+        self.id = id
+        self.value = value
+    }
 }

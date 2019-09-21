@@ -10,29 +10,30 @@ import SwiftUI
 
 protocol FolderDestinationFactory {
     associatedtype FolderView: View
-    func destination(forFolder folder: String) -> FolderView
+    func destination(forFolder folder: PresentableFolder) -> FolderView
     associatedtype ServiceTypeView: View
-    func destination(forServiceType serviceType: String) -> ServiceTypeView
+    func destination(forServiceType serviceType: PresentableServiceType) -> ServiceTypeView
 }
 
+typealias PresentableFolder = Identified<String, String>
+typealias PresentableServiceType = Identified<String, String>
+
 struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
-    typealias Folder = String
-    typealias ServiceType = String
     
     let destinationFactory: DestinationFactory
     
     let folderName: String
-    var folderNames: [String]
-    var serviceTypeNames: [String]
+    var folderNames: [PresentableFolder]
+    var serviceTypeNames: [PresentableServiceType]
     
     var body: some View {
         List() {
-            ForEach(folderNames, id: \.self) { folder in
+            ForEach(folderNames) { folder in
                 self.folderRow(for: folder)
             }
             
             Section(header: Text("SERVICE TYPES")) {
-                ForEach(serviceTypeNames, id: \.self) { serviceType in
+                ForEach(serviceTypeNames) { serviceType in
                     self.serviceTypeRow(for: serviceType)
                 }
             }
@@ -41,19 +42,19 @@ struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
         .navigationBarTitle(folderName)
     }
     
-    fileprivate func folderRow(for folder: Folder) -> some View {
+    fileprivate func folderRow(for folder: PresentableFolder) -> some View {
         NavigationLink(destination: destinationFactory.destination(forFolder: folder)) {
             HStack(spacing: 15) {
                 Image(systemName: "folder")
                     .foregroundColor(Color.green)
-                Text(folder)
+                Text(folder.value)
             }
         }
     }
     
-    fileprivate func serviceTypeRow(for serviceType: ServiceType) -> some View {
+    fileprivate func serviceTypeRow(for serviceType: PresentableServiceType) -> some View {
         NavigationLink(destination: destinationFactory.destination(forServiceType: serviceType)) {
-            Text(serviceType)
+            Text(serviceType.value)
         }
     }
 }
@@ -64,8 +65,8 @@ struct FolderContentView_Previews : PreviewProvider {
         NavigationView {
             FolderContentView(destinationFactory: RecursiveFolderFactory(),
                               folderName: "Crossroads",
-                              folderNames: ["STUDENTS", "YA"],
-                              serviceTypeNames: ["Sunday Morning"])
+                              folderNames: [.init("STUDENTS", id: "1"), .init("YA", id: "2")],
+                              serviceTypeNames: [.init("Sunday Mornings", id: "1")])
         }
     }
 }
