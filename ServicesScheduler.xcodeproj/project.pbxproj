@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
 		5C96DEEA22ED13D000BB643A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEE922ED13D000BB643A /* Assets.xcassets */; };
 		5C96DEED22ED13D000BB643A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEC22ED13D000BB643A /* Preview Assets.xcassets */; };
 		5C96DEF022ED13D000BB643A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */; };
-		5C96DEFB22ED13D000BB643A /* ServicesSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEFA22ED13D000BB643A /* ServicesSchedulerTests.swift */; };
 		5C96DF0622ED13D000BB643A /* ServicesSchedulerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */; };
+		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProviderTests.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServicesScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,11 +48,11 @@
 		5C96DEEF22ED13D000BB643A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C96DEF122ED13D000BB643A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C96DEF622ED13D000BB643A /* ServicesSchedulerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServicesSchedulerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C96DEFA22ED13D000BB643A /* ServicesSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSchedulerTests.swift; sourceTree = "<group>"; };
 		5C96DEFC22ED13D000BB643A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C96DF0122ED13D000BB643A /* ServicesSchedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServicesSchedulerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSchedulerUITests.swift; sourceTree = "<group>"; };
 		5C96DF0722ED13D000BB643A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
 				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
 				5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */,
+				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
 				5C96DEF122ED13D000BB643A /* Info.plist */,
@@ -126,8 +129,8 @@
 		5C96DEF922ED13D000BB643A /* ServicesSchedulerTests */ = {
 			isa = PBXGroup;
 			children = (
-				5C96DEFA22ED13D000BB643A /* ServicesSchedulerTests.swift */,
 				5C96DEFC22ED13D000BB643A /* Info.plist */,
+				5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */,
 			);
 			path = ServicesSchedulerTests;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			files = (
 				5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
+				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
 			);
@@ -290,7 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C96DEFB22ED13D000BB643A /* ServicesSchedulerTests.swift in Sources */,
+				5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
