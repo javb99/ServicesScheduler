@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */; };
+		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
+		5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */; };
+		5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */; };
+		5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -39,6 +43,10 @@
 
 /* Begin PBXFileReference section */
 		5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProviderTests.swift; sourceTree = "<group>"; };
+		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
+		5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLoader.swift; sourceTree = "<group>"; };
+		5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecursiveFolderFactory.swift; sourceTree = "<group>"; };
+		5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFolderFactory.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServicesScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +116,10 @@
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
 				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
+				5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */,
+				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
+				5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */,
+				5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */,
 				5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
@@ -282,11 +294,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
 				5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
+				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
+				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
+				5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

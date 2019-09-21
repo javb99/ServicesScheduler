@@ -14,6 +14,7 @@ protocol FolderDestinationFactory {
     associatedtype ServiceTypeView: View
     func destination(forServiceType serviceType: String) -> ServiceTypeView
 }
+
 struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
     typealias Folder = String
     typealias ServiceType = String
@@ -21,17 +22,17 @@ struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
     let destinationFactory: DestinationFactory
     
     let folderName: String
-    let folders = ["Vancouver", "Portland"]
-    let serviceTypes: [String] = ["STUDENTS"]
+    var folderNames: [String]
+    var serviceTypeNames: [String]
     
     var body: some View {
         List() {
-            ForEach(folders, id: \.self) { folder in
+            ForEach(folderNames, id: \.self) { folder in
                 self.folderRow(for: folder)
             }
             
             Section(header: Text("SERVICE TYPES")) {
-                ForEach(serviceTypes, id: \.self) { serviceType in
+                ForEach(serviceTypeNames, id: \.self) { serviceType in
                     self.serviceTypeRow(for: serviceType)
                 }
             }
@@ -61,7 +62,10 @@ struct FolderContentView<DestinationFactory: FolderDestinationFactory> : View {
 struct FolderContentView_Previews : PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FolderContentView(destinationFactory: RecursiveFolderFactory(), folderName: "Crossroads")
+            FolderContentView(destinationFactory: RecursiveFolderFactory(),
+                              folderName: "Crossroads",
+                              folderNames: ["STUDENTS", "YA"],
+                              serviceTypeNames: ["Sunday Morning"])
         }
     }
 }
