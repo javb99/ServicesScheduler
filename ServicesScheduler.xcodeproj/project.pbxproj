@@ -17,6 +17,8 @@
 		5C17CDDB2336DBC000E4E7C5 /* OAuthTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDD02336DA1200E4E7C5 /* OAuthTokenStoreTests.swift */; };
 		5C17CDDD2336F0DB00E4E7C5 /* OAuthAuthenticateOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDDC2336F0DB00E4E7C5 /* OAuthAuthenticateOperationTests.swift */; };
 		5C17CDDF2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDDE2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift */; };
+		5C17CDE123370B1B00E4E7C5 /* OAuthTokenEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDE023370B1B00E4E7C5 /* OAuthTokenEndpointTests.swift */; };
+		5C17CDE323370B2900E4E7C5 /* OAuthTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDE223370B2900E4E7C5 /* OAuthTokenEndpoint.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -57,6 +59,8 @@
 		5C17CDD82336DAB900E4E7C5 /* OAuthTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenStore.swift; sourceTree = "<group>"; };
 		5C17CDDC2336F0DB00E4E7C5 /* OAuthAuthenticateOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperationTests.swift; sourceTree = "<group>"; };
 		5C17CDDE2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperation.swift; sourceTree = "<group>"; };
+		5C17CDE023370B1B00E4E7C5 /* OAuthTokenEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpointTests.swift; sourceTree = "<group>"; };
+		5C17CDE223370B2900E4E7C5 /* OAuthTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpoint.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServicesScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				5C17CDD82336DAB900E4E7C5 /* OAuthTokenStore.swift */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C17CDDE2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift */,
+				5C17CDE223370B2900E4E7C5 /* OAuthTokenEndpoint.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
 				5C96DEF122ED13D000BB643A /* Info.plist */,
@@ -157,6 +162,7 @@
 				5C96DEFC22ED13D000BB643A /* Info.plist */,
 				5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */,
 				5C17CDD02336DA1200E4E7C5 /* OAuthTokenStoreTests.swift */,
+				5C17CDE023370B1B00E4E7C5 /* OAuthTokenEndpointTests.swift */,
 				5C17CDDC2336F0DB00E4E7C5 /* OAuthAuthenticateOperationTests.swift */,
 			);
 			path = ServicesSchedulerTests;
@@ -317,6 +323,7 @@
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5C17CDD92336DAB900E4E7C5 /* OAuthTokenStore.swift in Sources */,
+				5C17CDE323370B2900E4E7C5 /* OAuthTokenEndpoint.swift in Sources */,
 				5C17CDDF2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
@@ -330,6 +337,7 @@
 			files = (
 				5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */,
 				5C17CDDD2336F0DB00E4E7C5 /* OAuthAuthenticateOperationTests.swift in Sources */,
+				5C17CDE123370B1B00E4E7C5 /* OAuthTokenEndpointTests.swift in Sources */,
 				5C17CDDB2336DBC000E4E7C5 /* OAuthTokenStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

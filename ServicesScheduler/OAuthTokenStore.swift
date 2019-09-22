@@ -9,7 +9,7 @@
 import Foundation
 import PlanningCenterSwift
 
-public struct OAuthToken {
+public struct OAuthToken: Codable {
     public init(raw: String, refreshToken: String, expiresAt: Date, refreshTokenExpiresAt: Date) {
         self.raw = raw
         self.refreshToken = refreshToken

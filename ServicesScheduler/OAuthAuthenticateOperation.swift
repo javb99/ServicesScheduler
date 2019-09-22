@@ -25,29 +25,6 @@ public struct OAuthAppConfiguration {
     }
 }
 
-import PlanningCenterSwift
-public struct AuthTokenEndpoint: Endpoint {
-    public let method: HTTPMethod = .post
-    
-    public let path: Path = ["oauth", "token"]
-    
-    public typealias RequestBody = Int?
-    
-    public typealias ResponseBody = Int?
-    
-    public let queryItems: [URLQueryItem]
-    
-    init(refreshToken: String, appCredential: OAuthAppConfiguration.Credentials, redirectURI: String) {
-        queryItems = []
-        
-    }
-    
-    init(browserCode: String, appCredential: OAuthAppConfiguration.Credentials, redirectURI: String) {
-        queryItems = []
-        
-    }
-}
-
 public class OAuthAuthenticateOperation {
     public typealias AppCredentials = OAuthAppConfiguration.Credentials
     
