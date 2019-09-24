@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C14D407233AD4BA0039851F /* BrowserAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14D406233AD4BA0039851F /* BrowserAuthorizer.swift */; };
+		5C14D409233AD5BF0039851F /* OAuthAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14D408233AD5BF0039851F /* OAuthAppConfiguration.swift */; };
 		5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */; };
 		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
 		5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C14D406233AD4BA0039851F /* BrowserAuthorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserAuthorizer.swift; sourceTree = "<group>"; };
+		5C14D408233AD5BF0039851F /* OAuthAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAppConfiguration.swift; sourceTree = "<group>"; };
 		5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProviderTests.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
 		5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLoader.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				5C17CDD82336DAB900E4E7C5 /* OAuthTokenStore.swift */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C17CDDE2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift */,
+				5C14D408233AD5BF0039851F /* OAuthAppConfiguration.swift */,
+				5C14D406233AD4BA0039851F /* BrowserAuthorizer.swift */,
 				5C17CDE223370B2900E4E7C5 /* OAuthTokenEndpoint.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
@@ -321,9 +327,11 @@
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
+				5C14D409233AD5BF0039851F /* OAuthAppConfiguration.swift in Sources */,
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5C17CDD92336DAB900E4E7C5 /* OAuthTokenStore.swift in Sources */,
 				5C17CDE323370B2900E4E7C5 /* OAuthTokenEndpoint.swift in Sources */,
+				5C14D407233AD4BA0039851F /* BrowserAuthorizer.swift in Sources */,
 				5C17CDDF2336F1A500E4E7C5 /* OAuthAuthenticateOperation.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,

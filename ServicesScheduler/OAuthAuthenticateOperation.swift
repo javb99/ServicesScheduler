@@ -10,21 +10,6 @@ import Foundation
 
 public typealias Completion<T> = (Result<T, Error>)->()
 
-public struct OAuthAppConfiguration {
-    
-    /// The credentials that identify the app to the Planning Center API.
-    public struct Credentials {
-        
-        public var identifier: String
-        public var secret: String
-        
-        public init(identifier: String, secret: String) {
-            self.identifier = identifier
-            self.secret = secret
-        }
-    }
-}
-
 public class OAuthAuthenticateOperation {
     public typealias AppCredentials = OAuthAppConfiguration.Credentials
     
