@@ -62,7 +62,7 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
     }
     
     func teamSection(for team: Team, in plan: Plan) -> some View {
-        VStack(alignment: .leading) {
+        Group {
             Text(team.value).font(.headline)
             ForEach(dataSource.neededPositions(plan: plan, team: team), content: neededPositionRow)
             ForEach(dataSource.teamMembers(plan: plan, team: team), content: teamMemberRow)
