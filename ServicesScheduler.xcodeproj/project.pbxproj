@@ -24,6 +24,8 @@
 		5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD909A2348198C00F02002 /* PreviewHelpers.swift */; };
 		5CAD909E2348533000F02002 /* SelectableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD909D2348533000F02002 /* SelectableList.swift */; };
 		5CAD90A0234855DF00F02002 /* ServiceTypeTeamsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */; };
+		5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A12348650200F02002 /* StatusCircle.swift */; };
+		5CAD90A42348689400F02002 /* PresentableStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A32348689400F02002 /* PresentableStatus.swift */; };
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
@@ -70,6 +72,8 @@
 		5CAD909A2348198C00F02002 /* PreviewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewHelpers.swift; sourceTree = "<group>"; };
 		5CAD909D2348533000F02002 /* SelectableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableList.swift; sourceTree = "<group>"; };
 		5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTeamsLoader.swift; sourceTree = "<group>"; };
+		5CAD90A12348650200F02002 /* StatusCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCircle.swift; sourceTree = "<group>"; };
+		5CAD90A32348689400F02002 /* PresentableStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableStatus.swift; sourceTree = "<group>"; };
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +136,8 @@
 				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
 				5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */,
 				5CAD909D2348533000F02002 /* SelectableList.swift */,
+				5CAD90A12348650200F02002 /* StatusCircle.swift */,
+				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */,
 				5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */,
 				5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */,
@@ -313,12 +319,14 @@
 				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
 				5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */,
 				5CAD90A0234855DF00F02002 /* ServiceTypeTeamsLoader.swift in Sources */,
+				5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
+				5CAD90A42348689400F02002 /* PresentableStatus.swift in Sources */,
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
