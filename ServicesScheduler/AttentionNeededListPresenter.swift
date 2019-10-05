@@ -83,7 +83,7 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                 func value(for plan: MPlan) -> [Team] {
                     guard let serviceType = plan.serviceType?.data else { return [] }
                     guard let mTeams = teamsByServiceType[serviceType] else { return [] }
-                    return mTeams.map { mTeam in
+                    return mTeams.uniq(by: \MTeam.identifer.id).map { mTeam in
                         Team(mTeam.name ?? "", id: mTeam.identifer.id)
                     }
                 }
@@ -96,23 +96,12 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
     func teamMembersPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [TeamMember]]], Never> {
         
         return loader.$planPeople.map { mPlanPeople in
-            let planPeopleWithAPlan = mPlanPeople.lazy.filter { (person: MPlanPerson) in
-                guard let planID = person.plan.data else {
-                    print("PlanPerson didn't have a plan id.")
-                    return false }
-                return true
-            }
-            let planPeopleByPlan = Dictionary(grouping: planPeopleWithAPlan) { (person: MPlanPerson) in
+            let planPeopleByPlan = Dictionary(grouping: mPlanPeople) { (person: MPlanPerson) in
                 return person.plan.data!
             }
+            print("plan people by plan: \(planPeopleByPlan.mapValues{ people in people.map { $0.name + "-" + $0.status.rawValue }.joined(separator: ", ") } )")
             return planPeopleByPlan.mapValues { mPlanPeopleForPlan in
-                let planPeopleWithATeam = mPlanPeople.lazy.filter { (person: MPlanPerson) in
-                    guard let teamID = person.team.data else {
-                        print("PlanPerson didn't have a team id.")
-                        return false }
-                    return true
-                }
-                let planPeopleByTeam = Dictionary(grouping: planPeopleWithATeam) { (person: MPlanPerson) in
+                let planPeopleByTeam = Dictionary(grouping: mPlanPeopleForPlan) { (person: MPlanPerson) in
                     return person.team.data!
                 }
                 return planPeopleByTeam.mapValues { teamMPlanPeople in
