@@ -19,6 +19,19 @@ func does<T: Hashable>(_ binding: Binding<Set<T>>, contain element: T) -> Bindin
     })
 }
 
+func does<T: Equatable>(_ binding: Binding<T?>, equal value: T) -> Binding<Bool> {
+    Binding(
+        get: { binding.wrappedValue == value },
+        set: { newValue in
+            if newValue {
+                binding.wrappedValue = value
+            } else {
+                binding.wrappedValue = nil
+            }
+        }
+    )
+}
+
 extension Binding where Value == Bool {
     func toggle() {
         wrappedValue = !wrappedValue
