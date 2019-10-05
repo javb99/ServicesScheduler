@@ -62,20 +62,13 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                 
                 return (mplan.sortDate ?? Date(), Plan(id: mplan.identifer.id, date: dates, serviceTypeName: serviceTypeName) )
             }
-            return datesAndPlans.sorted(by: { (a, b) in
+            return datesAndPlans.uniq(by: \.1.id).sorted(by: { (a, b) in
                 let (sortA, _) = a
                 let (sortB, _) = b
                 return sortA < sortB
             }).map{ $0.1 }
         }.eraseToAnyPublisher()
     }
-    
-//    func serviceType(for planID: MPlan.ID) -> MServiceType {
-//        let serviceTypesById = Dictionary(self.loader.serviceTypes.map{ ($0.identifer, $0) }) { _, serviceType in serviceType }
-//        let mPlan
-//        return mplan.serviceType?.data,
-//        let serviceTypeName = serviceTypesById[serviceTypeId]
-//    }
     
     func teamsPublisher() -> AnyPublisher<[MPlan.ID: [Team]], Never> {
         loader.$teams.combineLatest(loader.$plans)
