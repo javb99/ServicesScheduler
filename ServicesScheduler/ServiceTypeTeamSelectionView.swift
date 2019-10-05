@@ -50,12 +50,16 @@ struct ServiceTypeTeamSelectionView: View {
 #if DEBUG
 struct ServiceTypeTeamSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        return NavigationView {
-            ServiceTypeTeamSelectionView(
-                selection: .constant(["1"]),
-                teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-                serviceTypeName: "STUDENTS Wednesdays"
-            )
+        AllSizes {
+            LightAndDark {
+                NavigationView {
+                    ServiceTypeTeamSelectionView(
+                        selection: .constant(["1"]),
+                        teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
+                        serviceTypeName: "STUDENTS Wednesdays"
+                    )
+                }
+            }
         }
     }
 }
