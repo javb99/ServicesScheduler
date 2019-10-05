@@ -29,11 +29,14 @@ struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
         )
     }
     
-    func destination(forServiceType serviceType: PresentableServiceType) -> some View {
-        ServiceTypeTeamSelectionView(
+    func destination(forServiceType serviceTypeName: PresentableServiceType) -> some View {
+        let serviceType = provider.serviceType(for: serviceTypeName)!
+        return TeamSelectionContainer(
             selection: selection,
-            teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-            serviceTypeName: serviceType.value
+            provider: ServiceTypeTeamsLoader(
+                serviceTypeID: serviceType.identifer,
+                network: network),
+            title: serviceTypeName.value
         )
     }
 }

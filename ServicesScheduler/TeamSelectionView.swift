@@ -10,30 +10,49 @@ import SwiftUI
 
 typealias Team = Identified<String, String>
 
-struct ServiceTypeTeamSelectionView: View {
+protocol TeamProvider: ObservableObject {
+    var teams: [Team] { get }
+    func load()
+}
+
+struct TeamSelectionContainer<Provider: TeamProvider>: View {
+    var selection: Binding<Set<Team.ID>>
+    @ObservedObject var provider: Provider
+    var title: String
+    
+    var body: some View {
+        TeamSelectionView(
+            selection: selection,
+            teams: provider.teams,
+            title: title
+        ).onAppear { self.provider.load() }
+    }
+}
+
+struct TeamSelectionView: View {
     
     var selection: Binding<Set<Team.ID>>
     var teams: [Team]
-    var serviceTypeName: String
+    var title: String
     
     var body: some View {
         SelectableList(teams, selection: self.selection) { team in
             Text(team.value)
         }
-        .navigationBarTitle(serviceTypeName)
+        .navigationBarTitle(title)
     }
 }
 
 #if DEBUG
-struct ServiceTypeTeamSelectionView_Previews: PreviewProvider {
+struct TeamSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         AllSizes {
             LightAndDark {
                 NavigationView {
-                    ServiceTypeTeamSelectionView(
+                    TeamSelectionView(
                         selection: .constant(["1"]),
                         teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-                        serviceTypeName: "STUDENTS Wednesdays"
+                        title: "STUDENTS Wednesdays"
                     )
                 }
             }
