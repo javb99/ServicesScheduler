@@ -53,6 +53,7 @@ struct Home: View {
                 selection: self.$selection
             )
             .destination(forFolder: PresentableFolder("", id: ""))
+                .accentColor(.servicesGreen)
         }
     }
 }

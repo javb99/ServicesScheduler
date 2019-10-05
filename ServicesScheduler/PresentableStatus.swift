@@ -19,21 +19,21 @@ extension PresentableStatus {
         switch status {
         case .confirmed:
             iconName = "checkmark.circle.fill"
-            color = .green
+            color = .confirmed
         case .unconfirmed:
             iconName = "questionmark.circle.fill"
-            color = .yellow
+            color = .unconfirmed
         case .declined:
             iconName = "xmark.circle.fill"
-            color = .red
+            color = .declined
         }
     }
 }
 
 extension PresentableStatus {
-    static let confirmed = Self(iconName: "checkmark.circle.fill", color: .green)
-    static let unconfirmed = Self(iconName: "questionmark.circle.fill", color: .yellow)
-    static let declined = Self(iconName: "xmark.circle.fill", color: .red)
+    static let confirmed = Self(iconName: "checkmark.circle.fill", color: .confirmed)
+    static let unconfirmed = Self(iconName: "questionmark.circle.fill", color: .unconfirmed)
+    static let declined = Self(iconName: "xmark.circle.fill", color: .declined)
 }
 extension PresentableStatus: CaseIterable {
     static var allCases: [PresentableStatus] {

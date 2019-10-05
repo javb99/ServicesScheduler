@@ -14,7 +14,7 @@ struct NeededPositionCircle : View {
     var body: some View {
         Text("\(count)")
             .padding(10)
-            .background(Circle().fill(Color.yellow))
+            .background(Circle().fill(Color.unconfirmed))
     }
 }
 
