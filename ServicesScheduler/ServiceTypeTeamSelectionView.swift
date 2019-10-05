@@ -10,17 +10,39 @@ import SwiftUI
 
 typealias Team = Identified<String, String>
 
+/// The UITableView checkmark style.
+struct CheckmarkStyle: ToggleStyle {
+    
+    func makeBody(configuration: ToggleStyleConfiguration) -> some View {
+        Button(action: configuration.$isOn.toggle) {
+            HStack {
+                configuration.label
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                if configuration.isOn {
+                    Image(systemName: "checkmark")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+    }
+}
+
 struct ServiceTypeTeamSelectionView: View {
     
-    var selection: Binding<Set<Team.ID>>?
+    var selection: Binding<Set<Team.ID>>
     var teams: [Team]
     var serviceTypeName: String
     
     var body: some View {
-        List(teams, selection: selection) { team in
-            Text(team.value)
+        List(teams) { team in
+            Toggle(isOn: does(self.selection, contain: team.id)) {
+                Text(team.value)
+            }
+            .toggleStyle(CheckmarkStyle())
         }
-        .environment(\.editMode, .constant(.active))
         .navigationBarTitle(serviceTypeName)
     }
 }

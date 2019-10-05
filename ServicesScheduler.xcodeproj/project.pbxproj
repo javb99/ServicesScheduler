@@ -20,6 +20,8 @@
 		5C96DEED22ED13D000BB643A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEC22ED13D000BB643A /* Preview Assets.xcassets */; };
 		5C96DEF022ED13D000BB643A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */; };
 		5C96DF0622ED13D000BB643A /* ServicesSchedulerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */; };
+		5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD9098234816C700F02002 /* BindingHelpers.swift */; };
+		5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD909A2348198C00F02002 /* PreviewHelpers.swift */; };
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */; };
@@ -62,6 +64,8 @@
 		5C96DF0122ED13D000BB643A /* ServicesSchedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServicesSchedulerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DF0522ED13D000BB643A /* ServicesSchedulerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSchedulerUITests.swift; sourceTree = "<group>"; };
 		5C96DF0722ED13D000BB643A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CAD9098234816C700F02002 /* BindingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingHelpers.swift; sourceTree = "<group>"; };
+		5CAD909A2348198C00F02002 /* PreviewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewHelpers.swift; sourceTree = "<group>"; };
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +121,8 @@
 			children = (
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
+				5CAD9098234816C700F02002 /* BindingHelpers.swift */,
+				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
 				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
 				5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */,
 				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
@@ -297,11 +303,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
 				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
 				5CF8784923336EF100B8A2DF /* ServiceTypeTeamSelectionView.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
+				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,

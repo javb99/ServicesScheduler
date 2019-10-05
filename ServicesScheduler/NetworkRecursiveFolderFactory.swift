@@ -13,7 +13,7 @@ import SwiftUI
 struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
     let network: URLSessionService
     let provider: FolderLoader
-    var selection: Binding<Set<Team.ID>>?
+    var selection: Binding<Set<Team.ID>>
     
     func destination(forFolder folder: PresentableFolder) -> some View {
         let newParent = provider.folder(for: folder)
