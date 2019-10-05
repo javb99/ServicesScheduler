@@ -12,9 +12,12 @@ struct NeededPositionCircle : View {
     var count: Int
     
     var body: some View {
-        Text("\(count)")
-            .padding(10)
-            .background(Circle().fill(Color.unconfirmed))
+        ZStack {
+            Circle()
+                .fill(Color.unconfirmed)
+            Text("\(count)")
+                .font(.headline)
+        }
     }
 }
 
@@ -26,7 +29,7 @@ struct NeededPositionCircle_Previews : PreviewProvider {
             NeededPositionCircle(count: 1)
             NeededPositionCircle(count: 10)
             NeededPositionCircle(count: 100)
-        }.previewLayout(.sizeThatFits)
+        }.previewLayout(.fixed(width: 44, height: 44))
     }
 }
 #endif
