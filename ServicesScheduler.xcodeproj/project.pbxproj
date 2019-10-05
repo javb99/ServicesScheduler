@@ -49,7 +49,7 @@
 		5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecursiveFolderFactory.swift; sourceTree = "<group>"; };
 		5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFolderFactory.swift; sourceTree = "<group>"; };
 		5C17CDC62336AC1800E4E7C5 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
-		5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServicesScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE722ED13CC00BB643A /* FolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentView.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		5C96DEE122ED13CC00BB643A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */,
+				5C96DEE022ED13CC00BB643A /* Scheduler.app */,
 				5C96DEF622ED13D000BB643A /* ServicesSchedulerTests.xctest */,
 				5C96DF0122ED13D000BB643A /* ServicesSchedulerUITests.xctest */,
 			);
@@ -180,7 +180,7 @@
 				5CF8784423332A5900B8A2DF /* PlanningCenterSwift */,
 			);
 			productName = ServicesScheduler;
-			productReference = 5C96DEE022ED13CC00BB643A /* ServicesScheduler.app */;
+			productReference = 5C96DEE022ED13CC00BB643A /* Scheduler.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5C96DEF522ED13D000BB643A /* ServicesSchedulerTests */ = {
@@ -485,7 +485,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = josephvb.ServicesScheduler;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Scheduler;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -505,7 +505,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = josephvb.ServicesScheduler;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Scheduler;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
