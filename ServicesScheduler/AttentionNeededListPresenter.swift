@@ -98,16 +98,38 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                     return person.team.data!
                 }
                 return planPeopleByTeam.mapValues { teamMPlanPeople in
-                    teamMPlanPeople.compactMap { (person: MPlanPerson) -> TeamMember? in
-                        guard let positionName = person.positionName else { return nil }
-                        return TeamMember(id: person.identifer.id,
-                                          name: person.name + person.identifer.id,
-                                          position: positionName,
-                                          status: PresentableStatus(person.status))
-                    }.uniq(by: \.id)
+                    teamMPlanPeople
+                        .uniq(by: \.identifer)
+                        .sorted(by: statusThenName)
+                        .compactMap { (person: MPlanPerson) -> TeamMember? in
+                            guard let positionName = person.positionName else { return nil }
+                            return TeamMember(id: person.identifer.id,
+                                              name: person.name,
+                                              position: positionName,
+                                              status: PresentableStatus(person.status))
+                        }
                 }
             }
         }.eraseToAnyPublisher()
+    }
+}
+
+/// A sort comparison function.
+private func statusThenName(_ personA: MPlanPerson, _ personB: MPlanPerson) -> Bool {
+    if personA.status.sortValue != personB.status.sortValue {
+        return personA.status.sortValue < personB.status.sortValue
+    } else {
+        return personA.name < personB.name
+    }
+}
+
+private extension Models.PlanPerson.Status {
+    var sortValue: Int {
+        switch self {
+        case .confirmed: return 2
+        case .unconfirmed: return 1
+        case .declined: return 0
+        }
     }
 }
 
