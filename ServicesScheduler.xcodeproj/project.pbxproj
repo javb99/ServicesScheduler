@@ -30,7 +30,9 @@
 		5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */; };
 		5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */; };
 		5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */; };
+		5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */; };
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
+		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +84,9 @@
 		5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+PlanningCenter.swift"; sourceTree = "<group>"; };
 		5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededFeedList.swift; sourceTree = "<group>"; };
 		5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstAttentionNeededFeedListData.swift; sourceTree = "<group>"; };
+		5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListLoader.swift; sourceTree = "<group>"; };
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
+		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +151,8 @@
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */,
+				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
+				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
@@ -337,6 +343,8 @@
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
+				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
+				5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */,
 				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
 				5CAD90A42348689400F02002 /* PresentableStatus.swift in Sources */,

@@ -29,12 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ),
             session: .shared
         )
+        let loader = AttentionNeededListPresenter(loader: AttentionNeededListLoader(network: service))
         
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
-            window.rootViewController = UIHostingController(rootView: Home(service: service))
+            window.rootViewController = UIHostingController(rootView: Home(service: service, loader: loader))
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -43,9 +44,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 struct Home: View {
     let service: URLSessionService
+    let loader: AttentionNeededListPresenter
     @State var selection: Set<Team.ID> = []
+    @State var isShowingBrowser = false
      
     var body: some View {
+        NavigationView {
+            AttentionNeededFeedList(dataSource: loader)
+                .onAppear(perform: load)
+                .navigationBarItems(trailing: Button(action: $isShowingBrowser.toggle) { Text("Choose") })
+                .sheet(isPresented: isShowingBrowserBindingHook(), content: folderBrowser)
+
+        }.accentColor(.servicesGreen)
+    }
+    
+    func folderBrowser() -> some View {
         NavigationView {
             NetworkRecursiveFolderFactory(
                 network: service,
@@ -53,8 +66,22 @@ struct Home: View {
                 selection: self.$selection
             )
             .destination(forFolder: PresentableFolder("", id: ""))
-                .accentColor(.servicesGreen)
-        }
+        }.onDisappear(perform: load)
+    }
+    
+    func isShowingBrowserBindingHook() -> Binding<Bool> {
+        Binding(get: { return self.isShowingBrowser },
+                set: { newValue in
+                    if newValue == false {
+                        self.load()
+                    }
+                    self.isShowingBrowser = newValue
+        })
+    }
+    
+    func load() {
+        loader.loader.load(teams: selection)
+        
     }
 }
 
