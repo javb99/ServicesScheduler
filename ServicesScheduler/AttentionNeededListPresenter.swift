@@ -76,9 +76,11 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                 func value(for plan: MPlan) -> [Team] {
                     guard let serviceType = plan.serviceType?.data else { return [] }
                     guard let mTeams = teamsByServiceType[serviceType] else { return [] }
-                    return mTeams.uniq(by: \MTeam.identifer.id).map { mTeam in
-                        Team(mTeam.name ?? "", id: mTeam.identifer.id)
-                    }
+                    return mTeams
+                        .uniq(by: \MTeam.identifer.id)
+                        .map { mTeam in
+                            Team(mTeam.name ?? "", id: mTeam.identifer.id)
+                        }
                 }
                 let planIDTeamsPair = plans.map { ($0.identifer, value(for: $0)) }
                 // Don't really want to deal with duplicates here...
@@ -88,30 +90,40 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
     
     func teamMembersPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [TeamMember]]], Never> {
         
-        return loader.$planPeople.map { mPlanPeople in
-            let planPeopleByPlan = Dictionary(grouping: mPlanPeople) { (person: MPlanPerson) in
-                return person.plan.data!
-            }
-            return planPeopleByPlan.mapValues { mPlanPeopleForPlan in
-                return mPlanPeopleForPlan.group(by: \.team.data!).mapValues { teamMPlanPeople in
-                    teamMPlanPeople
-                        .uniq(by: \.identifer)
-                        .sorted(by: statusThenNameThenPersonId)
-                        .mergeAdjacent(ifElementsShare: \MPlanPerson.person.data?.id) { personA, duplicatePerson in
-                            var sum = personA
-                            sum.positionName = [personA, duplicatePerson].compactMap{ $0.positionName }.joined(separator: ", ")
-                            return sum
-                        }
-                        .compactMap { (person: MPlanPerson) -> TeamMember? in
-                            guard let positionName = person.positionName else { return nil }
-                            return TeamMember(id: person.identifer.id,
-                                              name: person.name,
-                                              position: positionName,
-                                              status: PresentableStatus(person.status))
-                        }
+        loader.$planPeople.map { mPlanPeople in
+            mPlanPeople.group(by: \.plan.data!).mapValues { mPlanPeopleForPlan in
+                mPlanPeopleForPlan.group(by: \.team.data!).mapValues { teamMPlanPeople in
+                    teamMPlanPeople.createPresentableList()
                 }
             }
         }.eraseToAnyPublisher()
+    }
+}
+
+extension Collection where Element == MPlanPerson {
+    
+    /// Transform  a list of PlanPeople to TeamMembers that can be displayed.
+    /// This does the sorting, uniquing, and the merging of positions.
+    func createPresentableList() -> [TeamMember] {
+        self
+        .uniq(by: \.identifer)
+        .sorted(by: statusThenNameThenPersonId)
+        .mergeAdjacent(ifElementsShare: \MPlanPerson.person.data?.id, merge: MPlanPerson.joinPositions(_:_:))
+        .compactMap { (person: MPlanPerson) -> TeamMember? in
+            guard let positionName = person.positionName else { return nil }
+            return TeamMember(id: person.identifer.id,
+                              name: person.name,
+                              position: positionName,
+                              status: PresentableStatus(person.status))
+        }
+    }
+}
+
+extension MPlanPerson {
+    static func joinPositions(_ personA: MPlanPerson, _ personB: MPlanPerson) -> MPlanPerson {
+        var sum = personA
+        sum.positionName = [personA, personB].compactMap{ $0.positionName }.joined(separator: ", ")
+        return sum
     }
 }
 
