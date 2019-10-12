@@ -134,8 +134,31 @@
 			children = (
 				5CAD9098234816C700F02002 /* BindingHelpers.swift */,
 				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
+				5CAD909D2348533000F02002 /* SelectableList.swift */,
 			);
 			path = ReusableSwiftUI;
+			sourceTree = "<group>";
+		};
+		5C11D98E2351AB34008BCAE4 /* FolderBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
+				5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */,
+				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
+				5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */,
+				5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */,
+				5C11D98F2351ABC1008BCAE4 /* TeamSelection */,
+			);
+			path = FolderBrowser;
+			sourceTree = "<group>";
+		};
+		5C11D98F2351ABC1008BCAE4 /* TeamSelection */ = {
+			isa = PBXGroup;
+			children = (
+				5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */,
+				5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */,
+			);
+			path = TeamSelection;
 			sourceTree = "<group>";
 		};
 		5C96DED722ED13CC00BB643A = {
@@ -165,12 +188,8 @@
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
 				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
-				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
-				5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */,
-				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
-				5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */,
-				5CAD909D2348533000F02002 /* SelectableList.swift */,
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
+				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */,
 				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
@@ -178,9 +197,6 @@
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
-				5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */,
-				5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */,
-				5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
