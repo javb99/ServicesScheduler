@@ -27,19 +27,19 @@ class AttentionNeededListLoader {
     
     @Published var teams: [MServiceType.ID: [MTeam]] = [:] {
         didSet {
-            print("Teams: " + teams.values.lazy.flatMap({$0}).compactMap { $0.name }.joined(separator: ", "))
+            print("Teams: " + teams.values.commaSeparated(\.name))
         }
     }
     
     @Published var serviceTypes: [MServiceType] = [] {
         didSet {
-            print("Service Types: " + serviceTypes.compactMap{ $0.name }.joined(separator: ", "))
+            print("Service Types: " + serviceTypes.commaSeparated(\.name))
         }
     }
     
     @Published var plans: [MPlan] = [] {
         didSet {
-            print("Plans: " + plans.compactMap{ $0.shortDates }.joined(separator: ", "))
+            print("Plans: " + plans.commaSeparated(\.shortDates))
         }
     }
     

@@ -50,3 +50,9 @@ extension Collection {
         return Array(dictionary.values)
     }
 }
+
+extension Sequence {
+    func commaSeparated(_ keyPath: KeyPath<Element, String?>) -> String {
+        self.lazy.compactMap { $0[keyPath: keyPath] }.joined(separator: ", ")
+    }
+}
