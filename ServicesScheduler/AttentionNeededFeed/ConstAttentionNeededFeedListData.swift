@@ -36,3 +36,57 @@ class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
         teamMembers[plan.id]?[team.id] ?? []
     }
 }
+
+extension ConstAttentionNeededFeedListData {
+    static let sample = ConstAttentionNeededFeedListData([
+        (
+            Plan(
+                id: "1",
+                date: "Sunday Aug. 12",
+                serviceTypeName: "Vancouver - Services - Weekend"
+            ),
+            [
+                (
+                    Team("Band", id: "1"),
+                    (
+                        [
+                            NeededPosition(
+                                id: "1",
+                                title: "Drums",
+                                count: 1
+                            )
+                        ],
+                        [
+                            TeamMember(
+                                id: "1",
+                                name: "Joseph Van Boxtel",
+                                position: "Music Director",
+                                status: .confirmed
+                            )
+                        ]
+                    )
+                ),
+                (
+                    Team("Tech", id: "2"),
+                    (
+                        [
+                            NeededPosition(
+                                id: "1",
+                                title: "Front Of House",
+                                count: 1
+                            )
+                        ],
+                        [
+                            TeamMember(
+                                id: "2",
+                                name: "Remington Smith",
+                                position: "Head Hancho",
+                                status: .confirmed
+                            )
+                        ]
+                    )
+                )
+            ]
+        )
+    ])
+}
