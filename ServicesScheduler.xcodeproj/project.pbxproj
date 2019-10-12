@@ -34,6 +34,7 @@
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
 		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
 		5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */; };
+		5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD142349827700162DE0 /* SequenceExtensions.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
 		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
 		5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMergeAdjacent.swift; sourceTree = "<group>"; };
+		5CAFDD142349827700162DE0 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C11D98C2351AA75008BCAE4 /* StandardExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5CAFDD142349827700162DE0 /* SequenceExtensions.swift */,
+				5C17CDC62336AC1800E4E7C5 /* Identified.swift */,
+			);
+			path = StandardExtensions;
+			sourceTree = "<group>";
+		};
+		5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				5CAD9098234816C700F02002 /* BindingHelpers.swift */,
+				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
+			);
+			path = ReusableSwiftUI;
+			sourceTree = "<group>";
+		};
 		5C96DED722ED13CC00BB643A = {
 			isa = PBXGroup;
 			children = (
@@ -143,8 +163,8 @@
 			children = (
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
-				5CAD9098234816C700F02002 /* BindingHelpers.swift */,
-				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
+				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
+				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
 				5C96DEE722ED13CC00BB643A /* FolderContentView.swift */,
 				5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */,
 				5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */,
@@ -161,7 +181,6 @@
 				5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */,
 				5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */,
 				5CAD909F234855DF00F02002 /* ServiceTypeTeamsLoader.swift */,
-				5C17CDC62336AC1800E4E7C5 /* Identified.swift */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
@@ -336,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */,
 				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
 				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
