@@ -27,7 +27,7 @@ class AttentionNeededListLoader {
     
     @Published var teams: [MServiceType.ID: [MTeam]] = [:] {
         didSet {
-            print("Teams: " + teams.values.commaSeparated(\.name))
+            print("Teams: " + teams.values.flatMap{$0}.commaSeparated(\.name))
         }
     }
     
