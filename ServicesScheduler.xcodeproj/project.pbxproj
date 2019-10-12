@@ -165,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
+				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
 				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
@@ -199,11 +200,10 @@
 			children = (
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
+				5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */,
 				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
-				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
-				5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */,
 				5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
