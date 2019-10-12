@@ -23,7 +23,6 @@ struct LoadingIndicator<Content: View>: View {
 }
 
 struct LoadingIndicator_Previews: PreviewProvider {
-    static var isSpinning = false
     static var previews: some View {
         IsVisibleView {
             LoadingIndicator(isSpinning: $0){
