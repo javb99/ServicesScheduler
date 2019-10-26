@@ -37,3 +37,49 @@ extension Binding where Value == Bool {
         wrappedValue = !wrappedValue
     }
 }
+
+struct BoolTransitionCondition {
+    var matches: (_ old: Bool, _ new: Bool)->(Bool)
+    
+    static let riseHigh = BoolTransitionCondition{ $0 == false && $1 == true }
+    static let fallLow = BoolTransitionCondition{ $0 == true && $1 == false }
+    static let setHigh = BoolTransitionCondition{ $1 == true }
+    static let setLow = BoolTransitionCondition{ $1 == false }
+    static let change = BoolTransitionCondition{ $0 != $1 }
+}
+
+extension Binding where Value == Bool {
+    /// Returns a new `Binding` that wraps the receiver with a `willSet` callback that is only fired if the transition condition matches.
+    func withHook(will transition: BoolTransitionCondition, do action: @escaping ()->()) -> Binding<Bool> {
+        withWillSetHook { (old, new) in
+            if transition.matches(old, new) {
+                action()
+            }
+        }
+    }
+    
+    /// Returns a new `Binding` that wraps the receiver with a `didSet` callback that is only fired if the transition condition matches.
+    func withHook(did transition: BoolTransitionCondition, do action: @escaping ()->()) -> Binding<Bool> {
+        withDidSetHook { (old, new) in
+            if transition.matches(old, new) {
+                action()
+            }
+        }
+    }
+    
+    func withDidSetHook(_ action: @escaping (_ old: Bool, _ new: Bool)->()) -> Binding<Bool> {
+        Binding(get: { self.wrappedValue },
+                set: { newValue in
+                    self.wrappedValue = newValue
+                    action(self.wrappedValue, newValue)
+        })
+    }
+    
+    func withWillSetHook(_ action: @escaping (_ old: Bool, _ new: Bool)->()) -> Binding<Bool> {
+        Binding(get: { self.wrappedValue },
+                set: { newValue in
+                    action(self.wrappedValue, newValue)
+                    self.wrappedValue = newValue
+        })
+    }
+}

@@ -53,7 +53,7 @@ struct Home: View {
             AttentionNeededFeedList(dataSource: loader)
                 .onAppear(perform: load)
                 .navigationBarItems(trailing: Button(action: $isShowingBrowser.toggle) { Text("Choose") })
-                .sheet(isPresented: isShowingBrowserBindingHook(), content: folderBrowser)
+                .sheet(isPresented: self.$isShowingBrowser.withHook(will: .setLow, do: self.load), content: folderBrowser)
 
         }.accentColor(.servicesGreen)
     }
@@ -69,19 +69,7 @@ struct Home: View {
         }.onDisappear(perform: load)
     }
     
-    func isShowingBrowserBindingHook() -> Binding<Bool> {
-        Binding(get: { return self.isShowingBrowser },
-                set: { newValue in
-                    if newValue == false {
-                        self.load()
-                    }
-                    self.isShowingBrowser = newValue
-        })
-    }
-    
     func load() {
         loader.loader.load(teams: selection)
-        
     }
 }
-
