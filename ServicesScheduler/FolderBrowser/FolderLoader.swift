@@ -15,11 +15,20 @@ class FolderLoader: FolderContentProvider {
     
     let network: URLSessionService
     let parent: Resource<Models.Folder>?
+    let folderName: String
     
-    internal init(network: URLSessionService, parent: Resource<Models.Folder>? = nil) {
+    init(network: URLSessionService, parent: Resource<Models.Folder>?) {
         self.network = network
         self.parent = parent
+        self.folderName = parent?.name ?? ""
     }
+    
+    init(network: URLSessionService, rootTitle: String) {
+        self.network = network
+        self.parent = nil
+        self.folderName = rootTitle
+    }
+    
     
     var folders: [Resource<Models.Folder>] = [] {
         willSet {
@@ -45,10 +54,6 @@ class FolderLoader: FolderContentProvider {
     
     func serviceType(for presentableServiceType: PresentableServiceType) -> Resource<Models.ServiceType>? {
         serviceTypes.first(where: {$0.identifer.id == presentableServiceType.id})
-    }
-    
-    var folderName: String {
-        parent?.name ?? ""
     }
     
     var folderNames: [PresentableFolder] = []

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */; };
 		5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */; };
-		5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */; };
 		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
 		5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */; };
 		5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */; };
@@ -17,6 +16,7 @@
 		5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC62336AC1800E4E7C5 /* Identified.swift */; };
 		5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */; };
 		5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8E2376893D00AD2255 /* HomeView.swift */; };
+		5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D9023774C7000AD2255 /* RootComposer.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -35,7 +35,7 @@
 		5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */; };
 		5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */; };
 		5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */; };
-		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */; };
+		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */; };
 		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
 		5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */; };
 		5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD142349827700162DE0 /* SequenceExtensions.swift */; };
@@ -63,7 +63,6 @@
 /* Begin PBXFileReference section */
 		5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVisibleView.swift; sourceTree = "<group>"; };
-		5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProviderTests.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
 		5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLoader.swift; sourceTree = "<group>"; };
 		5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecursiveFolderFactory.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		5C17CDC62336AC1800E4E7C5 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
 		5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsScreen.swift; sourceTree = "<group>"; };
 		5C521D8E2376893D00AD2255 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		5C521D9023774C7000AD2255 /* RootComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComposer.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededFeedList.swift; sourceTree = "<group>"; };
 		5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstAttentionNeededFeedListData.swift; sourceTree = "<group>"; };
 		5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListLoader.swift; sourceTree = "<group>"; };
-		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationProvider.swift; sourceTree = "<group>"; };
+		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BasicAuthenticationProvider+ServiceScheduler.swift"; sourceTree = "<group>"; };
 		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
 		5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMergeAdjacent.swift; sourceTree = "<group>"; };
 		5CAFDD142349827700162DE0 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
@@ -211,13 +211,14 @@
 			children = (
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
+				5C521D9023774C7000AD2255 /* RootComposer.swift */,
 				5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */,
 				5C521D8E2376893D00AD2255 /* HomeView.swift */,
 				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
 				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
 				5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */,
-				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider.swift */,
+				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
 				5C96DEEE22ED13D000BB643A /* LaunchScreen.storyboard */,
 				5C96DEF122ED13D000BB643A /* Info.plist */,
@@ -239,7 +240,6 @@
 			children = (
 				5C96DEFC22ED13D000BB643A /* Info.plist */,
 				5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */,
-				5C17CDBC2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift */,
 			);
 			path = ServicesSchedulerTests;
 			sourceTree = "<group>";
@@ -396,6 +396,7 @@
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
 				5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */,
+				5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */,
 				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
 				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
 				5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */,
@@ -403,7 +404,7 @@
 				5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
-				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider.swift in Sources */,
+				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
 				5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */,
@@ -426,7 +427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */,
-				5C17CDBD2336995500E4E7C5 /* BasicAuthenticationProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
