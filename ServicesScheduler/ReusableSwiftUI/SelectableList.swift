@@ -38,20 +38,16 @@ struct SelectableList<Elements, Selection, RowContent>: View where Elements: Ran
 extension SelectableList where Selection == Set<Element.ID> {
     /// Configure for muli selection.
     init(_ elements: Elements, selection: Binding<Set<Element.ID>>, @ViewBuilder content: @escaping (Element) -> RowContent) {
-        let isElementSelected = { (selection: Binding<Selection>, elementID: Element.ID) in
-            does(selection, contain: elementID)
-        }
-        self.init(elements, selection: selection, isElementSelected: isElementSelected, content: content)
+        
+        self.init(elements, selection: selection, isElementSelected: does(_:contain:), content: content)
     }
 }
 
 extension SelectableList where Selection == Element.ID? {
     /// Configure for single selection.
     init(_ elements: Elements, selection: Binding<Element.ID?>, @ViewBuilder content: @escaping (Element) -> RowContent) {
-        let isElementSelected = { (selection: Binding<Selection>, elementID: Element.ID) in
-            does(selection, equal: elementID)
-        }
-        self.init(elements, selection: selection, isElementSelected: isElementSelected, content: content)
+        
+        self.init(elements, selection: selection, isElementSelected: does(_:equal:), content: content)
     }
 }
 
