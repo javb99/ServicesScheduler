@@ -19,6 +19,7 @@ class RootComposer {
     
     lazy var feedLoader = AttentionNeededListLoader(network: service)
     lazy var feedPresenter = AttentionNeededListPresenter(loader: feedLoader)
+    lazy var rootFolderLoader = FolderLoader(network: service)
     
     var navigationState = NavigationState()
     
@@ -41,11 +42,15 @@ class RootComposer {
     
     func browserScreen() -> some View {
         NavigationView {
-            NetworkRecursiveFolderFactory(
-                network: self.service,
-                provider: FolderLoader(network: self.service, rootTitle: "Browse"),
-                selection: .constant([])
-            ).destination(forFolder: PresentableFolder("Browse", id: ""))
+            DynamicFolderContentView(
+                folderName: "Browse",
+                destinationFactory: NetworkRecursiveFolderFactory(
+                    network: self.service,
+                    provider: rootFolderLoader,
+                    selection: .constant([])
+                ),
+                provider: rootFolderLoader
+            )
         }
     }
 }

@@ -20,6 +20,7 @@ struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
         let newProvider = FolderLoader(network: network, parent: newParent)
         
         return DynamicFolderContentView(
+            folderName: folder.value,
             destinationFactory: Self(
                 network: network,
                 provider: newProvider,

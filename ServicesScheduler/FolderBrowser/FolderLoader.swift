@@ -15,20 +15,11 @@ class FolderLoader: FolderContentProvider {
     
     let network: URLSessionService
     let parent: Resource<Models.Folder>?
-    let folderName: String
     
-    init(network: URLSessionService, parent: Resource<Models.Folder>?) {
+    init(network: URLSessionService, parent: Resource<Models.Folder>? = nil) {
         self.network = network
         self.parent = parent
-        self.folderName = parent?.name ?? ""
     }
-    
-    init(network: URLSessionService, rootTitle: String) {
-        self.network = network
-        self.parent = nil
-        self.folderName = rootTitle
-    }
-    
     
     var folders: [Resource<Models.Folder>] = [] {
         willSet {
