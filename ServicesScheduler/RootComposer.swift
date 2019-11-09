@@ -9,6 +9,10 @@
 import PlanningCenterSwift
 import SwiftUI
 
+class NavigationState: ObservableObject {
+    @Published var currentTab: HomeViewTab = .browse
+}
+
 class RootComposer {
     
     lazy var service = URLSessionService(authenticationProvider: .servicesScheduler)
@@ -16,12 +20,16 @@ class RootComposer {
     lazy var feedLoader = AttentionNeededListLoader(network: service)
     lazy var feedPresenter = AttentionNeededListPresenter(loader: feedLoader)
     
+    var navigationState = NavigationState()
+    
     func makeRootView() -> some View {
-        HomeView(selectedTab: .browse, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
+        DerivedBinding(for: \.currentTab, on: self.navigationState) {
+            HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
+        }
     }
     
     func teamsScreen() -> some View {
-        MyTeamsScreen(model: MyTeamsScreenStaticModel(myTeams: [], isLoadingMyTeams: false, otherTeams: [], selectedTeams: [], chooseTeams: {}))
+        MyTeamsScreen(model: MyTeamsScreenStaticModel(chooseTeams: { self.navigationState.currentTab = .browse }))
     }
     
     func feedScreen() -> some View {

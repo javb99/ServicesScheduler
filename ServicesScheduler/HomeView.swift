@@ -16,7 +16,7 @@ enum HomeViewTab: Int {
 
 struct HomeView<TeamsView: View, FeedView: View, BrowserView: View>: View {
     
-    @State var selectedTab: HomeViewTab = .feed
+    @Binding var selectedTab: HomeViewTab
     var makeTeamsView: ()->TeamsView
     var makeFeedView: ()->FeedView
     var makeBrowserView: ()->BrowserView
@@ -62,6 +62,6 @@ struct HomeView<TeamsView: View, FeedView: View, BrowserView: View>: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(makeTeamsView: {Text("Teams!!")}, makeFeedView: {Text("Feed!!")}, makeBrowserView: {Text("Browser!!")})
+        HomeView(selectedTab: .constant(.browse), makeTeamsView: {Text("Teams!!")}, makeFeedView: {Text("Feed!!")}, makeBrowserView: {Text("Browser!!")})
     }
 }

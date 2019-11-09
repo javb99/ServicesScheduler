@@ -8,6 +8,24 @@
 
 import SwiftUI
 
+struct DerivedBinding<Observable: ObservableObject, Value, Content: View>: View {
+    @ObservedObject var observedObject: Observable
+    var keyPath: ReferenceWritableKeyPath<Observable, Value>
+    var contentGivenBinding: (Binding<Value>)->Content
+    
+    init(for path: ReferenceWritableKeyPath<Observable, Value>,
+         on observable: Observable,
+         @ViewBuilder content: @escaping (Binding<Value>)->Content) {
+        _observedObject = .init(initialValue: observable)
+        keyPath = path
+        contentGivenBinding = content
+    }
+    
+    var body: some View {
+        contentGivenBinding($observedObject[dynamicMember: keyPath])
+    }
+}
+
 // MARK: Debug Printing
 
 extension Binding {

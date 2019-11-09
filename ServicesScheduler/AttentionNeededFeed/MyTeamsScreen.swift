@@ -108,19 +108,25 @@ struct MyTeamsScreen_Previews: PreviewProvider {
 }
 
 class MyTeamsScreenStaticModel: MyTeamsScreenModel {
+    
     internal init(myTeams: [Team], isLoadingMyTeams: Bool, otherTeams: [Team], selectedTeams: Set<Team.ID>, chooseTeams: @escaping () -> ()) {
         self._myTeams = Published(initialValue: myTeams)
         self._isLoadingMyTeams = Published(initialValue: isLoadingMyTeams)
         self._otherTeams = Published(initialValue: otherTeams)
         self._selectedTeams = Published(initialValue: selectedTeams)
-        self._chooseTeams = Published(initialValue: chooseTeams)
+        self.chooseTeams = chooseTeams
     }
     
-    @Published var myTeams: [Team]
-    @Published var isLoadingMyTeams: Bool
-    @Published var otherTeams: [Team]
-    @Published var selectedTeams: Set<Team.ID>
-    @Published var chooseTeams: ()->()
+    internal init(chooseTeams: @escaping () -> ()) {
+        self.chooseTeams = chooseTeams
+    }
+    
+    
+    @Published var myTeams: [Team] = []
+    @Published var isLoadingMyTeams: Bool = false
+    @Published var otherTeams: [Team] = []
+    @Published var selectedTeams: Set<Team.ID> = []
+    var chooseTeams: ()->()
 }
 
 func identity<T>(_ t: T) -> T {
