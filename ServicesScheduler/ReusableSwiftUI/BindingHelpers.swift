@@ -8,6 +8,46 @@
 
 import SwiftUI
 
+// MARK: Debug Printing
+
+extension Binding {
+    
+    func debugingSetter(name: String = String(describing: Self.self)) -> Self {
+        Binding(
+            get: { self.wrappedValue },
+            set: { (value, transaction) in
+                print("\(name).setter(value: \(value), transaction: \(transaction))")
+                self.wrappedValue = value
+            }
+        )
+    }
+    
+    func debugingGetter(name: String = String(describing: Self.self)) -> Self {
+        Binding(
+            get: {
+                print("\(name).getter() -> \(self.wrappedValue)")
+                return self.wrappedValue
+            },
+            set: { self.wrappedValue = $0 }
+        )
+    }
+    
+    func debuging(name: String = String(describing: Self.self)) -> Self {
+        Binding(
+            get: {
+                print("\(name).getter() -> \(self.wrappedValue)")
+                return self.wrappedValue
+            },
+            set: { (value, transaction) in
+                print("\(name).setter(value: \(value), transaction: \(transaction))")
+                self.wrappedValue = value
+            }
+        )
+    }
+}
+
+// MARK: Bool logic
+
 func does<T: Hashable>(_ binding: Binding<Set<T>>, contain element: T) -> Binding<Bool> {
     Binding(get: { binding.wrappedValue.contains(element) },
             set: { newValue in
