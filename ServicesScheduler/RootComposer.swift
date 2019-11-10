@@ -30,15 +30,17 @@ class RootComposer {
     }
     
     func teamsScreen() -> some View {
-        MyTeamsScreen(model: MyTeamsScreenStaticModel(chooseTeams: { self.navigationState.currentTab = .browse }))
+        MyTeamsScreen(model: MyTeamsScreenStaticModel(), chooseTeams: { self.navigationState.currentTab = .browse })
     }
     
     func feedScreen() -> some View {
         NavigationView {
             AttentionNeededFeedList(dataSource: feedPresenter)
-                //.onAppear(perform: { self.feedLoader.load(teams: []) })
+                .onAppear(perform: { self.feedLoader.load(teams: self.selection) })
         }.accentColor(.servicesGreen)
     }
+    
+    var selection = Set(["1"])
     
     func browserScreen() -> some View {
         NavigationView {
@@ -47,7 +49,7 @@ class RootComposer {
                 destinationFactory: NetworkRecursiveFolderFactory(
                     network: self.service,
                     provider: rootFolderLoader,
-                    selection: .constant([])
+                    selection: Binding(get: {self.selection}, set: {self.selection = $0})
                 ),
                 provider: rootFolderLoader
             )

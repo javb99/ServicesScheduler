@@ -13,11 +13,11 @@ protocol MyTeamsScreenModel: ObservableObject {
     var isLoadingMyTeams: Bool { get }
     var otherTeams: [Team] { get }
     var selectedTeams: Set<Team.ID> { get set }
-    var chooseTeams: ()->() { get }
 }
 
 struct MyTeamsScreen<Model: MyTeamsScreenModel>: View {
     @ObservedObject var model: Model
+    var chooseTeams: ()->()
     
     var body: some View {
         VStack {
@@ -36,7 +36,7 @@ struct MyTeamsScreen<Model: MyTeamsScreenModel>: View {
                     PrimaryActionRow(
                         iconName: "plus.circle",
                         title: model.otherTeams.isEmpty ? "Choose teams" : "Choose more",
-                        action: model.chooseTeams
+                        action: chooseTeams
                     )
                 }
             }
@@ -81,52 +81,48 @@ struct MyTeamsScreen_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LightAndDark {
-                MyTeamsScreen(model: MyTeamsScreenStaticModel(
-                    myTeams: [Team("New Believers Team", id: "1")]*4,
-                    isLoadingMyTeams: false,
-                    otherTeams: [Team("Technical Team", id: "2")]*3,
-                    selectedTeams: ["1"],
+                MyTeamsScreen(
+                    model: MyTeamsScreenStaticModel(
+                        myTeams: [Team("New Believers Team", id: "1")]*4,
+                        isLoadingMyTeams: false,
+                        otherTeams: [Team("Technical Team", id: "2")]*3,
+                        selectedTeams: ["1"]),
                     chooseTeams: {}
-                ))
+                )
             }
-            MyTeamsScreen(model: MyTeamsScreenStaticModel(
-                myTeams: [],
-                isLoadingMyTeams: true,
-                otherTeams: [Team("Technical Team", id: "2")]*10,
-                selectedTeams: ["2"],
+            MyTeamsScreen(
+                model: MyTeamsScreenStaticModel(
+                    myTeams: [],
+                    isLoadingMyTeams: true,
+                    otherTeams: [Team("Technical Team", id: "2")]*10,
+                    selectedTeams: ["2"]),
                 chooseTeams: {}
-            ))
-            MyTeamsScreen(model: MyTeamsScreenStaticModel(
-                myTeams: [],
-                isLoadingMyTeams: false,
-                otherTeams: [],
-                selectedTeams: ["1"],
+            )
+            MyTeamsScreen(
+                model: MyTeamsScreenStaticModel(
+                    myTeams: [],
+                    isLoadingMyTeams: false,
+                    otherTeams: [],
+                    selectedTeams: ["1"]),
                 chooseTeams: {}
-            ))
+            )
         }
     }
 }
 
 class MyTeamsScreenStaticModel: MyTeamsScreenModel {
     
-    internal init(myTeams: [Team], isLoadingMyTeams: Bool, otherTeams: [Team], selectedTeams: Set<Team.ID>, chooseTeams: @escaping () -> ()) {
+    init(myTeams: [Team] = [], isLoadingMyTeams: Bool = false, otherTeams: [Team] = [], selectedTeams: Set<Team.ID> = []) {
         self._myTeams = Published(initialValue: myTeams)
         self._isLoadingMyTeams = Published(initialValue: isLoadingMyTeams)
         self._otherTeams = Published(initialValue: otherTeams)
         self._selectedTeams = Published(initialValue: selectedTeams)
-        self.chooseTeams = chooseTeams
     }
-    
-    internal init(chooseTeams: @escaping () -> ()) {
-        self.chooseTeams = chooseTeams
-    }
-    
     
     @Published var myTeams: [Team] = []
     @Published var isLoadingMyTeams: Bool = false
     @Published var otherTeams: [Team] = []
     @Published var selectedTeams: Set<Team.ID> = []
-    var chooseTeams: ()->()
 }
 
 func identity<T>(_ t: T) -> T {

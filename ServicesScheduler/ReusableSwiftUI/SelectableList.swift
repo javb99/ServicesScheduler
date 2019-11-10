@@ -30,7 +30,7 @@ struct SelectableList<Elements, Selection, RowContent>: View where Elements: Ran
             Toggle(isOn: self.isElementSelected(self.selection, element.id)) {
                 self.content(element)
             }
-            .toggleStyle(CheckmarkStyle())
+            //.toggleStyle(CheckmarkStyle())
         }
     }
 }
