@@ -64,6 +64,16 @@ extension Binding {
     }
 }
 
+struct BindingTestPreviews: PreviewProvider {
+    static var previews: some View {
+        ProvideState(initialValue: false) { (binding: Binding<Bool>) in
+            Toggle(isOn: binding.debuging()) {
+                Text("Toggle")
+            }.toggleStyle(CheckmarkStyle())
+        }
+    }
+}
+
 // MARK: Bool logic
 
 func does<T: Hashable>(_ binding: Binding<Set<T>>, contain element: T) -> Binding<Bool> {
@@ -92,7 +102,7 @@ func does<T: Equatable>(_ binding: Binding<T?>, equal value: T) -> Binding<Bool>
 
 extension Binding where Value == Bool {
     func toggle() {
-        wrappedValue = !wrappedValue
+        wrappedValue.toggle()
     }
 }
 

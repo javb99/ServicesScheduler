@@ -30,7 +30,7 @@ struct SelectableList<Elements, Selection, RowContent>: View where Elements: Ran
             Toggle(isOn: self.isElementSelected(self.selection, element.id)) {
                 self.content(element)
             }
-            //.toggleStyle(CheckmarkStyle())
+            .toggleStyle(CheckmarkStyle())
         }
     }
 }
@@ -55,18 +55,46 @@ extension SelectableList where Selection == Element.ID? {
 struct CheckmarkStyle: ToggleStyle {
     
     func makeBody(configuration: ToggleStyleConfiguration) -> some View {
-        Button(action: configuration.$isOn.toggle) {
-            HStack {
-                configuration.label
-                    .foregroundColor(.primary)
-                
-                Spacer()
-                
-                if configuration.isOn {
-                    Image(systemName: "checkmark")
-                        .foregroundColor(.accentColor)
+        Toggle(isOn: configuration.$isOn, label: {configuration.label})
+    }
+    
+    struct Toggle<Label: View>: View {
+        @Binding var isOn: Bool
+        var label: ()->Label
+        
+        var body: some View {
+            Button(action: { self.isOn.toggle() }) {
+                HStack {
+                    label()
+                        .foregroundColor(.primary)
+                    
+                    Spacer()
+                    
+                    if isOn {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.accentColor)
+                    }
                 }
             }
+        }
+    }
+}
+
+struct SelectableListPreviews: PreviewProvider {
+    static var previews: some View {
+        ProvideState(initialValue: ["Joe", "Sam", "Bob"]) { people in
+            
+            ProvideState(initialValue: Optional.some("Joe")) { selectedPerson in
+                SelectableList(people.wrappedValue.map { Identified($0, id: $0) }, selection: selectedPerson.debuging()) { person in
+                    Text(verbatim: person.value)
+                }
+            }.previewDisplayName("Single-select")
+            
+            ProvideState(initialValue: Set(["Joe"])) { selectedPeople in
+                SelectableList(people.wrappedValue.map { Identified($0, id: $0) }, selection: selectedPeople.debuging()) { person in
+                    Text(verbatim: person.value)
+                }
+            }.previewDisplayName("Multi-select")
         }
     }
 }

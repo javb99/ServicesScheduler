@@ -48,15 +48,18 @@ class RootComposer {
     
     func browserScreen() -> some View {
         NavigationView {
-            DynamicFolderContentView(
-                folderName: "Browse",
-                destinationFactory: NetworkRecursiveFolderFactory(
-                    network: self.service,
-                    provider: rootFolderLoader,
-                    selection: Binding(get: {self.selection}, set: {self.selection = $0})
-                ),
-                provider: rootFolderLoader
-            )
+            ProvideState(initialValue: Set<String>()) {
+                DynamicFolderContentView(
+                    folderName: "Browse",
+                    destinationFactory: NetworkRecursiveFolderFactory(
+                        network: self.service,
+                        provider: self.rootFolderLoader,
+                        selection: $0.debuging()
+                    ),
+                    provider: self.rootFolderLoader
+                )
+            }
+            
         }
     }
 }

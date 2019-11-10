@@ -21,3 +21,18 @@ struct IsVisibleView<Content: View>: View {
             .onDisappear() { self.isVisible = false }
     }
 }
+
+struct ProvideState<Content: View, Value>: View {
+    @State var state: Value
+    
+    var content: (Binding<Value>) -> Content
+    
+    init(initialValue: Value, @ViewBuilder content: @escaping (Binding<Value>)->Content) {
+        _state = State(initialValue: initialValue)
+        self.content = content
+    }
+    
+    var body: some View {
+        content($state)
+    }
+}
