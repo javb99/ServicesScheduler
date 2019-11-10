@@ -30,13 +30,17 @@ class RootComposer {
     }
     
     func teamsScreen() -> some View {
-        MyTeamsScreen(model: MyTeamsScreenStaticModel(), chooseTeams: { self.navigationState.currentTab = .browse })
+        NavigationView {
+            MyTeamsScreen(model: MyTeamsScreenStaticModel(), chooseTeams: { self.navigationState.currentTab = .browse })
+                .navigationBarTitle("My Teams")
+        }
     }
     
     func feedScreen() -> some View {
         NavigationView {
             AttentionNeededFeedList(dataSource: feedPresenter)
                 .onAppear(perform: { self.feedLoader.load(teams: self.selection) })
+                .navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)
     }
     
