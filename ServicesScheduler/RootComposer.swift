@@ -21,6 +21,9 @@ class RootComposer {
     lazy var feedPresenter = AttentionNeededListPresenter(loader: feedLoader)
     lazy var rootFolderLoader = FolderLoader(network: service)
     
+    lazy var meLoader = NetworkMeService(network: service)
+    lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader)
+    
     var navigationState = NavigationState()
     var teamState = MyTeamsScreenStaticModel()
     
@@ -34,6 +37,7 @@ class RootComposer {
         NavigationView {
             MyTeamsScreen(model: teamState, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
+                .onAppear{ self.myTeamsLoader.load(completion: {_ in}) }
         }
     }
     
