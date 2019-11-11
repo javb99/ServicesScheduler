@@ -22,6 +22,7 @@ class RootComposer {
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     var navigationState = NavigationState()
+    var teamState = MyTeamsScreenStaticModel()
     
     func makeRootView() -> some View {
         DerivedBinding(for: \.currentTab, on: self.navigationState) {
@@ -48,13 +49,13 @@ class RootComposer {
     
     func browserScreen() -> some View {
         NavigationView {
-            ProvideState(initialValue: Set<String>()) {
+            DerivedBinding(for: \.selectedTeams, on: teamState) { selection in
                 DynamicFolderContentView(
                     folderName: "Browse",
                     destinationFactory: NetworkRecursiveFolderFactory(
                         network: self.service,
                         provider: self.rootFolderLoader,
-                        selection: $0.debuging()
+                        selection: selection
                     ),
                     provider: self.rootFolderLoader
                 )
