@@ -32,7 +32,7 @@ class RootComposer {
     
     func teamsScreen() -> some View {
         NavigationView {
-            MyTeamsScreen(model: MyTeamsScreenStaticModel(), chooseTeams: { self.navigationState.currentTab = .browse })
+            MyTeamsScreen(model: teamState, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
         }
     }
@@ -40,12 +40,13 @@ class RootComposer {
     func feedScreen() -> some View {
         NavigationView {
             AttentionNeededFeedList(dataSource: feedPresenter)
-                .onAppear(perform: { self.feedLoader.load(teams: self.selection) })
+                .onAppear(perform: {
+                    print(self.teamState.selectedTeams)
+                    self.feedLoader.load(teams: self.teamState.selectedTeams)
+                })
                 .navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)
     }
-    
-    var selection = Set(["1"])
     
     func browserScreen() -> some View {
         NavigationView {

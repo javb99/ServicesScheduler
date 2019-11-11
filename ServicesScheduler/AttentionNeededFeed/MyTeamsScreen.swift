@@ -113,16 +113,22 @@ struct MyTeamsScreen_Previews: PreviewProvider {
 class MyTeamsScreenStaticModel: MyTeamsScreenModel {
     
     init(myTeams: [Team] = [], isLoadingMyTeams: Bool = false, otherTeams: [Team] = [], selectedTeams: Set<Team.ID> = []) {
-        self._myTeams = Published(initialValue: myTeams)
-        self._isLoadingMyTeams = Published(initialValue: isLoadingMyTeams)
-        self._otherTeams = Published(initialValue: otherTeams)
-        self._selectedTeams = Published(initialValue: selectedTeams)
+        self.myTeams = myTeams
+        self.isLoadingMyTeams = isLoadingMyTeams
+        self.otherTeams = otherTeams
+        self.selectedTeams = selectedTeams
     }
     
-    @Published var myTeams: [Team] = []
-    @Published var isLoadingMyTeams: Bool = false
-    @Published var otherTeams: [Team] = []
-    @Published var selectedTeams: Set<Team.ID> = []
+    var myTeams: [Team] = []
+    var isLoadingMyTeams: Bool = false
+    var otherTeams: [Team] = []
+    var selectedTeams: Set<Team.ID> = [] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
+    var objectWillChange = ObjectWillChangePublisher()
 }
 
 func identity<T>(_ t: T) -> T {
