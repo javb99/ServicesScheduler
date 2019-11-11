@@ -15,14 +15,39 @@ protocol MyTeamsService {
     func load(completion: @escaping (Result<[Resource<Models.Team>], Error>)->())
 }
 
+protocol TeamService {
+    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<Resource<Models.Team>, Error>)->())
+}
+
+final class NetworkTeamService: TeamService {
+    let network: URLSessionService
+    
+    init(network: URLSessionService) {
+        self.network = network
+    }
+    
+    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<Resource<Models.Team>, Error>)->()) {
+        network.fetch(Endpoints.services.teams[id: teamID]) { result in
+            switch result {
+            case let .success(_, _, team):
+                completion(.success(team.data!))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+}
+
 final class NetworkMyTeamsService: MyTeamsService {
     
     let network: URLSessionService
     let meService: MeService
+    let teamService: TeamService
     
-    init(network: URLSessionService, meService: MeService) {
+    init(network: URLSessionService, meService: MeService, teamService: TeamService) {
         self.network = network
         self.meService = meService
+        self.teamService = teamService
     }
     
     func load(completion: @escaping (Result<[Resource<Models.Team>], Error>)->()) {
@@ -39,13 +64,45 @@ final class NetworkMyTeamsService: MyTeamsService {
     private func loadTeams(for person: Resource<Models.PeoplePerson>, _ completion: @escaping (Result<[Resource<Models.Team>], Error>)->()) {
         let id = ResourceIdentifier<Models.Person>.raw(person.identifer.id)
         let assignmentsEndpoint = Endpoints.services.people[id: id].personTeamPositionAssignments
+        
+        var teams = [Resource<Models.Team>]()
+        var waitingForTeamsCount = 0
+        
         network.fetch(assignmentsEndpoint) { result in
             switch result {
             case let .success(_, _, document):
                 let assignments = document.data!
-                print(assignments.map { assignment in
-                    "Assignment: \(assignment.schedulePreference.rawValue)"
-                })
+                waitingForTeamsCount = assignments.count
+                assignments.forEach {
+                    self.loadTeam(for: $0, meID: id) { result in
+                        waitingForTeamsCount -= 1
+                        switch result {
+                        case let .success(team):
+                            teams.append(team)
+                            if waitingForTeamsCount == 0 {
+                                completion(.success(teams.uniq(by: \.identifer)))
+                            }
+                        case let .failure(error):
+                            print("Failed to load team: \(error)")
+                            //completion(.failure(error))
+                        }
+                    }
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func loadTeam(for assignment: Resource<Models.PersonTeamPositionAssignment>, meID: ResourceIdentifier<Models.Person>, _ completion: @escaping (Result<Resource<Models.Team>, Error>)->()) {
+        
+        let teamPositionEndpoint = Endpoints.services.people[id: meID].personTeamPositionAssignments[id: assignment.identifer].teamPosition
+        network.fetch(teamPositionEndpoint) { result in
+            switch result {
+            case let .success(_, _, document):
+                let teamPosition = document.data!
+                let teamID = teamPosition.team.data!
+                self.teamService.load(team: teamID, completion: completion)
             case let .failure(error):
                 completion(.failure(error))
             }

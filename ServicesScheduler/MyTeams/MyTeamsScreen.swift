@@ -120,9 +120,22 @@ class MyTeamsScreenStaticModel: MyTeamsScreenModel {
         self.selectedTeams = selectedTeams
     }
     
-    var myTeams: [Team] = []
-    var isLoadingMyTeams: Bool = false
-    var otherTeams: [Team] = []
+    var myTeams: [Team] = [] {
+           willSet {
+               objectWillChange.send()
+           }
+       }
+    var isLoadingMyTeams: Bool = false {
+           willSet {
+               objectWillChange.send()
+           }
+       }
+    var otherTeams: [Team] = [] {
+           willSet {
+               objectWillChange.send()
+           }
+       }
+    
     var selectedTeams: Set<Team.ID> = [] {
         willSet {
             objectWillChange.send()

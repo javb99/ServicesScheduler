@@ -22,7 +22,8 @@ class RootComposer {
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var meLoader = NetworkMeService(network: service)
-    lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader)
+    lazy var teamLoader = NetworkTeamService(network: service)
+    lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
     
     var navigationState = NavigationState()
     var teamState = MyTeamsScreenStaticModel()
@@ -37,7 +38,22 @@ class RootComposer {
         NavigationView {
             MyTeamsScreen(model: teamState, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
-                .onAppear{ self.myTeamsLoader.load(completion: {_ in}) }
+                .onAppear{
+                    self.teamState.isLoadingMyTeams = true
+                    self.myTeamsLoader.load(completion: { result in
+                        DispatchQueue.main.async {
+                            self.teamState.isLoadingMyTeams = false
+                            if let teams = try? result.get() {
+                                self.teamState.myTeams = teams
+                                    .compactMap(MTeam.presentableTeam)
+                                    .sorted(by: {$0.sequenceIndex < $1.sequenceIndex})
+                                    .map{ Identified($0.name, id: $0.id) }
+                            } else {
+                                print("Failed \(result)")
+                            }
+                        }
+                    })
+                }
         }
     }
     
