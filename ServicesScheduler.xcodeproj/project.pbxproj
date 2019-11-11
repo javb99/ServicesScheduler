@@ -181,9 +181,16 @@
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
-				5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */,
 			);
 			path = AttentionNeededFeed;
+			sourceTree = "<group>";
+		};
+		5C320BB72379E1FE003CDEE8 /* MyTeams */ = {
+			isa = PBXGroup;
+			children = (
+				5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */,
+			);
+			path = MyTeams;
 			sourceTree = "<group>";
 		};
 		5C96DED722ED13CC00BB643A = {
@@ -217,6 +224,7 @@
 				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
 				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
+				5C320BB72379E1FE003CDEE8 /* MyTeams */,
 				5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
