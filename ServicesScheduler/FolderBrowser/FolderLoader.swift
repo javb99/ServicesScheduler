@@ -67,7 +67,6 @@ class FolderLoader: FolderContentProvider {
         }
         if let parent = parent {
             print("Fetching serviceTypes of: \(parent.name!) \(parent.identifer.id)")
-            
         }
     }
     
@@ -77,7 +76,12 @@ class FolderLoader: FolderContentProvider {
             switch result {
             case let .success(_, _, document):
                 print("Received folder contents: \(document.data!.map{$0.name})")
-                self.folders = document.data ?? []
+                let folders = document.data ?? []
+                if self.parent == nil {
+                    self.folders = folders.filter { $0.parent?.data == nil }
+                } else {
+                    self.folders = folders
+                }
             case let .failure(error):
                 print("Received Failed: \(error)")
                 self.folders = []
