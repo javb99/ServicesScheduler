@@ -29,7 +29,7 @@ class ServiceTypeTeamsLoader: TeamProvider {
     }
     
     func load() {
-        let endpoint = Endpoints.serviceTypes[id: serviceTypeID].teams
+        let endpoint = Endpoints.services.serviceTypes[id: serviceTypeID].teams
         network.fetch(endpoint) { result in
             DispatchQueue.main.async {
                 switch result {

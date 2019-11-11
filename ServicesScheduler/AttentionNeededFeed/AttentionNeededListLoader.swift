@@ -59,7 +59,7 @@ class AttentionNeededListLoader {
     
     func load(team: Team.ID) {
         let id = ResourceIdentifier<Models.Team>(stringLiteral: team)
-        network.fetch(Endpoints.teams[id: id]) { (result) in
+        network.fetch(Endpoints.services.teams[id: id]) { (result) in
             self.teamFetchDidComplete(team, result.map { $0.2 })
         }
     }
@@ -83,7 +83,7 @@ class AttentionNeededListLoader {
     
     func load(serviceType: String) {
         let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
-        network.fetch(Endpoints.serviceTypes[id: id]) { (result) in
+        network.fetch(Endpoints.services.serviceTypes[id: id]) { (result) in
             self.serviceTypeFetchDidComplete(serviceType, result.map { $0.2 })
         }
     }
@@ -101,7 +101,7 @@ class AttentionNeededListLoader {
     
     func loadPlans(forServiceType serviceType: String) {
         let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
-        network.fetch(Endpoints.serviceTypes[id: id].plans.filter(.future)) { (result) in
+        network.fetch(Endpoints.services.serviceTypes[id: id].plans.filter(.future)) { (result) in
             self.plansFetchDidComplete(serviceType, result.map { $0.2 })
         }
     }
@@ -122,7 +122,7 @@ class AttentionNeededListLoader {
     
     func loadTeamMembers(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) {
         let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
-        network.fetch(Endpoints.serviceTypes[id: serviceID].plans[id: planID].teamMembers) { (result) in
+        network.fetch(Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers) { (result) in
             self.teamMembersFetchDidComplete(planID, result.map { $0.2 })
         }
     }

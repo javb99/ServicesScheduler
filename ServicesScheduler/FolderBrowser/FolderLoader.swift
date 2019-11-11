@@ -58,12 +58,12 @@ class FolderLoader: FolderContentProvider {
     func load() {
         if let parent = parent {
             print("Fetching contents of: \(parent.name!) \(parent.identifer.id)")
-            let baseFolderEndpoint = Endpoints.folders[id: parent.identifer]
+            let baseFolderEndpoint = Endpoints.services.folders[id: parent.identifer]
             network.fetch(baseFolderEndpoint.subfolders, completion: self.handleLoadResult)
             network.fetch(baseFolderEndpoint.serviceTypes, completion: self.handleServiceTypesLoadResult)
         } else {
             print("Fetching folders")
-            network.fetch(Endpoints.folders, completion: self.handleLoadResult)
+            network.fetch(Endpoints.services.folders, completion: self.handleLoadResult)
         }
         if let parent = parent {
             print("Fetching serviceTypes of: \(parent.name!) \(parent.identifer.id)")

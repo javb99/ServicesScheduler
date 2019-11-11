@@ -22,6 +22,7 @@ struct MyTeamsScreen<Model: MyTeamsScreenModel>: View {
     var body: some View {
         VStack {
             List() {
+                // /services/v2/people/1/person_team_position_assignments
                 Section(header: Text("My Teams")) {
                     if model.isLoadingMyTeams && model.myTeams.isEmpty {
                         Text("Loading teams you lead...")
