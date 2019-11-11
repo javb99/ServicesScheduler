@@ -45,7 +45,13 @@ class RootComposer {
                             self.teamState.isLoadingMyTeams = false
                             if let teams = try? result.get() {
                                 self.teamState.myTeams = teams
-                                    .compactMap(MTeam.presentableTeam)
+                                    .compactMap { (teamAndServiceType: TeamWithServiceType) -> PresentableTeam? in
+                                        let id = teamAndServiceType.identifer.id
+                                        if let teamName = teamAndServiceType.name, let serviceName = teamAndServiceType.serviceType.name {
+                                            return PresentableTeam(id: id, name: serviceName + " - " + teamName, sequenceIndex: teamAndServiceType.sequenceIndex ?? 0)
+                                        }
+                                        return nil
+                                    }
                                     .sorted(by: {$0.sequenceIndex < $1.sequenceIndex})
                                     .map{ Identified($0.name, id: $0.id) }
                             } else {

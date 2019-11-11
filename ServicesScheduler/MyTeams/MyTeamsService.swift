@@ -12,11 +12,11 @@ import PlanningCenterSwift
 import JSONAPISpec
 
 protocol MyTeamsService {
-    func load(completion: @escaping (Result<[Resource<Models.Team>], Error>)->())
+    func load(completion: @escaping (Result<[TeamWithServiceType], Error>)->())
 }
 
 protocol TeamService {
-    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<Resource<Models.Team>, Error>)->())
+    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<TeamWithServiceType, Error>)->())
 }
 
 final class NetworkTeamService: TeamService {
@@ -26,14 +26,31 @@ final class NetworkTeamService: TeamService {
         self.network = network
     }
     
-    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<Resource<Models.Team>, Error>)->()) {
-        network.fetch(Endpoints.services.teams[id: teamID]) { result in
+    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<TeamWithServiceType, Error>)->()) {
+        network.fetch(Endpoints.services.teams[id: teamID].withServiceType) { result in
             switch result {
-            case let .success(_, _, team):
-                completion(.success(team.data!))
+            case let .success(_, _, document):
+                let team = document.data!
+                let serviceType = document.included!.first!
+                completion(.success(TeamWithServiceType(team: team, serviceType: serviceType)))
             case let .failure(error):
                 completion(.failure(error))
             }
+        }
+    }
+}
+
+@dynamicMemberLookup
+public struct TeamWithServiceType {
+    public var team: Resource<Models.Team>
+    public var serviceType: Resource<Models.ServiceType>
+    
+    public subscript<T>(dynamicMember path: WritableKeyPath<Resource<Models.Team>, T>) -> T {
+        get {
+            return team[keyPath: path]
+        }
+        set {
+            team[keyPath: path] = newValue
         }
     }
 }
@@ -50,7 +67,7 @@ final class NetworkMyTeamsService: MyTeamsService {
         self.teamService = teamService
     }
     
-    func load(completion: @escaping (Result<[Resource<Models.Team>], Error>)->()) {
+    func load(completion: @escaping (Result<[TeamWithServiceType], Error>)->()) {
         meService.load { result in
             switch result {
             case let .success(person):
@@ -61,11 +78,11 @@ final class NetworkMyTeamsService: MyTeamsService {
         }
     }
     
-    private func loadTeams(for person: Resource<Models.PeoplePerson>, _ completion: @escaping (Result<[Resource<Models.Team>], Error>)->()) {
+    private func loadTeams(for person: Resource<Models.PeoplePerson>, _ completion: @escaping (Result<[TeamWithServiceType], Error>)->()) {
         let id = ResourceIdentifier<Models.Person>.raw(person.identifer.id)
         let assignmentsEndpoint = Endpoints.services.people[id: id].personTeamPositionAssignments
         
-        var teams = [Resource<Models.Team>]()
+        var teams = [TeamWithServiceType]()
         var waitingForTeamsCount = 0
         
         network.fetch(assignmentsEndpoint) { result in
@@ -94,7 +111,7 @@ final class NetworkMyTeamsService: MyTeamsService {
         }
     }
     
-    private func loadTeam(for assignment: Resource<Models.PersonTeamPositionAssignment>, meID: ResourceIdentifier<Models.Person>, _ completion: @escaping (Result<Resource<Models.Team>, Error>)->()) {
+    private func loadTeam(for assignment: Resource<Models.PersonTeamPositionAssignment>, meID: ResourceIdentifier<Models.Person>, _ completion: @escaping (Result<TeamWithServiceType, Error>)->()) {
         
         let teamPositionEndpoint = Endpoints.services.people[id: meID].personTeamPositionAssignments[id: assignment.identifer].teamPosition
         network.fetch(teamPositionEndpoint) { result in
