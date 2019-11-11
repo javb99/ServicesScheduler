@@ -39,26 +39,7 @@ class RootComposer {
             MyTeamsScreen(model: teamState, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
                 .onAppear{
-                    self.teamState.isLoadingMyTeams = true
-                    self.myTeamsLoader.load(completion: { result in
-                        DispatchQueue.main.async {
-                            self.teamState.isLoadingMyTeams = false
-                            if let teams = try? result.get() {
-                                self.teamState.myTeams = teams
-                                    .compactMap { (teamAndServiceType: TeamWithServiceType) -> PresentableTeam? in
-                                        let id = teamAndServiceType.identifer.id
-                                        if let teamName = teamAndServiceType.name, let serviceName = teamAndServiceType.serviceType.name {
-                                            return PresentableTeam(id: id, name: serviceName + " - " + teamName, sequenceIndex: teamAndServiceType.sequenceIndex ?? 0)
-                                        }
-                                        return nil
-                                    }
-                                    .sorted(by: {$0.sequenceIndex < $1.sequenceIndex})
-                                    .map{ Identified($0.name, id: $0.id) }
-                            } else {
-                                print("Failed \(result)")
-                            }
-                        }
-                    })
+                    self.teamScreenDidAppear()
                 }
         }
     }
@@ -89,5 +70,22 @@ class RootComposer {
             }
             
         }
+    }
+    
+    func teamScreenDidAppear() {
+        self.teamState.isLoadingMyTeams = true
+        self.myTeamsLoader.load(completion: { result in
+            DispatchQueue.main.async {
+                self.teamState.isLoadingMyTeams = false
+                if let teams = try? result.get() {
+                    self.teamState.myTeams = teams
+                        .compactMap(TeamWithServiceType.presentableTeam)
+                        .sorted(by: {$0.sequenceIndex < $1.sequenceIndex})
+                        .map{ Identified($0.name, id: $0.id) }
+                } else {
+                    print("Failed \(result)")
+                }
+            }
+        })
     }
 }
