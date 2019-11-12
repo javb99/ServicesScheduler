@@ -54,9 +54,9 @@ struct PresentableTeam {
 
 extension MTeam {
     static func presentableTeam(_ fullTeam: MTeam) -> PresentableTeam? {
-        guard let name = fullTeam.name,
-            let index = fullTeam.sequenceIndex else
-        { return nil }
+        guard let name = fullTeam.name
+             else { return nil }
+        let index = fullTeam.sequenceIndex ?? 0
         return PresentableTeam(id: fullTeam.identifer.id, name: name, sequenceIndex: index)
     }
 }

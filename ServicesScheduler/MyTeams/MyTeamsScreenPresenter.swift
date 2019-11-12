@@ -45,12 +45,12 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
     
     fileprivate func processTeams(_ teams: [TeamWithServiceType]) {
         let teamsByServiceType = teams.group(by: \.serviceType.identifer)
-        let serviceTypes = teams.pluck(\.serviceType).uniq(by: \.identifer).filter{ $0.name != nil }.sortedLexographically(on: \.name!)
-        let teamsForServiceType = serviceTypes.compactMap { serviceType -> ServiceTypeTeams? in
+        let serviceTypes = teams.pluck(\.serviceType).uniq(by: \.identifer).assertMap{$0.name == nil ? nil : $0}.sortedLexographically(on: \.name!)
+        let teamsForServiceType = serviceTypes.assertMap { serviceType -> ServiceTypeTeams? in
             
             guard let thisTeams = teamsByServiceType[serviceType.identifer]?
                 .pluck(\.team)
-                .compactMap(MTeam.presentableTeam)
+                .assertMap(MTeam.presentableTeam)
                 .sortedLexographically(on: \.name)
             else { return nil }
             if thisTeams.isEmpty { return nil }
@@ -58,6 +58,20 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
         }
         
         self.myTeams = teamsForServiceType
+    }
+}
+
+extension Sequence {
+    /// Compact map that probably shouldn't return nil.
+    func assertMap<T>(file: StaticString = #file, function: StaticString = #function, _ transform: (Element)->T?) -> [T] {
+        self.compactMap {
+            if let successful = transform($0) {
+                return successful
+            } else {
+                print("Assert map failed\nfile: \(file)\nfunction: \(function))\n\($0) -> \(T.self)")
+                return nil
+            }
+        }
     }
 }
 
