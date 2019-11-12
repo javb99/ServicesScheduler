@@ -16,6 +16,7 @@
 		5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC62336AC1800E4E7C5 /* Identified.swift */; };
 		5C320BB92379E563003CDEE8 /* MeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BB82379E563003CDEE8 /* MeService.swift */; };
 		5C320BBB2379E8CC003CDEE8 /* MyTeamsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */; };
+		5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BBC237A2544003CDEE8 /* MyTeamsScreenPresenter.swift */; };
 		5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */; };
 		5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8E2376893D00AD2255 /* HomeView.swift */; };
 		5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D9023774C7000AD2255 /* RootComposer.swift */; };
@@ -72,6 +73,7 @@
 		5C17CDC62336AC1800E4E7C5 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
 		5C320BB82379E563003CDEE8 /* MeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeService.swift; sourceTree = "<group>"; };
 		5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsService.swift; sourceTree = "<group>"; };
+		5C320BBC237A2544003CDEE8 /* MyTeamsScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsScreenPresenter.swift; sourceTree = "<group>"; };
 		5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsScreen.swift; sourceTree = "<group>"; };
 		5C521D8E2376893D00AD2255 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5C521D9023774C7000AD2255 /* RootComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComposer.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */,
+				5C320BBC237A2544003CDEE8 /* MyTeamsScreenPresenter.swift */,
 				5C320BB82379E563003CDEE8 /* MeService.swift */,
 				5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */,
 			);
@@ -419,6 +422,7 @@
 				5CAD90A0234855DF00F02002 /* ServiceTypeTeamsLoader.swift in Sources */,
 				5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
+				5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,

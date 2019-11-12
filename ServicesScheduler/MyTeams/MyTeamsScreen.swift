@@ -8,10 +8,14 @@
 
 import SwiftUI
 
+struct ServiceTypeTeams {
+    var serviceType: PresentableServiceType
+    var teams: [PresentableTeam]
+}
+
 protocol MyTeamsScreenModel: ObservableObject {
-    var myTeams: [Team] { get }
+    var myTeams: [ServiceTypeTeams] { get }
     var isLoadingMyTeams: Bool { get }
-    var otherTeams: [Team] { get }
     var selectedTeams: Set<Team.ID> { get set }
 }
 
@@ -22,21 +26,17 @@ struct MyTeamsScreen<Model: MyTeamsScreenModel>: View {
     var body: some View {
         VStack {
             List() {
-                // /services/v2/people/1/person_team_position_assignments
-                Section(header: Text("My Teams")) {
-                    if model.isLoadingMyTeams && model.myTeams.isEmpty {
-                        Text("Loading teams you lead...")
-                    } else if model.myTeams.isEmpty {
-                        Text("You don't lead any teams.")
-                    } else {
-                        teamsSection(teams: model.myTeams)
-                    }
+                if model.isLoadingMyTeams && model.myTeams.isEmpty {
+                    Text("Loading teams you belong to...")
+                } else if model.myTeams.isEmpty {
+                    Text("You don't belong to any teams.")
+                } else {
+                    teamsSection(model.myTeams)
                 }
-                Section(header: Text("Other Teams")) {
-                    teamsSection(teams: model.otherTeams)
+                Section() {
                     PrimaryActionRow(
                         iconName: "plus.circle",
-                        title: model.otherTeams.isEmpty ? "Choose teams" : "Choose more",
+                        title: model.myTeams.isEmpty ? "Choose teams" : "Choose more",
                         action: chooseTeams
                     )
                 }
@@ -50,11 +50,15 @@ struct MyTeamsScreen<Model: MyTeamsScreenModel>: View {
         return self.$model.selectedTeams
     }
     
-    func teamsSection(teams: [Team]) -> some View {
-        ForEach(teams) { (team: Team) in
-            Toggle(isOn: does(self.selectedTeams, contain: team.id)) {
-                Text(team.value)
-            }.toggleStyle(CheckmarkStyle())
+    func teamsSection(_ teamsByServiceType: [ServiceTypeTeams]) -> some View {
+        ForEach(teamsByServiceType, id: \.serviceType.id) { (serviceType: ServiceTypeTeams) in
+            Section(header: Text(serviceType.serviceType.value)) {
+                ForEach(serviceType.teams, id: \.id) { (team: PresentableTeam) in
+                    Toggle(isOn: does(self.selectedTeams, contain: team.id)) {
+                        Text(team.name)
+                    }.toggleStyle(CheckmarkStyle())
+                }
+            }
         }
     }
 }
@@ -84,9 +88,8 @@ struct MyTeamsScreen_Previews: PreviewProvider {
             LightAndDark {
                 MyTeamsScreen(
                     model: MyTeamsScreenStaticModel(
-                        myTeams: [Team("New Believers Team", id: "1")]*4,
+                        myTeams: [ServiceTypeTeams(serviceType: PresentableServiceType("Sanctuary", id: "123"), teams: [PresentableTeam(id: "2", name: "Technical Team", sequenceIndex: 0)]*5)],
                         isLoadingMyTeams: false,
-                        otherTeams: [Team("Technical Team", id: "2")]*3,
                         selectedTeams: ["1"]),
                     chooseTeams: {}
                 )
@@ -95,7 +98,6 @@ struct MyTeamsScreen_Previews: PreviewProvider {
                 model: MyTeamsScreenStaticModel(
                     myTeams: [],
                     isLoadingMyTeams: true,
-                    otherTeams: [Team("Technical Team", id: "2")]*10,
                     selectedTeams: ["2"]),
                 chooseTeams: {}
             )
@@ -103,7 +105,6 @@ struct MyTeamsScreen_Previews: PreviewProvider {
                 model: MyTeamsScreenStaticModel(
                     myTeams: [],
                     isLoadingMyTeams: false,
-                    otherTeams: [],
                     selectedTeams: ["1"]),
                 chooseTeams: {}
             )
@@ -112,15 +113,14 @@ struct MyTeamsScreen_Previews: PreviewProvider {
 }
 
 class MyTeamsScreenStaticModel: MyTeamsScreenModel {
-    
-    init(myTeams: [Team] = [], isLoadingMyTeams: Bool = false, otherTeams: [Team] = [], selectedTeams: Set<Team.ID> = []) {
+
+    init(myTeams: [ServiceTypeTeams] = [], isLoadingMyTeams: Bool = false, selectedTeams: Set<Team.ID> = []) {
         self.myTeams = myTeams
         self.isLoadingMyTeams = isLoadingMyTeams
-        self.otherTeams = otherTeams
         self.selectedTeams = selectedTeams
     }
-    
-    var myTeams: [Team] = [] {
+
+    var myTeams: [ServiceTypeTeams] = [] {
            willSet {
                objectWillChange.send()
            }
@@ -130,18 +130,12 @@ class MyTeamsScreenStaticModel: MyTeamsScreenModel {
                objectWillChange.send()
            }
        }
-    var otherTeams: [Team] = [] {
-           willSet {
-               objectWillChange.send()
-           }
-       }
-    
     var selectedTeams: Set<Team.ID> = [] {
         willSet {
             objectWillChange.send()
         }
     }
-    
+
     var objectWillChange = ObjectWillChangePublisher()
 }
 

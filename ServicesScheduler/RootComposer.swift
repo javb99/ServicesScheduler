@@ -24,9 +24,10 @@ class RootComposer {
     lazy var meLoader = NetworkMeService(network: service)
     lazy var teamLoader = NetworkTeamService(network: service)
     lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
+    lazy var teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
     
     var navigationState = NavigationState()
-    var teamState = MyTeamsScreenStaticModel()
+    
     
     func makeRootView() -> some View {
         DerivedBinding(for: \.currentTab, on: self.navigationState) {
@@ -36,11 +37,9 @@ class RootComposer {
     
     func teamsScreen() -> some View {
         NavigationView {
-            MyTeamsScreen(model: teamState, chooseTeams: { self.navigationState.currentTab = .browse })
+            MyTeamsScreen(model: teamPresenter, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
-                .onAppear{
-                    self.teamScreenDidAppear()
-                }
+                .onAppear{ self.teamPresenter.teamScreenDidAppear() }
         }
     }
     
@@ -48,8 +47,8 @@ class RootComposer {
         NavigationView {
             AttentionNeededFeedList(dataSource: feedPresenter)
                 .onAppear(perform: {
-                    print(self.teamState.selectedTeams)
-                    self.feedLoader.load(teams: self.teamState.selectedTeams)
+                    print(self.teamPresenter.selectedTeams)
+                    self.feedLoader.load(teams: self.teamPresenter.selectedTeams)
                 })
                 .navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)
@@ -57,7 +56,7 @@ class RootComposer {
     
     func browserScreen() -> some View {
         NavigationView {
-            DerivedBinding(for: \.selectedTeams, on: teamState) { selection in
+            DerivedBinding(for: \.selectedTeams, on: teamPresenter) { selection in
                 DynamicFolderContentView(
                     folderName: "Browse",
                     destinationFactory: NetworkRecursiveFolderFactory(
@@ -70,22 +69,5 @@ class RootComposer {
             }
             
         }
-    }
-    
-    func teamScreenDidAppear() {
-        self.teamState.isLoadingMyTeams = true
-        self.myTeamsLoader.load(completion: { result in
-            DispatchQueue.main.async {
-                self.teamState.isLoadingMyTeams = false
-                if let teams = try? result.get() {
-                    self.teamState.myTeams = teams
-                        .compactMap(TeamWithServiceType.presentableTeam)
-                        .sorted(by: {$0.sequenceIndex < $1.sequenceIndex})
-                        .map{ Identified($0.name, id: $0.id) }
-                } else {
-                    print("Failed \(result)")
-                }
-            }
-        })
     }
 }

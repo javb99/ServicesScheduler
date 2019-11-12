@@ -60,12 +60,3 @@ extension MTeam {
         return PresentableTeam(id: fullTeam.identifer.id, name: name, sequenceIndex: index)
     }
 }
-extension TeamWithServiceType {
-    static func presentableTeam(_ fullTeam: TeamWithServiceType) -> PresentableTeam? {
-        guard var presTeam = MTeam.presentableTeam(fullTeam.team), let serviceTypeName = fullTeam.serviceType.name else {
-            return nil
-        }
-        presTeam.name = serviceTypeName + " - " + presTeam.name
-        return presTeam
-    }
-}
