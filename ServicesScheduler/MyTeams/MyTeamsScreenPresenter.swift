@@ -25,6 +25,9 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
     @Published var selectedTeams: Set<Team.ID> = []
     
     func teamScreenDidAppear() {
+        let shouldAvoidReload = !myTeams.isEmpty || isLoadingMyTeams
+        if shouldAvoidReload { return }
+        
         isLoadingMyTeams = true
         
         myTeamsService.load() { result in
