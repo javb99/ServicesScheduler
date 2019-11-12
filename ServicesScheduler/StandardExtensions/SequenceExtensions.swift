@@ -56,3 +56,29 @@ extension Sequence {
         self.lazy.compactMap { $0[keyPath: keyPath] }.joined(separator: ", ")
     }
 }
+
+extension Sequence {
+    /// Compact map that probably shouldn't return nil.
+    func assertMap<T>(file: StaticString = #file, function: StaticString = #function, _ transform: (Element)->T?) -> [T] {
+        self.compactMap {
+            if let successful = transform($0) {
+                return successful
+            } else {
+                print("Assert map failed\nfile: \(file)\nfunction: \(function))\n\($0) -> \(T.self)")
+                return nil
+            }
+        }
+    }
+}
+
+extension Sequence {
+    func sortedLexographically(on keyPath: KeyPath<Element, String>) -> [Element] {
+        return sorted(by: {$0[keyPath: keyPath] < $1[keyPath: keyPath]})
+    }
+}
+
+extension Sequence {
+    func pluck<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
+        return map{ $0[keyPath: keyPath] }
+    }
+}
