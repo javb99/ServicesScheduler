@@ -48,6 +48,7 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
             guard let thisTeams = teamsByServiceType[serviceType.identifer]?
                 .pluck(\.team)
                 .compactMap(MTeam.presentableTeam)
+                .sortedLexographically(on: \.name)
             else { return nil }
             if thisTeams.isEmpty { return nil }
             return ServiceTypeTeams(serviceType: serviceType.makePresentable(), teams: thisTeams)
