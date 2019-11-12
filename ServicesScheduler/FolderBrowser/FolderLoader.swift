@@ -63,10 +63,8 @@ class FolderLoader: FolderContentProvider {
             network.fetch(baseFolderEndpoint.serviceTypes, completion: self.handleServiceTypesLoadResult)
         } else {
             print("Fetching folders")
-            network.fetch(Endpoints.services.folders, completion: self.handleLoadResult)
-        }
-        if let parent = parent {
-            print("Fetching serviceTypes of: \(parent.name!) \(parent.identifer.id)")
+            network.fetch(Endpoints.services.rootFolders, completion: self.handleLoadResult)
+            network.fetch(Endpoints.services.rootServiceTypes, completion: self.handleServiceTypesLoadResult)
         }
     }
     
@@ -76,12 +74,7 @@ class FolderLoader: FolderContentProvider {
             switch result {
             case let .success(_, _, document):
                 print("Received folder contents: \(document.data!.map{$0.name})")
-                let folders = document.data ?? []
-                if self.parent == nil {
-                    self.folders = folders.filter { $0.parent?.data == nil }
-                } else {
-                    self.folders = folders
-                }
+                self.folders = document.data ?? []
             case let .failure(error):
                 print("Received Failed: \(error)")
                 self.folders = []
