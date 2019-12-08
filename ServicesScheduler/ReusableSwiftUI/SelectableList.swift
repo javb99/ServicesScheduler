@@ -81,20 +81,29 @@ struct CheckmarkStyle: ToggleStyle {
 }
 
 struct SelectableListPreviews: PreviewProvider {
+    static var people = ["Joe", "Sam", "Bob"]
+    
     static var previews: some View {
-        ProvideState(initialValue: ["Joe", "Sam", "Bob"]) { people in
-            
-            ProvideState(initialValue: Optional.some("Joe")) { selectedPerson in
-                SelectableList(people.wrappedValue.map { Identified($0, id: $0) }, selection: selectedPerson.debuging()) { person in
-                    Text(verbatim: person.value)
-                }
+        Group {
+            ProvideState(initialValue: Optional<String>.some("Joe")) { selectedPerson in
+                singleSelectList(people, selectedPerson)
             }.previewDisplayName("Single-select")
-            
+
             ProvideState(initialValue: Set(["Joe"])) { selectedPeople in
-                SelectableList(people.wrappedValue.map { Identified($0, id: $0) }, selection: selectedPeople.debuging()) { person in
-                    Text(verbatim: person.value)
-                }
+                multiSelectList(people, selectedPeople)
             }.previewDisplayName("Multi-select")
+        }
+    }
+    
+    static func singleSelectList(_ people: [String], _ selection: Binding<String?>) -> some View {
+        SelectableList(people.map { Identified($0, id: $0) }, selection: selection) { person in
+            Text(verbatim: person.value)
+        }
+    }
+    
+    static func multiSelectList(_ people: [String], _ selection: Binding<Set<String>>) -> some View {
+        SelectableList(people.map { Identified($0, id: $0) }, selection: selection) { person in
+            Text(verbatim: person.value)
         }
     }
 }
