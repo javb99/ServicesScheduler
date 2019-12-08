@@ -66,6 +66,13 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
         
         self.myTeams = teamsForServiceType
     }
+    
+    public func selectAll() {
+        selectedTeams = Set(myTeams.flatMap{$0.teams}.map{$0.id})
+    }
+    public func deselectAll() {
+        selectedTeams = []
+    }
 }
 
 extension Resource where Type == Models.ServiceType {

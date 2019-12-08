@@ -15,7 +15,7 @@ struct DerivedBinding<Observable: ObservableObject, Value, Content: View>: View 
     
     init(for path: ReferenceWritableKeyPath<Observable, Value>,
          on observable: Observable,
-         @ViewBuilder content: @escaping (Binding<Value>)->Content) {
+         content: @escaping (Binding<Value>)->Content) {
         _observedObject = .init(initialValue: observable)
         keyPath = path
         contentGivenBinding = content

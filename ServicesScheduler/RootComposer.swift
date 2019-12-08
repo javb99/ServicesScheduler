@@ -39,7 +39,22 @@ class RootComposer {
         NavigationView {
             MyTeamsScreen(model: teamPresenter, chooseTeams: { self.navigationState.currentTab = .browse })
                 .navigationBarTitle("My Teams")
+                .navigationBarItems(trailing: selectAllButton())
                 .onAppear{ self.teamPresenter.teamScreenDidAppear() }
+        }
+    }
+    
+    func selectAllButton() -> some View {
+        DerivedBinding(for: \.selectedTeams, on: teamPresenter) { selection in
+            Button(action: {
+                if selection.wrappedValue.isEmpty {
+                    self.teamPresenter.selectAll()
+                } else {
+                    self.teamPresenter.deselectAll()
+                }
+            }) {
+                Text(selection.wrappedValue.isEmpty ? "Select all" : "Deselect all")
+            }
         }
     }
     
