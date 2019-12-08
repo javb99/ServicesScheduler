@@ -43,7 +43,8 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
     func teamMembers(plan: Plan, team: Team) -> [TeamMember] {
         let planID = MPlan.ID(stringLiteral: plan.id)
         let teamID = MTeam.ID(stringLiteral: team.id)
-        return teamMembers[planID]?[teamID] ?? []
+        let members = teamMembers[planID]?[teamID] ?? []
+        return members.filter { $0.status.iconName == PresentableStatus(.unconfirmed).iconName }
     }
     
     func plansPublisher() -> AnyPublisher<[Plan], Never> {
