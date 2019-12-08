@@ -46,15 +46,11 @@ class RootComposer {
     
     func selectAllButton() -> some View {
         DerivedBinding(for: \.selectedTeams, on: teamPresenter) { selection in
-            Button(action: {
-                if selection.wrappedValue.isEmpty {
-                    self.teamPresenter.selectAll()
-                } else {
-                    self.teamPresenter.deselectAll()
-                }
-            }) {
-                Text(selection.wrappedValue.isEmpty ? "Select all" : "Deselect all")
-            }
+            SelectAllButton(
+                showSelectAll: selection.wrappedValue.isEmpty,
+                selectAll: self.teamPresenter.selectAll,
+                deselectAll: self.teamPresenter.deselectAll
+            )
         }
     }
     

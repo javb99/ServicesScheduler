@@ -14,6 +14,7 @@
 		5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */; };
 		5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */; };
 		5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC62336AC1800E4E7C5 /* Identified.swift */; };
+		5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2FF3FD239D9B6900D258CA /* SelectAllButton.swift */; };
 		5C320BB92379E563003CDEE8 /* MeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BB82379E563003CDEE8 /* MeService.swift */; };
 		5C320BBB2379E8CC003CDEE8 /* MyTeamsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */; };
 		5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C320BBC237A2544003CDEE8 /* MyTeamsScreenPresenter.swift */; };
@@ -71,6 +72,7 @@
 		5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecursiveFolderFactory.swift; sourceTree = "<group>"; };
 		5C17CDC42336AA4300E4E7C5 /* RecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFolderFactory.swift; sourceTree = "<group>"; };
 		5C17CDC62336AC1800E4E7C5 /* Identified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identified.swift; sourceTree = "<group>"; };
+		5C2FF3FD239D9B6900D258CA /* SelectAllButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAllButton.swift; sourceTree = "<group>"; };
 		5C320BB82379E563003CDEE8 /* MeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeService.swift; sourceTree = "<group>"; };
 		5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsService.swift; sourceTree = "<group>"; };
 		5C320BBC237A2544003CDEE8 /* MyTeamsScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsScreenPresenter.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAD9098234816C700F02002 /* BindingHelpers.swift */,
+				5C2FF3FD239D9B6900D258CA /* SelectAllButton.swift */,
 				5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */,
 				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
 				5CAD909D2348533000F02002 /* SelectableList.swift */,
@@ -413,6 +416,7 @@
 				5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */,
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
+				5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */,
 				5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */,
 				5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */,
 				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
