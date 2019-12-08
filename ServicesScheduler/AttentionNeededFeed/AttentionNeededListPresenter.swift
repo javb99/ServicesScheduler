@@ -32,7 +32,8 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
     @Published var teams: [MPlan.ID: [Team]] = [:]
     func teams(plan: Plan) -> [Team] {
         let planID = MPlan.ID(stringLiteral: plan.id)
-        return teams[planID] ?? []
+        let teams = self.teams[planID] ?? []
+        return teams.filter { self.teamMembers(plan: plan, team: $0).isEmpty == false }
     }
     
     func neededPositions(plan: Plan, team: Team) -> [NeededPosition] {
