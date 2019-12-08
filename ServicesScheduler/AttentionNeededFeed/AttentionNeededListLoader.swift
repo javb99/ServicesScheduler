@@ -9,6 +9,7 @@
 import Foundation
 import PlanningCenterSwift
 import JSONAPISpec
+import Combine
 
 extension Resource {
     typealias ID = ResourceIdentifier<Type>
@@ -43,9 +44,10 @@ class AttentionNeededListLoader {
         }
     }
     
+    var planPeopleCancellables: [AnyCancellable] = []
     @Published var planPeople: [MPlanPerson] = [] {
         didSet {
-            print("Plan People: " + planPeople.map{ $0.name + "-" + $0.status.rawValue }.joined(separator: ", "))
+            print("\(planPeople.count) Plan People: " + planPeople.map{ $0.name + "-" + $0.status.rawValue }.joined(separator: ", "))
         }
     }
     
@@ -107,7 +109,7 @@ class AttentionNeededListLoader {
     }
     
     func plansFetchDidComplete(_ serviceTypeID: String, _ result: Result<ResourceCollectionDocument<Models.Plan>, NetworkError>) {
-        guard let plansDoc = try? result.get(), let mPlans = plansDoc.data else {
+        guard let plansDoc = try? result.get(), let mPlans = plansDoc.data?.prefix(3) else {
             print("Error fetching plans: \(result)")
             return
         }
@@ -122,19 +124,14 @@ class AttentionNeededListLoader {
     
     func loadTeamMembers(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) {
         let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
-        network.fetch(Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers) { (result) in
-            self.teamMembersFetchDidComplete(planID, result.map { $0.2 })
-        }
-    }
-    
-    func teamMembersFetchDidComplete(_ planID: ResourceIdentifier<Models.Plan>, _ result: Result<ResourceCollectionDocument<Models.PlanPerson>, NetworkError>) {
-        guard let peopleDoc = try? result.get(), let mPlanPeople = peopleDoc.data else {
-            print("Error fetching team members: \(result)")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.planPeople.append(contentsOf: mPlanPeople)
-        }
+        let membersEndpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers
+        planPeopleCancellables.append(network.publisher(for: membersEndpoint)
+            .subscribe(on: DispatchQueue.global())
+            .handleEvents(receiveOutput: { print($0.name) })
+            .collect()
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .sink { self.planPeople.append(contentsOf: $0) }
+        )
     }
 }
