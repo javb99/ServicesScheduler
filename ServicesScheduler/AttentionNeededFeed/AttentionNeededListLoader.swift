@@ -44,94 +44,94 @@ class AttentionNeededListLoader {
         }
     }
     
-    var planPeopleCancellables: [AnyCancellable] = []
     @Published var planPeople: [MPlanPerson] = [] {
         didSet {
-            print("\(planPeople.count) Plan People: " + planPeople.map{ $0.name + "-" + $0.status.rawValue }.joined(separator: ", "))
+            let peopleNames = planPeople.map{ $0.name + "-" + $0.status.rawValue }.commaSeparated(\.self)
+            print("\(planPeople.count) Plan People: " + peopleNames)
         }
     }
+    
+    var currentLoad: AnyCancellable?
     
     func load(teams: Set<Team.ID>) {
         self.teams.removeAll()
         plans.removeAll()
         serviceTypes.removeAll()
         planPeople.removeAll()
-        teams.forEach(load(team:))
-    }
-    
-    func load(team: Team.ID) {
-        let id = ResourceIdentifier<Models.Team>(stringLiteral: team)
-        network.fetch(Endpoints.services.teams[id: id]) { (result) in
-            self.teamFetchDidComplete(team, result.map { $0.2 })
-        }
-    }
-    
-    func teamFetchDidComplete(_ team: Team.ID, _ result: Result<ResourceDocument<Models.Team>, NetworkError>) {
-        guard let teamDoc = try? result.get(), let mTeam = teamDoc.data, let serviceTypeID = mTeam.serviceType.data else {
-            print("Error fetching team: \(result)")
-            return
-        }
-        load(serviceType: serviceTypeID.id)
-        loadPlans(forServiceType: serviceTypeID.id)
         
-        DispatchQueue.main.async {
-            if let teams = self.teams[serviceTypeID] {
-                self.teams[serviceTypeID] = teams + [mTeam]
-            } else {
-                self.teams[serviceTypeID] = [mTeam]
+        currentLoad?.cancel()
+        currentLoad = Publishers.Sequence(sequence: teams)
+            .setFailureType(to: NetworkError.self)
+            .flatMap{ self.teamPublisher(team: $0) }
+            .handleEvents(receiveOutput: { mTeam in
+                guard let serviceTypeID = mTeam.serviceType.data else { return }
+                DispatchQueue.main.async {
+                    if self.teams[serviceTypeID] != nil {
+                        self.teams[serviceTypeID]!.append(mTeam)
+                    } else {
+                        self.teams[serviceTypeID] = [mTeam]
+                    }
+                }
+            })
+            .compactMap{ mTeam in mTeam.serviceType.data }
+            .flatMap { serviceTypeID in
+                self.serviceTypesPublisher(serviceType: serviceTypeID.id)
             }
-        }
-    }
-    
-    func load(serviceType: String) {
-        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
-        network.fetch(Endpoints.services.serviceTypes[id: id]) { (result) in
-            self.serviceTypeFetchDidComplete(serviceType, result.map { $0.2 })
-        }
-    }
-    
-    func serviceTypeFetchDidComplete(_ serviceTypeID: String, _ result: Result<ResourceDocument<Models.ServiceType>, NetworkError>) {
-        guard let serviceTypeDoc = try? result.get(), let mServiceType = serviceTypeDoc.data else {
-            print("Error fetching service type: \(result)")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.serviceTypes.append(mServiceType)
-        }
-    }
-    
-    func loadPlans(forServiceType serviceType: String) {
-        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
-        network.fetch(Endpoints.services.serviceTypes[id: id].plans.filter(.future)) { (result) in
-            self.plansFetchDidComplete(serviceType, result.map { $0.2 })
-        }
-    }
-    
-    func plansFetchDidComplete(_ serviceTypeID: String, _ result: Result<ResourceCollectionDocument<Models.Plan>, NetworkError>) {
-        guard let plansDoc = try? result.get(), let mPlans = plansDoc.data?.prefix(3) else {
-            print("Error fetching plans: \(result)")
-            return
-        }
-        for plan in mPlans {
-            loadTeamMembers(forServiceType: serviceTypeID, planID: plan.identifer)
-        }
-        
-        DispatchQueue.main.async {
-            self.plans.append(contentsOf: mPlans)
-        }
-    }
-    
-    func loadTeamMembers(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) {
-        let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
-        let membersEndpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers
-        planPeopleCancellables.append(network.publisher(for: membersEndpoint)
-            .subscribe(on: DispatchQueue.global())
-            .handleEvents(receiveOutput: { print($0.name) })
-            .collect()
+            .handleEvents(receiveOutput: {(serviceType: MServiceType) in
+                DispatchQueue.main.async {
+                    self.serviceTypes.append(serviceType)
+                }
+            })
+            .flatMap{ serviceType in
+                Just(serviceType).setFailureType(to: NetworkError.self)
+                    .combineLatest(
+                        self.futurePlansPublisher(forServiceType: serviceType.identifer.id)
+                            .prefix(4)
+                            .handleEvents(receiveOutput: { (plan: MPlan) in
+                                DispatchQueue.main.async {
+                                    self.plans.append(plan)
+                                }
+                            })
+                    )
+            }
+            .flatMap { (both: (MServiceType, MPlan)) in
+                self.teamMembersPublisher(forServiceType: both.0.identifer.id, planID: both.1.identifer)
+            }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .sink { self.planPeople.append(contentsOf: $0) }
-        )
+            .sink{ self.planPeople.append(contentsOf: $0) }
+    }
+    
+    func teamPublisher(team: String) -> AnyPublisher<MTeam, NetworkError> {
+        let id = ResourceIdentifier<Models.Team>(stringLiteral: team)
+        let endpoint = Endpoints.services.teams[id: id]
+        return network.future(for: endpoint)
+            .map(\.2.data)
+            .compactMap(identity)
+            .eraseToAnyPublisher()
+    }
+    
+    func serviceTypesPublisher(serviceType: String) -> AnyPublisher<MServiceType, NetworkError> {
+        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
+        let endpoint = Endpoints.services.serviceTypes[id: id]
+        return network.future(for: endpoint)
+            .map(\.2.data)
+            .compactMap(identity)
+            .eraseToAnyPublisher()
+    }
+    
+    func futurePlansPublisher(forServiceType serviceType: String) -> AnyPublisher<MPlan, NetworkError> {
+        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
+        let endpoint = Endpoints.services.serviceTypes[id: id].plans.filter(.future)
+        return network.publisher(for: endpoint)
+            .eraseToAnyPublisher()
+    }
+    
+    func teamMembersPublisher(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) -> AnyPublisher<[Resource<Models.PlanPerson>], NetworkError> {
+        let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
+        let membersEndpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers
+        return network.publisher(for: membersEndpoint)
+            .collect()
+            .eraseToAnyPublisher()
     }
 }
