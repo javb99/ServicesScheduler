@@ -18,6 +18,7 @@ extension Resource {
 typealias MServiceType = Resource<Models.ServiceType>
 typealias MPlan = Resource<Models.Plan>
 typealias MPlanPerson = Resource<Models.PlanPerson>
+typealias MNeededPosition = Resource<Models.NeededPosition>
 
 class AttentionNeededListLoader {
     init(network: URLSessionService) {
@@ -51,6 +52,12 @@ class AttentionNeededListLoader {
         }
     }
     
+    @Published var neededPositions: [MNeededPosition] = [] {
+        didSet {
+            print("\(neededPositions.count) NeededPositions")
+        }
+    }
+    
     var currentLoad: AnyCancellable?
     
     func load(teams: Set<Team.ID>) {
@@ -58,9 +65,10 @@ class AttentionNeededListLoader {
         plans.removeAll()
         serviceTypes.removeAll()
         planPeople.removeAll()
+        neededPositions.removeAll()
         
         currentLoad?.cancel()
-        currentLoad = Publishers.Sequence(sequence: teams)
+        let plansPublisher = Publishers.Sequence(sequence: teams)
             .setFailureType(to: NetworkError.self)
             .flatMap{ self.teamPublisher(team: $0) }
             .handleEvents(receiveOutput: { mTeam in
@@ -94,12 +102,26 @@ class AttentionNeededListLoader {
                             })
                     )
             }
+        let peopleSub = plansPublisher
             .flatMap { (both: (MServiceType, MPlan)) in
                 self.teamMembersPublisher(forServiceType: both.0.identifer.id, planID: both.1.identifer)
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .sink{ self.planPeople.append(contentsOf: $0) }
+        
+        let positionsSub = plansPublisher
+            .flatMap { (both: (MServiceType, MPlan)) in
+                self.neededPositionsPublisher(forServiceType: both.0.identifer.id, planID: both.1.identifer)
+            }
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .sink{ self.neededPositions.append(contentsOf: $0) }
+        
+        currentLoad = AnyCancellable {
+            peopleSub.cancel()
+            positionsSub.cancel()
+        }
     }
     
     func teamPublisher(team: String) -> AnyPublisher<MTeam, NetworkError> {
@@ -132,6 +154,15 @@ class AttentionNeededListLoader {
         let membersEndpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers
         return network.publisher(for: membersEndpoint)
             .collect()
+            .eraseToAnyPublisher()
+    }
+    
+    func neededPositionsPublisher(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) -> AnyPublisher<[Resource<Models.NeededPosition>], NetworkError> {
+        let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
+        let endpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].neededPositions
+        return network.publisher(for: endpoint)
+            .collect()
+            .handleEvents(receiveCompletion: {print("NeededPositions.complete: \($0)")}, receiveCancel: {print("NeededPositions.cancel")})
             .eraseToAnyPublisher()
     }
 }

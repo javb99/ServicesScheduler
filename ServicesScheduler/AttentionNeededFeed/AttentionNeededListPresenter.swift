@@ -20,7 +20,8 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         self.loader = loader
         cancelables = [plansPublisher().assign(to: \.plans, on: self),
                        teamsPublisher().assign(to: \.teams, on: self),
-                       teamMembersPublisher().assign(to: \.teamMembers, on: self)]
+                       teamMembersPublisher().assign(to: \.teamMembers, on: self),
+                       neededPositionsPublisher().assign(to: \.neededPositions, on: self)]
     }
     
     deinit {
@@ -36,8 +37,11 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         return teams.filter { self.teamMembers(plan: plan, team: $0).isEmpty == false }
     }
     
+    @Published var neededPositions: [MPlan.ID: [MTeam.ID: [NeededPosition]]] = [:]
     func neededPositions(plan: Plan, team: Team) -> [NeededPosition] {
-        return []
+        let planID = MPlan.ID(stringLiteral: plan.id)
+        let teamID = MTeam.ID(stringLiteral: team.id)
+        return neededPositions[planID]?[teamID] ?? []
     }
     
     @Published var teamMembers: [MPlan.ID: [MTeam.ID: [TeamMember]]] = [:]
@@ -100,6 +104,17 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func neededPositionsPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [NeededPosition]]], Never> {
+        
+        loader.$neededPositions.map { mNeededPosition in
+            mNeededPosition.group(by: \.plan.data!).mapValues { mPositionsForPlan in
+                mPositionsForPlan.group(by: \.team.data!).mapValues { teamPositions in
+                    teamPositions.createPresentableList()
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 }
 
 extension Collection where Element == MPlanPerson {
@@ -117,6 +132,23 @@ extension Collection where Element == MPlanPerson {
                               name: person.name,
                               position: positionName,
                               status: PresentableStatus(person.status))
+        }
+    }
+}
+
+extension Collection where Element == MNeededPosition {
+    
+    /// Transform  a list of PlanPeople to TeamMembers that can be displayed.
+    /// This does the sorting, uniquing, and the merging of positions.
+    func createPresentableList() -> [NeededPosition] {
+        self
+        .uniq(by: \.identifer)
+        .compactMap { (mPosition: MNeededPosition) -> NeededPosition? in
+            return NeededPosition(
+                id: mPosition.identifer.id,
+                title: mPosition.positionName,
+                count: mPosition.quantity
+            )
         }
     }
 }
