@@ -21,6 +21,15 @@ enum LogInState {
 
 extension LogInState {
     var presentable: PresentableLogInState {
-        return .loggedIn
+        switch self {
+        case .welcome:
+            return .welcome
+        case .welcomeRefreshing(_), .welcomeCheckingKeychain, .browserPrompting, .fetchingToken(browserCode: _):
+            return .welcomeLoggingIn
+        case let .failed(error):
+            return .failed(error)
+        case .success(_), .prevSuccessRefreshing(_):
+            return .loggedIn
+        }
     }
 }

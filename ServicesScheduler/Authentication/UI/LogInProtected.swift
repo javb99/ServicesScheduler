@@ -17,15 +17,15 @@ struct LogInProtected<Content: View>: View {
         _LogInProtected(
             state: stateMachine.state.presentable,
             cancel: {},
-            logIn: {},
-            backToLogIn: {},
+            logIn: stateMachine.presentBrowserLogIn,
+            backToLogIn: stateMachine.goBackToLogIn,
             content: content
         )
     }
 }
 
-func PrimaryButton(action: ()->(), label: String) -> some View {
-    Button(action: {}) {
+func PrimaryButton(action: @escaping ()->(), label: String) -> some View {
+    Button(action: action) {
         Text(verbatim: label)
             .padding()
             .background(

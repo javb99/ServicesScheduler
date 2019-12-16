@@ -26,12 +26,15 @@ class LogInStateMachine: ObservableObject {
         }
         state = .browserPrompting
         browserAuthorizer.requestAuthorization() { result in
-            switch result {
-            case let .success(code):
-                self.beginAuthEndpointPost(browserCode: code)
-            case let .failure(error):
-                self.state = .failed(error)
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(code):
+                    self.beginAuthEndpointPost(browserCode: code)
+                case let .failure(error):
+                    self.state = .failed(error)
+                }
             }
+            
         }
     }
     
@@ -41,11 +44,13 @@ class LogInStateMachine: ObservableObject {
         }
         state = .fetchingToken(browserCode: browserCode)
         self.fetchAuthToken(.browserCode(browserCode)) { result in
-            switch result {
-            case let .success(token):
-                self.state = .success(token)
-            case let .failure(error):
-                self.state = .failed(error)
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(token):
+                    self.state = .success(token)
+                case let .failure(error):
+                    self.state = .failed(error)
+                }
             }
         }
     }
@@ -56,11 +61,13 @@ class LogInStateMachine: ObservableObject {
         }
         state = .prevSuccessRefreshing(oldToken)
         self.fetchAuthToken(.refreshToken(oldToken.refreshToken)) { result in
-            switch result {
-            case let .success(token):
-                self.state = .success(token)
-            case let .failure(error):
-                self.state = .failed(error)
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(token):
+                    self.state = .success(token)
+                case let .failure(error):
+                    self.state = .failed(error)
+                }
             }
         }
     }

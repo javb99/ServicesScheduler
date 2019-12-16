@@ -135,6 +135,7 @@
 		5CCFF99B23A8303300596110 /* PresentableLogInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableLogInState.swift; sourceTree = "<group>"; };
 		5CCFF99D23A830A100596110 /* LogInStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachine.swift; sourceTree = "<group>"; };
 		5CCFF99F23A8332400596110 /* BrowserContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContext.swift; sourceTree = "<group>"; };
+		5CCFF9A123A83D9900596110 /* Scheduler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scheduler.entitlements; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +257,7 @@
 		5C96DEE222ED13CC00BB643A /* ServicesScheduler */ = {
 			isa = PBXGroup;
 			children = (
+				5CCFF9A123A83D9900596110 /* Scheduler.entitlements */,
 				5CB7270323A7254C006BD2F4 /* Authentication */,
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
@@ -691,6 +693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ServicesScheduler/Scheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "ServicesScheduler/Preview\\ Content";
 				DEVELOPMENT_TEAM = ZRHLCAHG9L;
@@ -700,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = josephvb.ServicesScheduler;
+				PRODUCT_BUNDLE_IDENTIFIER = com.josephvb.ServicesScheduler;
 				PRODUCT_NAME = Scheduler;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -711,6 +714,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ServicesScheduler/Scheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "ServicesScheduler/Preview\\ Content";
 				DEVELOPMENT_TEAM = ZRHLCAHG9L;
@@ -720,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = josephvb.ServicesScheduler;
+				PRODUCT_BUNDLE_IDENTIFIER = com.josephvb.ServicesScheduler;
 				PRODUCT_NAME = Scheduler;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -46,6 +46,7 @@ class BrowserAuthorizer: Authorizer {
             }
             completion(.success(code))
         }
+        session?.prefersEphemeralWebBrowserSession = true
         session?.presentationContextProvider = uiContext
         session?.start()
     }
@@ -61,3 +62,7 @@ fileprivate extension URL {
         return code
     }
 }
+// https://api.planningcenteronline.com/oauth/authorize?client_id=e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561&client_secret=0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26&redirect_uri=services-scheduler://auth/complete&response_type=code&scope=services%20people
+// https://api.planningcenteronline.com/oauth/authorize?client_id=e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561&client_secret=0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26&redirect_uri=services-scheduler://auth/complete&response_type=code&scope=services%20people
+// https://api.planningcenteronline.com//oauth/authorize?client_id=e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561&client_secret=0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26&redirect_uri=services-scheduler://auth/complete&response_type=code&scope=services%20people
+// https://api.planningcenteronline.com//oauth/authorize?client_id=e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561&client_secret=0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26&redirect_uri=servicesscheduler://auth/complete&response_type=code&scope=services%20people
