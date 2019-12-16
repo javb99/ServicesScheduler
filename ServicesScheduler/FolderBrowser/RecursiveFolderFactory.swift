@@ -21,10 +21,10 @@ struct RecursiveFolderFactory: FolderDestinationFactory {
     }
     
     func destination(forServiceType serviceType: PresentableServiceType) -> some View {
-        ServiceTypeTeamSelectionView(
+        TeamSelectionView(
             selection: .constant(["1"]),
             teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-            serviceTypeName: serviceType.value
+            title: serviceType.value
         )
     }
 }

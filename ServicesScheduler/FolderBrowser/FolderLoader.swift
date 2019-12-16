@@ -16,7 +16,7 @@ class FolderLoader: FolderContentProvider {
     let network: URLSessionService
     let parent: Resource<Models.Folder>?
     
-    internal init(network: URLSessionService, parent: Resource<Models.Folder>? = nil) {
+    init(network: URLSessionService, parent: Resource<Models.Folder>? = nil) {
         self.network = network
         self.parent = parent
     }
@@ -30,12 +30,21 @@ class FolderLoader: FolderContentProvider {
         }
     }
     
+    var serviceTypes: [Resource<Models.ServiceType>] = [] {
+        willSet {
+            objectWillChange.send()
+        }
+        didSet {
+            serviceTypeNames = serviceTypes.map{ .init($0.name!, id: $0.identifer.id) }
+        }
+    }
+    
     func folder(for presentableFolder: PresentableFolder) -> Resource<Models.Folder>? {
         folders.first(where: {$0.identifer.id == presentableFolder.id})
     }
     
-    var folderName: String {
-        parent?.name ?? ""
+    func serviceType(for presentableServiceType: PresentableServiceType) -> Resource<Models.ServiceType>? {
+        serviceTypes.first(where: {$0.identifer.id == presentableServiceType.id})
     }
     
     var folderNames: [PresentableFolder] = []
@@ -49,16 +58,13 @@ class FolderLoader: FolderContentProvider {
     func load() {
         if let parent = parent {
             print("Fetching contents of: \(parent.name!) \(parent.identifer.id)")
-            let baseFolderEndpoint = Endpoints.folders[id: parent.identifer]
+            let baseFolderEndpoint = Endpoints.services.folders[id: parent.identifer]
             network.fetch(baseFolderEndpoint.subfolders, completion: self.handleLoadResult)
             network.fetch(baseFolderEndpoint.serviceTypes, completion: self.handleServiceTypesLoadResult)
         } else {
             print("Fetching folders")
-            network.fetch(Endpoints.folders, completion: self.handleLoadResult)
-        }
-        if let parent = parent {
-            print("Fetching serviceTypes of: \(parent.name!) \(parent.identifer.id)")
-            
+            network.fetch(Endpoints.services.rootFolders, completion: self.handleLoadResult)
+            network.fetch(Endpoints.services.rootServiceTypes, completion: self.handleServiceTypesLoadResult)
         }
     }
     
@@ -82,10 +88,10 @@ class FolderLoader: FolderContentProvider {
             switch result {
             case let .success(_, _, document):
                 print("Received service types: \(document.data!.map{$0.name})")
-                self.serviceTypeNames = document.data!.map { .init($0.name!, id: $0.identifer.id) }
+                self.serviceTypes = document.data ?? []
             case let .failure(error):
                 print("Received Failed: \(error)")
-                self.serviceTypeNames = []
+                self.serviceTypes = []
             }
         }
     }

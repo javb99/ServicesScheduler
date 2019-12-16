@@ -13,13 +13,14 @@ import SwiftUI
 struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
     let network: URLSessionService
     let provider: FolderLoader
-    var selection: Binding<Set<Team.ID>>?
+    var selection: Binding<Set<Team.ID>>
     
     func destination(forFolder folder: PresentableFolder) -> some View {
         let newParent = provider.folder(for: folder)
         let newProvider = FolderLoader(network: network, parent: newParent)
         
         return DynamicFolderContentView(
+            folderName: folder.value,
             destinationFactory: Self(
                 network: network,
                 provider: newProvider,
@@ -29,11 +30,14 @@ struct NetworkRecursiveFolderFactory: FolderDestinationFactory {
         )
     }
     
-    func destination(forServiceType serviceType: PresentableServiceType) -> some View {
-        ServiceTypeTeamSelectionView(
+    func destination(forServiceType serviceTypeName: PresentableServiceType) -> some View {
+        let serviceType = provider.serviceType(for: serviceTypeName)!
+        return TeamSelectionContainer(
             selection: selection,
-            teams: [.init("Band", id: "1"), .init("Tech", id: "2")],
-            serviceTypeName: serviceType.value
+            provider: ServiceTypeTeamsLoader(
+                serviceTypeID: serviceType.identifer,
+                network: network),
+            title: serviceTypeName.value
         )
     }
 }

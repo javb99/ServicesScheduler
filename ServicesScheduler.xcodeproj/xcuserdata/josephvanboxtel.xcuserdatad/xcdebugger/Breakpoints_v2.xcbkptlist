@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "8F52309D-9844-4ADB-AA5B-413473A80797"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66B53119-08F2-4B05-822C-E4B2926B125D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ServicesScheduler/ReusableSwiftUI/LoadableDataView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF107A14-AC45-4052-98D9-B817CF4073D1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ServicesScheduler/FolderBrowser/DynamicFolderContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30">
+            <Locations>
+               <Location
+                  uuid = "CF107A14-AC45-4052-98D9-B817CF4073D1 - 809d369969121280"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Scheduler.DynamicFolderContentView.body.getter : some"
+                  moduleName = "Scheduler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephvanboxtel/Documents/Programming/SwiftPackages/ServicesScheduler/ServicesScheduler/FolderBrowser/DynamicFolderContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "858">
+               </Location>
+               <Location
+                  uuid = "CF107A14-AC45-4052-98D9-B817CF4073D1 - b6468b06c3c504b5"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Scheduler.DynamicFolderContentView.body.getter : some"
+                  moduleName = "Scheduler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephvanboxtel/Documents/Programming/SwiftPackages/ServicesScheduler/ServicesScheduler/FolderBrowser/DynamicFolderContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "121">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1296B6B-8D28-40A1-ACB6-DA50E757E56D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ServicesScheduler/ReusableSwiftUI/SelectableList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "makeBody(configuration:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D1296B6B-8D28-40A1-ACB6-DA50E757E56D - fd9232ba379deedf"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Scheduler.CheckmarkStyle.makeBody(configuration: SwiftUI.ToggleStyleConfiguration) -&gt; some"
+                  moduleName = "Scheduler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephvanboxtel/Documents/Programming/SwiftPackages/ServicesScheduler/ServicesScheduler/ReusableSwiftUI/SelectableList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "D1296B6B-8D28-40A1-ACB6-DA50E757E56D - b93ca34b7e2dead8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Scheduler.CheckmarkStyle.makeBody(configuration: SwiftUI.ToggleStyleConfiguration) -&gt; some"
+                  moduleName = "Scheduler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephvanboxtel/Documents/Programming/SwiftPackages/ServicesScheduler/ServicesScheduler/ReusableSwiftUI/SelectableList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  uuid = "D1296B6B-8D28-40A1-ACB6-DA50E757E56D - a7a1930dae477d88"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, Swift.Optional&lt;&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt; in Scheduler.CheckmarkStyle.makeBody(configuration: SwiftUI.ToggleStyleConfiguration) -&gt; some"
+                  moduleName = "Scheduler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephvanboxtel/Documents/Programming/SwiftPackages/ServicesScheduler/ServicesScheduler/ReusableSwiftUI/SelectableList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00EE2B8D-FB54-49F1-8637-0E695C80BD74"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ServicesScheduler/MyTeams/MyTeamsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "loadTeams(for:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DA7D7CC8-94A2-4B04-BA5A-AED5074CE632"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ServicesScheduler/MyTeams/MyTeamsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "loadTeams(for:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
