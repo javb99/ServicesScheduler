@@ -27,8 +27,16 @@ class ServicesSchedulerUITests: XCTestCase {
     }
 
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let app = XCUIApplication()
+        let tabBarsQuery = app.tabBars
+        tabBarsQuery.buttons["Teams"].tap()
+        sleep(3)
+        let tablesQuery = app.tables
+        tablesQuery.children(matching: .cell).element(boundBy: 7).switches["Technical"].tap()
+        tablesQuery.children(matching: .cell).element(boundBy: 10).switches["Band"].tap()
+        tablesQuery.children(matching: .cell).element(boundBy: 13).switches["Technical"].tap()
+        tablesQuery.children(matching: .cell).element(boundBy: 12).switches["Leadership Team"].tap()
+        tablesQuery.children(matching: .cell).element(boundBy: 11).switches["Band"].tap()
+        tabBarsQuery.buttons["Feed"].tap()
     }
-
 }
