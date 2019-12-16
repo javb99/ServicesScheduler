@@ -43,6 +43,14 @@
 		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
 		5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */; };
 		5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD142349827700162DE0 /* SequenceExtensions.swift */; };
+		5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */; };
+		5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */; };
+		5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */; };
+		5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */; };
+		5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */; };
+		5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */; };
+		5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */; };
+		5CB7270923A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -107,6 +115,14 @@
 		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
 		5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMergeAdjacent.swift; sourceTree = "<group>"; };
 		5CAFDD142349827700162DE0 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
+		5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpoint.swift; sourceTree = "<group>"; };
+		5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStore.swift; sourceTree = "<group>"; };
+		5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAppConfiguration.swift; sourceTree = "<group>"; };
+		5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperation.swift; sourceTree = "<group>"; };
+		5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserAuthorizer.swift; sourceTree = "<group>"; };
+		5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpointTests.swift; sourceTree = "<group>"; };
+		5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStoreTests.swift; sourceTree = "<group>"; };
+		5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperationTests.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +244,7 @@
 		5C96DEE222ED13CC00BB643A /* ServicesScheduler */ = {
 			isa = PBXGroup;
 			children = (
+				5CB7270323A7254C006BD2F4 /* Authentication */,
 				5C96DEE322ED13CC00BB643A /* AppDelegate.swift */,
 				5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */,
 				5C521D9023774C7000AD2255 /* RootComposer.swift */,
@@ -258,6 +275,7 @@
 		5C96DEF922ED13D000BB643A /* ServicesSchedulerTests */ = {
 			isa = PBXGroup;
 			children = (
+				5CB7270A23A72569006BD2F4 /* AuthenticationTests */,
 				5C96DEFC22ED13D000BB643A /* Info.plist */,
 				5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */,
 			);
@@ -271,6 +289,28 @@
 				5C96DF0722ED13D000BB643A /* Info.plist */,
 			);
 			path = ServicesSchedulerUITests;
+			sourceTree = "<group>";
+		};
+		5CB7270323A7254C006BD2F4 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */,
+				5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */,
+				5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */,
+				5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */,
+				5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		5CB7270A23A72569006BD2F4 /* AuthenticationTests */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */,
+				5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */,
+				5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */,
+			);
+			path = AuthenticationTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +457,7 @@
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
 				5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */,
+				5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */,
 				5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */,
 				5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */,
 				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
@@ -431,6 +472,7 @@
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
+				5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */,
 				5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */,
 				5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */,
 				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
@@ -441,6 +483,9 @@
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
+				5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */,
+				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
+				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
 				5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */,
 			);
@@ -450,6 +495,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB7270923A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift in Sources */,
+				5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */,
+				5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */,
 				5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

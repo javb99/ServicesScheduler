@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ServicesScheduler
+import Scheduler
 
 class OAuthTokenStoreTests: XCTestCase {
     
