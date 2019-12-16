@@ -51,6 +51,7 @@
 		5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */; };
 		5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */; };
 		5CB7270923A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */; };
+		5CB7270D23A72B69006BD2F4 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270C23A72B69006BD2F4 /* ErrorView.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -123,6 +124,7 @@
 		5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpointTests.swift; sourceTree = "<group>"; };
 		5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStoreTests.swift; sourceTree = "<group>"; };
 		5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperationTests.swift; sourceTree = "<group>"; };
+		5CB7270C23A72B69006BD2F4 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +296,7 @@
 		5CB7270323A7254C006BD2F4 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				5CB7270B23A72B5C006BD2F4 /* UI */,
 				5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */,
 				5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */,
 				5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */,
@@ -311,6 +314,14 @@
 				5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */,
 			);
 			path = AuthenticationTests;
+			sourceTree = "<group>";
+		};
+		5CB7270B23A72B5C006BD2F4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7270C23A72B69006BD2F4 /* ErrorView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,6 +483,7 @@
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
+				5CB7270D23A72B69006BD2F4 /* ErrorView.swift in Sources */,
 				5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */,
 				5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */,
 				5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */,
