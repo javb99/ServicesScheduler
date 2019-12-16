@@ -42,3 +42,19 @@ public struct AuthTokenEndpoint: Endpoint {
         ]
     }
 }
+
+public enum AuthInputCredential {
+    case browserCode(String)
+    case refreshToken(String)
+}
+
+extension AuthTokenEndpoint {
+    public init(credential: AuthInputCredential, appCredential: OAuthAppConfiguration.Credentials, redirectURI: String) {
+        switch credential {
+        case let .browserCode(code):
+            self.init(browserCode: code, appCredential: appCredential, redirectURI: redirectURI)
+        case let .refreshToken(token):
+            self.init(refreshToken: token, appCredential: appCredential, redirectURI: redirectURI)
+        }
+    }
+}

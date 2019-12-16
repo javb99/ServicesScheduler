@@ -52,6 +52,11 @@
 		5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */; };
 		5CB7270923A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */; };
 		5CB7270D23A72B69006BD2F4 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270C23A72B69006BD2F4 /* ErrorView.swift */; };
+		5CB7270F23A7361F006BD2F4 /* LogInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270E23A7361F006BD2F4 /* LogInState.swift */; };
+		5CB7271123A743D5006BD2F4 /* LogInProtected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7271023A743D5006BD2F4 /* LogInProtected.swift */; };
+		5CCFF99C23A8303300596110 /* PresentableLogInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99B23A8303300596110 /* PresentableLogInState.swift */; };
+		5CCFF99E23A830A100596110 /* LogInStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99D23A830A100596110 /* LogInStateMachine.swift */; };
+		5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99F23A8332400596110 /* BrowserContext.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -125,6 +130,11 @@
 		5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStoreTests.swift; sourceTree = "<group>"; };
 		5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperationTests.swift; sourceTree = "<group>"; };
 		5CB7270C23A72B69006BD2F4 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		5CB7270E23A7361F006BD2F4 /* LogInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInState.swift; sourceTree = "<group>"; };
+		5CB7271023A743D5006BD2F4 /* LogInProtected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInProtected.swift; sourceTree = "<group>"; };
+		5CCFF99B23A8303300596110 /* PresentableLogInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableLogInState.swift; sourceTree = "<group>"; };
+		5CCFF99D23A830A100596110 /* LogInStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachine.swift; sourceTree = "<group>"; };
+		5CCFF99F23A8332400596110 /* BrowserContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContext.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -320,6 +330,11 @@
 			isa = PBXGroup;
 			children = (
 				5CB7270C23A72B69006BD2F4 /* ErrorView.swift */,
+				5CB7270E23A7361F006BD2F4 /* LogInState.swift */,
+				5CCFF99D23A830A100596110 /* LogInStateMachine.swift */,
+				5CCFF99B23A8303300596110 /* PresentableLogInState.swift */,
+				5CB7271023A743D5006BD2F4 /* LogInProtected.swift */,
+				5CCFF99F23A8332400596110 /* BrowserContext.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -480,24 +495,29 @@
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
+				5CB7271123A743D5006BD2F4 /* LogInProtected.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
 				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
 				5CB7270D23A72B69006BD2F4 /* ErrorView.swift in Sources */,
 				5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */,
 				5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */,
+				5CCFF99E23A830A100596110 /* LogInStateMachine.swift in Sources */,
 				5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */,
 				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
 				5CAD90A42348689400F02002 /* PresentableStatus.swift in Sources */,
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */,
+				5CCFF99C23A8303300596110 /* PresentableLogInState.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
 				5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */,
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
+				5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */,
+				5CB7270F23A7361F006BD2F4 /* LogInState.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
 				5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */,
 			);

@@ -42,3 +42,9 @@ public struct OAuthAppConfiguration {
         return oAuthURLComps.url!
     }
 }
+
+extension OAuthAppConfiguration {
+    static var servicesScheduler: OAuthAppConfiguration {
+        return .init(credentials: .init(identifier: "", secret: ""), redirectURI: "", scopes: ["services"], baseURL: URL(string: "https://google.com")!)
+    }
+}

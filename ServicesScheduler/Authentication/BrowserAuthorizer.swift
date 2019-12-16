@@ -8,6 +8,7 @@
 
 import Foundation
 import AuthenticationServices
+import UIKit
 
 enum AuthError: Error, LocalizedError {
     case failedToParseQuery
@@ -17,14 +18,23 @@ enum AuthError: Error, LocalizedError {
     }
 }
 
-class BrowserAuthorizer {
+protocol Authorizer {
+    func requestAuthorization(completion: @escaping Completion<String>)
+}
+
+class BrowserAuthorizer: Authorizer {
     
-    var session: ASWebAuthenticationSession
+    let app: OAuthAppConfiguration
+    let uiContext: ASWebAuthenticationPresentationContextProviding
+    private var session: ASWebAuthenticationSession?
     
     init(app: OAuthAppConfiguration,
-         uiContext: ASWebAuthenticationPresentationContextProviding,
-         completion: @escaping Completion<String>) {
-        
+         uiContext: ASWebAuthenticationPresentationContextProviding) {
+        self.app = app
+        self.uiContext = uiContext
+    }
+    
+    func requestAuthorization(completion: @escaping Completion<String>) {
         session = ASWebAuthenticationSession(url: app.authorizeEndpoint, callbackURLScheme: app.redirectURI) { (url, error) in
             if let error = error {
                 completion(.failure(error))
@@ -36,11 +46,8 @@ class BrowserAuthorizer {
             }
             completion(.success(code))
         }
-        session.presentationContextProvider = uiContext
-    }
-    
-    func requestAuthorization() {
-        session.start()
+        session?.presentationContextProvider = uiContext
+        session?.start()
     }
 }
 

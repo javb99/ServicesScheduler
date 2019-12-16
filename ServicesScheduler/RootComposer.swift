@@ -15,6 +15,12 @@ class NavigationState: ObservableObject {
 
 class RootComposer {
     
+    var browserContext: BrowserContext
+    
+    internal init(browserContext: BrowserContext) {
+        self.browserContext = browserContext
+    }
+    
     lazy var service = URLSessionService(authenticationProvider: .servicesScheduler)
     
     lazy var feedLoader = AttentionNeededListLoader(network: service)
@@ -26,13 +32,17 @@ class RootComposer {
     lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
     lazy var teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
     
+    lazy var logInStateMachine = LogInStateMachine(browserAuthorizer: BrowserAuthorizer(app: .servicesScheduler, uiContext: browserContext)) { (_, _) in }
+    
     var navigationState = NavigationState()
     
     
     func makeRootView() -> some View {
-        DerivedBinding(for: \.currentTab, on: self.navigationState) {
-            HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
-        }
+        LogInProtected {
+            DerivedBinding(for: \.currentTab, on: self.navigationState) {
+                HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
+            }
+        }.environmentObject(logInStateMachine)
     }
     
     func teamsScreen() -> some View {
