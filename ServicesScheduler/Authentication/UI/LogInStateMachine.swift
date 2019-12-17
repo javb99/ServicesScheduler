@@ -37,7 +37,7 @@ class LogInStateMachine: ObservableObject {
             state = .success
         } else if let token = tokenStore.refreshToken {
             state = .welcomeRefreshing
-            refreshToken(token)
+            self.fetchAuthToken(.refreshToken(token), self.handleFetchResult)
         } else {
             state = .welcome
         }
@@ -52,26 +52,8 @@ class LogInStateMachine: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(code):
-                    self.beginAuthEndpointPost(browserCode: code)
-                case let .failure(error):
-                    self.state = .failed(error)
-                }
-            }
-            
-        }
-    }
-    
-    func beginAuthEndpointPost(browserCode: String) {
-        guard case .browserPrompting = state else {
-            preconditionFailure()
-        }
-        state = .fetchingToken
-        self.fetchAuthToken(.browserCode(browserCode)) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(token):
-                    self.tokenStore.setToken(token)
-                    self.state = .success
+                    self.state = .fetchingToken
+                    self.fetchAuthToken(.browserCode(code), self.handleFetchResult)
                 case let .failure(error):
                     self.state = .failed(error)
                 }
@@ -79,15 +61,14 @@ class LogInStateMachine: ObservableObject {
         }
     }
     
-    func refreshToken(_ refreshToken: String) {
-        self.fetchAuthToken(.refreshToken(refreshToken)) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(token):
-                    self.state = .success
-                case let .failure(error):
-                    self.state = .failed(error)
-                }
+    private func handleFetchResult(_ result: Result<OAuthToken, Error>) {
+        DispatchQueue.main.async {
+            switch result {
+            case let .success(token):
+                self.tokenStore.setToken(token)
+                self.state = .success
+            case let .failure(error):
+                self.state = .failed(error)
             }
         }
     }
