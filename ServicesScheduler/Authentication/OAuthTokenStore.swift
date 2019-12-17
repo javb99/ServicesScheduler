@@ -10,17 +10,26 @@ import Foundation
 import PlanningCenterSwift
 
 public struct OAuthToken: Codable {
-    public init(raw: String, refreshToken: String, expiresAt: Date, refreshTokenExpiresAt: Date) {
-        self.raw = raw
-        self.refreshToken = refreshToken
-        self.expiresAt = expiresAt
-        self.refreshTokenExpiresAt = refreshTokenExpiresAt
+    
+    enum CodingKeys: String, CodingKey {
+        case raw = "access_token"
+        case refreshToken = "refresh_token"
+        case expiresIn = "expires_in"
+        case createdAt = "created_at"
     }
     
     public var raw: String
     public var refreshToken: String
-    public var expiresAt: Date
-    public var refreshTokenExpiresAt: Date
+    public var expiresIn: Int
+    public var createdAt: Int
+    
+    public var expiresAt: Date {
+        Date(timeIntervalSince1970: TimeInterval(expiresIn + createdAt))
+    }
+    
+    public var refreshTokenExpiresAt: Date {
+        Date(timeIntervalSince1970: TimeInterval(createdAt) + 90 * 24 * 60 * 60)
+    }
 }
 
 public class OAuthTokenStore: AuthenticationProvider {

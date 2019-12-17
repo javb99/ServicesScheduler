@@ -11,11 +11,11 @@ import Foundation
 class LogInStateMachine: ObservableObject {
     
     let browserAuthorizer: Authorizer
-    let fetchAuthToken: (AuthInputCredential, Completion<OAuthToken>)->()
+    let fetchAuthToken: (AuthInputCredential, @escaping Completion<OAuthToken>)->()
     
     @Published var state: LogInState = .welcome
     
-    init(browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, (Result<OAuthToken, Error>) -> ()) -> ()) {
+    init(browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, @escaping Completion<OAuthToken>)->()) {
         self.browserAuthorizer = browserAuthorizer
         self.fetchAuthToken = fetchAuthToken
     }

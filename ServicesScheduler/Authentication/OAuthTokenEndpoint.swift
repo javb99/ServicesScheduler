@@ -20,25 +20,27 @@ public struct AuthTokenEndpoint: Endpoint {
     
     public typealias ResponseBody = OAuthToken
     
-    public let queryItems: [URLQueryItem]
+    public let queryParams: [URLQueryItem]
     
     public let requiresAuthentication = false
     
     public init(refreshToken: String, appCredential: OAuthAppConfiguration.Credentials, redirectURI: String) {
-        queryItems = [
+        queryParams = [
             .init(name: "client_id", value: appCredential.identifier),
             .init(name: "client_secret", value: appCredential.secret),
             .init(name: "refresh_token", value: refreshToken),
-            .init(name: "grant_type", value: "refresh_token")
+            .init(name: "grant_type", value: "refresh_token"),
+            .init(name: "redirect_uri", value: redirectURI)
         ]
     }
     
     public init(browserCode: String, appCredential: OAuthAppConfiguration.Credentials, redirectURI: String) {
-        queryItems = [
+        queryParams = [
             .init(name: "client_id", value: appCredential.identifier),
             .init(name: "client_secret", value: appCredential.secret),
             .init(name: "code", value: browserCode),
-            .init(name: "grant_type", value: "authorization_code")
+            .init(name: "grant_type", value: "authorization_code"),
+            .init(name: "redirect_uri", value: redirectURI)
         ]
     }
 }

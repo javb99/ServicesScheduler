@@ -32,7 +32,8 @@ class RootComposer {
     lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
     lazy var teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
     
-    lazy var logInStateMachine = LogInStateMachine(browserAuthorizer: BrowserAuthorizer(app: .servicesScheduler, uiContext: browserContext)) { (_, _) in }
+    lazy var authTokenService = AuthTokenService(network: service, appConfig: .servicesScheduler)
+    lazy var logInStateMachine = LogInStateMachine(browserAuthorizer: BrowserAuthorizer(app: .servicesScheduler, uiContext: browserContext), fetchAuthToken: authTokenService.fetchToken(with:completion:))
     
     var navigationState = NavigationState()
     

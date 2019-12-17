@@ -57,6 +57,7 @@
 		5CCFF99C23A8303300596110 /* PresentableLogInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99B23A8303300596110 /* PresentableLogInState.swift */; };
 		5CCFF99E23A830A100596110 /* LogInStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99D23A830A100596110 /* LogInStateMachine.swift */; };
 		5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99F23A8332400596110 /* BrowserContext.swift */; };
+		5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9A223A8482900596110 /* AuthTokenService.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +137,7 @@
 		5CCFF99D23A830A100596110 /* LogInStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachine.swift; sourceTree = "<group>"; };
 		5CCFF99F23A8332400596110 /* BrowserContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContext.swift; sourceTree = "<group>"; };
 		5CCFF9A123A83D9900596110 /* Scheduler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scheduler.entitlements; sourceTree = "<group>"; };
+		5CCFF9A223A8482900596110 /* AuthTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenService.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -336,6 +338,7 @@
 				5CCFF99D23A830A100596110 /* LogInStateMachine.swift */,
 				5CCFF99B23A8303300596110 /* PresentableLogInState.swift */,
 				5CB7271023A743D5006BD2F4 /* LogInProtected.swift */,
+				5CCFF9A223A8482900596110 /* AuthTokenService.swift */,
 				5CCFF99F23A8332400596110 /* BrowserContext.swift */,
 			);
 			path = UI;
@@ -516,6 +519,7 @@
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
 				5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */,
+				5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */,
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
 				5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */,
