@@ -7,12 +7,49 @@
 //
 
 import Foundation
+import Combine
 
 enum PresentableLogInState {
     case welcome
     case welcomeLoggingIn
     case loggedIn
     case failed(Error)
+}
+
+/// Map the LogInState to a presentable version. Some presentation states require knowledge about the previous state to ensure that the welcome screen isn't displayed while refreshing.
+class PresentableLogInStateMachine: ObservableObject {
+    @Published var state: PresentableLogInState = .welcome
+    private var sub: AnyCancellable?
+    
+    init(logInState: AnyPublisher<LogInState, Never>) {
+        sub = logInState
+            .scan((LogInState.notLoggedIn, LogInState.notLoggedIn)) { (prevPair, newState) in
+                // Some of the presentable states need to know the previous state.
+                return (prevPair.1, newState)
+            }
+            .map { statesPair -> PresentableLogInState in
+                let (prev, cur) = statesPair
+                switch (prev, cur) {
+                case (_, .notLoggedIn):
+                    return .welcome
+                case (.loggedIn, .loadingAccessToken):
+                    // Simple refresh while using the app case.
+                    return .loggedIn
+                case (_, .loadingAccessToken):
+                    return .welcomeLoggingIn
+                case (_, .checkingKeychain):
+                    return .welcomeLoggingIn
+                case (_, .browserPrompting):
+                    return .welcomeLoggingIn
+                case (_, .loggedIn):
+                    return .loggedIn
+                case (_, .failed(let error)):
+                    return .failed(error)
+                }
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \.state, on: self)
+    }
 }
 
 extension PresentableLogInState {

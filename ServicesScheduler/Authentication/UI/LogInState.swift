@@ -9,27 +9,12 @@
 import Foundation
 
 enum LogInState {
-    case welcome
-    case welcomeCheckingKeychain
-    case welcomeRefreshing
+    // MARK: Active States
+    case checkingKeychain
     case browserPrompting
-    case fetchingToken
-    case success
-    case prevSuccessRefreshing
+    case loadingAccessToken
+    // MARK: Idle States
+    case notLoggedIn
+    case loggedIn
     case failed(Error)
-}
-
-extension LogInState {
-    var presentable: PresentableLogInState {
-        switch self {
-        case .welcome:
-            return .welcome
-        case .welcomeRefreshing, .welcomeCheckingKeychain, .browserPrompting, .fetchingToken:
-            return .welcomeLoggingIn
-        case let .failed(error):
-            return .failed(error)
-        case .success, .prevSuccessRefreshing:
-            return .loggedIn
-        }
-    }
 }

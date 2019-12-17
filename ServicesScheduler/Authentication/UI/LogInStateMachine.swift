@@ -16,7 +16,7 @@ class LogInStateMachine: ObservableObject {
     let browserAuthorizer: Authorizer
     let fetchAuthToken: (AuthInputCredential, @escaping Completion<OAuthToken>)->()
     
-    @Published private(set) var state: LogInState = .welcome {
+    @Published private(set) var state: LogInState = .notLoggedIn {
         didSet {
             print("Transitioned LogInState from \(oldValue) to \(state)")
         }
@@ -29,23 +29,23 @@ class LogInStateMachine: ObservableObject {
     }
     
     func attemptToLoadTokenFromDisk() {
-        guard case .welcome = state else {
+        guard case .notLoggedIn = state else {
             preconditionFailure()
         }
-        state = .welcomeCheckingKeychain
+        state = .checkingKeychain
         tokenStore.loadToken()
         if tokenStore.isAuthenticated {
-            state = .success
+            state = .loggedIn
         } else if let token = tokenStore.refreshToken {
-            state = .welcomeRefreshing
+            state = .loadingAccessToken
             self.fetchAuthToken(.refreshToken(token), self.handleFetchResult)
         } else {
-            state = .welcome
+            state = .notLoggedIn
         }
     }
     
     func presentBrowserLogIn() {
-        guard case .welcome = state else {
+        guard case .notLoggedIn = state else {
             preconditionFailure()
         }
         state = .browserPrompting
@@ -53,10 +53,10 @@ class LogInStateMachine: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(code):
-                    self.state = .fetchingToken
+                    self.state = .loadingAccessToken
                     self.fetchAuthToken(.browserCode(code), self.handleFetchResult)
                 case let .failure(error as ASWebAuthenticationSessionError) where error.code == .canceledLogin:
-                    self.state = .welcome
+                    self.state = .notLoggedIn
                 case let .failure(error):
                     self.state = .failed(error)
                 }
@@ -69,7 +69,7 @@ class LogInStateMachine: ObservableObject {
             switch result {
             case let .success(token):
                 self.tokenStore.setToken(token)
-                self.state = .success
+                self.state = .loggedIn
             case let .failure(error):
                 self.state = .failed(error)
             }
@@ -80,6 +80,6 @@ class LogInStateMachine: ObservableObject {
         guard case .failed(_) = state else {
             preconditionFailure()
         }
-        state = .welcome
+        state = .notLoggedIn
     }
 }

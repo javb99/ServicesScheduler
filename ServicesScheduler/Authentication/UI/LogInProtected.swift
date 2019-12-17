@@ -10,12 +10,13 @@ import SwiftUI
 
 struct LogInProtected<Content: View>: View {
     @EnvironmentObject var stateMachine: LogInStateMachine
+    @EnvironmentObject var presentableStateMachine: PresentableLogInStateMachine
     
     var content: ()->Content
     
     var body: some View {
         _LogInProtected(
-            state: stateMachine.state.presentable,
+            state: presentableStateMachine.state,
             cancel: {},
             logIn: stateMachine.presentBrowserLogIn,
             backToLogIn: stateMachine.goBackToLogIn,

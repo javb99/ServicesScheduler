@@ -71,7 +71,9 @@ class RootComposer {
             DerivedBinding(for: \.currentTab, on: self.navigationState) {
                 HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
             }
-        }.environmentObject(logInStateMachine)
+        }
+        .environmentObject(logInStateMachine)
+        .environmentObject(PresentableLogInStateMachine(logInState: logInStateMachine.$state.eraseToAnyPublisher()))
     }
     
     func teamsScreen() -> some View {
