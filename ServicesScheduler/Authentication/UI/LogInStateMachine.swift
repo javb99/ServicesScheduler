@@ -33,11 +33,11 @@ class LogInStateMachine: ObservableObject {
         }
         state = .welcomeCheckingKeychain
         tokenStore.loadToken()
-        if let token = tokenStore.token, tokenStore.isAuthenticated {
-            state = .success(token)
-        } else if let oldToken = tokenStore.token {
-            state = .welcomeRefreshing(refreshToken: oldToken.refreshToken)
-            refreshToken(oldToken.refreshToken)
+        if tokenStore.isAuthenticated {
+            state = .success
+        } else if let token = tokenStore.refreshToken {
+            state = .welcomeRefreshing
+            refreshToken(token)
         } else {
             state = .welcome
         }
@@ -65,13 +65,13 @@ class LogInStateMachine: ObservableObject {
         guard case .browserPrompting = state else {
             preconditionFailure()
         }
-        state = .fetchingToken(browserCode: browserCode)
+        state = .fetchingToken
         self.fetchAuthToken(.browserCode(browserCode)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(token):
                     self.tokenStore.setToken(token)
-                    self.state = .success(token)
+                    self.state = .success
                 case let .failure(error):
                     self.state = .failed(error)
                 }
@@ -84,7 +84,7 @@ class LogInStateMachine: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(token):
-                    self.state = .success(token)
+                    self.state = .success
                 case let .failure(error):
                     self.state = .failed(error)
                 }
@@ -97,15 +97,5 @@ class LogInStateMachine: ObservableObject {
             preconditionFailure()
         }
         state = .welcome
-    }
-}
-
-extension LogInStateMachine: AuthenticationProvider {
-    var authenticationHeader: (key: String, value: String)? {
-        if let token = state.accessToken?.raw {
-            return (key: "Authorization", value: "Bearer " + token)
-        } else {
-            return nil
-        }
     }
 }

@@ -11,11 +11,11 @@ import Foundation
 enum LogInState {
     case welcome
     case welcomeCheckingKeychain
-    case welcomeRefreshing(refreshToken: String)
+    case welcomeRefreshing
     case browserPrompting
-    case fetchingToken(browserCode: String)
-    case success(OAuthToken)
-    case prevSuccessRefreshing(refreshToken: String)
+    case fetchingToken
+    case success
+    case prevSuccessRefreshing
     case failed(Error)
 }
 
@@ -24,21 +24,12 @@ extension LogInState {
         switch self {
         case .welcome:
             return .welcome
-        case .welcomeRefreshing(_), .welcomeCheckingKeychain, .browserPrompting, .fetchingToken(browserCode: _):
+        case .welcomeRefreshing, .welcomeCheckingKeychain, .browserPrompting, .fetchingToken:
             return .welcomeLoggingIn
         case let .failed(error):
             return .failed(error)
-        case .success(_), .prevSuccessRefreshing(_):
+        case .success, .prevSuccessRefreshing:
             return .loggedIn
-        }
-    }
-    
-    var accessToken: OAuthToken? {
-        switch self {
-        case let .success(token):
-            return token
-        default:
-            return nil
         }
     }
 }

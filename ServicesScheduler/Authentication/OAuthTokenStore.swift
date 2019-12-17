@@ -37,7 +37,7 @@ public class OAuthTokenStore: AuthenticationProvider {
     let tokenGetter: ()->(OAuthToken?)
     let now: ()->Date
     
-    private(set) var token: OAuthToken?
+    private var token: OAuthToken?
     
     public init(tokenSaver: @escaping (OAuthToken)->(), tokenGetter: @escaping ()->(OAuthToken?), now: @escaping ()->Date) {
         self.tokenSaver = tokenSaver
