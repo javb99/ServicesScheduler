@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PlanningCenterSwift
 
 class LogInStateMachine: ObservableObject {
     
@@ -77,5 +78,15 @@ class LogInStateMachine: ObservableObject {
             preconditionFailure()
         }
         state = .welcome
+    }
+}
+
+extension LogInStateMachine: AuthenticationProvider {
+    var authenticationHeader: (key: String, value: String)? {
+        if let token = state.accessToken?.raw {
+            return (key: "Authorization", value: "Bearer " + token)
+        } else {
+            return nil
+        }
     }
 }

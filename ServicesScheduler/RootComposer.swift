@@ -19,9 +19,38 @@ class RootComposer {
     
     internal init(browserContext: BrowserContext) {
         self.browserContext = browserContext
+        
+        // Use OptionalAuthenticationProvider to avoid a circular dependency graph.
+        // URLSessionService needs a auth provider but the OAuth provider doesn't exist until the service is instantiated.
+        let authenticationWrapper = OptionalAuthenticationProvider()
+        self.service = URLSessionService(
+            requestBuilder: JSONRequestBuilder(
+                baseURL: URL(string: "https://api.planningcenteronline.com")!,
+                authenticationProvider: authenticationWrapper,
+                encoder: JSONEncoder.pco
+            ),
+            responseHandler: JSONResponseHandler(
+                decoder: JSONDecoder.pco
+            ),
+            session: .shared
+        )
+        self.authTokenService = AuthTokenService(
+            network: service,
+            appConfig: .servicesScheduler
+        )
+        self.logInStateMachine = LogInStateMachine(
+            browserAuthorizer: BrowserAuthorizer(
+                app: .servicesScheduler,
+                uiContext: browserContext
+            ),
+            fetchAuthToken: authTokenService.fetchToken(with:completion:)
+        )
+        authenticationWrapper.wrapped = logInStateMachine
     }
     
-    lazy var service = URLSessionService(authenticationProvider: .servicesScheduler)
+    let service: URLSessionService
+    let authTokenService: AuthTokenService
+    let logInStateMachine: LogInStateMachine
     
     lazy var feedLoader = AttentionNeededListLoader(network: service)
     lazy var feedPresenter = AttentionNeededListPresenter(loader: feedLoader)
@@ -32,11 +61,7 @@ class RootComposer {
     lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
     lazy var teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
     
-    lazy var authTokenService = AuthTokenService(network: service, appConfig: .servicesScheduler)
-    lazy var logInStateMachine = LogInStateMachine(browserAuthorizer: BrowserAuthorizer(app: .servicesScheduler, uiContext: browserContext), fetchAuthToken: authTokenService.fetchToken(with:completion:))
-    
     var navigationState = NavigationState()
-    
     
     func makeRootView() -> some View {
         LogInProtected {

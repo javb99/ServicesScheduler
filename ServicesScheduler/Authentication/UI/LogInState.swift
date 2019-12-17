@@ -32,4 +32,13 @@ extension LogInState {
             return .loggedIn
         }
     }
+    
+    var accessToken: OAuthToken? {
+        switch self {
+        case let .success(token):
+            return token
+        default:
+            return nil
+        }
+    }
 }

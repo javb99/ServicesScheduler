@@ -27,3 +27,13 @@ class AuthTokenService {
         })
     }
 }
+
+/// Allows setting the provider after intialization.
+class OptionalAuthenticationProvider: AuthenticationProvider {
+    
+    weak var wrapped: (AuthenticationProvider & AnyObject)?
+    
+    var authenticationHeader: (key: String, value: String)? {
+        wrapped?.authenticationHeader
+    }
+}
