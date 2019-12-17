@@ -53,7 +53,14 @@ class OAuthTokenStoreTests: XCTestCase {
     
     func test_loadStoredToken_isAuthenticated() {
         let sut = makeSUT(tokenGetter: { return self.token })
+        sut.loadToken()
         XCTAssertTrue(sut.isAuthenticated)
+    }
+    
+    func test_loadStoredToken_noStoredToken_isNotAuthenticated() {
+        let sut = makeSUT(tokenGetter: { return nil })
+        sut.loadToken()
+        XCTAssertFalse(sut.isAuthenticated)
     }
     
     func test_isAuthenticated_tokenExpired_notAuthenticated() {

@@ -43,6 +43,9 @@ public class OAuthTokenStore: AuthenticationProvider {
         self.tokenSaver = tokenSaver
         self.tokenGetter = tokenGetter
         self.now = now
+    }
+    
+    public func loadToken() {
         setToken(tokenGetter())
     }
     
