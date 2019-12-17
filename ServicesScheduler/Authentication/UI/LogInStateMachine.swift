@@ -8,6 +8,7 @@
 
 import Foundation
 import PlanningCenterSwift
+import Combine
 import AuthenticationServices
 
 class LogInStateMachine: ObservableObject {
@@ -22,10 +23,45 @@ class LogInStateMachine: ObservableObject {
         }
     }
     
+    private var masterCancellable: AnyCancellable?
+    private var currentActionCancellable: AnyCancellable?
+    
     init(tokenStore: OAuthTokenStore, browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, @escaping Completion<OAuthToken>)->()) {
         self.tokenStore = tokenStore
         self.browserAuthorizer = browserAuthorizer
         self.fetchAuthToken = fetchAuthToken
+        
+        masterCancellable = $state.compactMap { s -> AnyPublisher<LogInState, Never>? in
+            switch s {
+            case .checkingKeychain:
+                return Future<LogInState, Never> { promise in
+                    tokenStore.loadToken()
+                    if tokenStore.isAuthenticated {
+                        promise(.success(.loggedIn))
+                    } else if let token = tokenStore.refreshToken {
+                        promise(.success(.loadingAccessToken(.refreshToken(token))))
+                    } else {
+                        promise(.success(.notLoggedIn))
+                    }
+                }.eraseToAnyPublisher()
+                
+            case .browserPrompting:
+                return browserAuthorizer.requestAuthorization()
+                    .map { LogInState.loadingAccessToken(.browserCode($0)) }
+                    .catch { (error: Error) -> Just<LogInState> in
+                        if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
+                            return Just(.notLoggedIn)
+                        }
+                        return Just(.failed(error))
+                    }.eraseToAnyPublisher()
+                
+            default:
+                return nil
+            }
+        }
+        .map { $0.receive(on: RunLoop.main).assign(to: \.state, on: self) }
+        .receive(on: RunLoop.main)
+        .assign(to: \.currentActionCancellable, on: self)
     }
     
     func attemptToLoadTokenFromDisk() {
@@ -33,15 +69,6 @@ class LogInStateMachine: ObservableObject {
             preconditionFailure()
         }
         state = .checkingKeychain
-        tokenStore.loadToken()
-        if tokenStore.isAuthenticated {
-            state = .loggedIn
-        } else if let token = tokenStore.refreshToken {
-            state = .loadingAccessToken
-            self.fetchAuthToken(.refreshToken(token), self.handleFetchResult)
-        } else {
-            state = .notLoggedIn
-        }
     }
     
     func presentBrowserLogIn() {
@@ -49,19 +76,6 @@ class LogInStateMachine: ObservableObject {
             preconditionFailure()
         }
         state = .browserPrompting
-        browserAuthorizer.requestAuthorization() { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(code):
-                    self.state = .loadingAccessToken
-                    self.fetchAuthToken(.browserCode(code), self.handleFetchResult)
-                case let .failure(error as ASWebAuthenticationSessionError) where error.code == .canceledLogin:
-                    self.state = .notLoggedIn
-                case let .failure(error):
-                    self.state = .failed(error)
-                }
-            }
-        }
     }
     
     private func handleFetchResult(_ result: Result<OAuthToken, Error>) {

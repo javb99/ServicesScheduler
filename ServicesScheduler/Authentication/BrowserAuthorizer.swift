@@ -8,7 +8,7 @@
 
 import Foundation
 import AuthenticationServices
-import UIKit
+import Combine
 
 enum AuthError: Error, LocalizedError {
     case failedToParseQuery
@@ -19,7 +19,8 @@ enum AuthError: Error, LocalizedError {
 }
 
 protocol Authorizer {
-    func requestAuthorization(completion: @escaping Completion<String>)
+    typealias BrowserCode = String
+    func requestAuthorization() -> AnyPublisher<BrowserCode, Error>
 }
 
 class BrowserAuthorizer: Authorizer {
@@ -34,21 +35,25 @@ class BrowserAuthorizer: Authorizer {
         self.uiContext = uiContext
     }
     
-    func requestAuthorization(completion: @escaping Completion<String>) {
-        session = ASWebAuthenticationSession(url: app.authorizeEndpoint, callbackURLScheme: app.redirectURI) { (url, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
+    func requestAuthorization() -> AnyPublisher<BrowserCode, Error> {
+        Future<BrowserCode, Error> { resolve in
+            self.session = ASWebAuthenticationSession(url: self.app.authorizeEndpoint, callbackURLScheme: self.app.redirectURI) { (url, error) in
+                if let error = error {
+                    resolve(.failure(error))
+                    return
+                }
+                guard let code = url?.codeFromQuery else {
+                    resolve(.failure(AuthError.failedToParseQuery))
+                    return
+                }
+                resolve(.success(code))
             }
-            guard let code = url?.codeFromQuery else {
-                completion(.failure(AuthError.failedToParseQuery))
-                return
+            self.session?.prefersEphemeralWebBrowserSession = true
+            self.session?.presentationContextProvider = self.uiContext
+            self.session?.start()
             }
-            completion(.success(code))
-        }
-        session?.prefersEphemeralWebBrowserSession = true
-        session?.presentationContextProvider = uiContext
-        session?.start()
+        .handleEvents(receiveCancel: { self.session?.cancel() })
+        .eraseToAnyPublisher()
     }
 }
 

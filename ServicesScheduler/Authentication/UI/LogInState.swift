@@ -12,7 +12,7 @@ enum LogInState {
     // MARK: Active States
     case checkingKeychain
     case browserPrompting
-    case loadingAccessToken
+    case loadingAccessToken(AuthInputCredential)
     // MARK: Idle States
     case notLoggedIn
     case loggedIn
