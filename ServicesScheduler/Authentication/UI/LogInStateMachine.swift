@@ -55,6 +55,19 @@ class LogInStateMachine: ObservableObject {
                         return Just(.failed(error))
                     }.eraseToAnyPublisher()
                 
+            case let .loadingAccessToken(credential):
+                return Future<LogInState, Never> { promise in
+                    self.fetchAuthToken(credential) { result in
+                        switch result {
+                        case let .success(token):
+                            self.tokenStore.setToken(token) // This is kinda smelly.
+                            promise(.success(.loggedIn))
+                        case let .failure(error):
+                            promise(.success(.failed(error)))
+                        }
+                    }
+                }.eraseToAnyPublisher()
+                
             default:
                 return nil
             }

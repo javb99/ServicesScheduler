@@ -2,5 +2,5 @@
 
 - Support Refreshing tokens
 - Support Cancelling log in
--   Use Combine to implement the StateMachine, helps get off the main queue, simplifies cancelation.
+-   Use the future implementation of PCOService
 - Consider deleting the keychain item when saving fails.
