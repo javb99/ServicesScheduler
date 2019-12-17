@@ -7,15 +7,15 @@
 //
 
 import XCTest
-import Scheduler
+@testable import Scheduler
 
 class OAuthTokenStoreTests: XCTestCase {
     
     let token = OAuthToken(
         raw: "AToken",
         refreshToken: "ARefresh",
-        expiresAt: Date(timeIntervalSince1970: (2 * 60 * 60)),
-        refreshTokenExpiresAt: Date(timeIntervalSince1970: 90 * 24 * 60 * 60))
+        expiresIn: 2 * 60 * 60,
+        createdAt: 0)
 
     func test_authHeader_noToken_provideNoHeader() {
         let sut = makeSUT()

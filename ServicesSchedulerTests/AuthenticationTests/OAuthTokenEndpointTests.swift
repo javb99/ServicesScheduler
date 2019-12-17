@@ -17,10 +17,10 @@ class OAuthTokenEndpointTests: XCTestCase {
             appCredential: .init(identifier: "ID1", secret: "****"),
             redirectURI: "redirected")
         
-        let grantType = sut.queryItems.first{$0.name=="grant_type"}?.value
+        let grantType = sut.queryParams.first{$0.name=="grant_type"}?.value
         XCTAssertEqual(grantType, "refresh_token")
-        XCTAssertTrue(sut.queryItems.contains(where: {$0.name == "refresh_token"}))
-        XCTAssertEqual(sut.queryItems.count, 4)
+        XCTAssertTrue(sut.queryParams.contains(where: {$0.name == "refresh_token"}))
+        XCTAssertEqual(sut.queryParams.count, 5)
     }
     
     func test_browser_configuresCorrectly() {
@@ -29,9 +29,9 @@ class OAuthTokenEndpointTests: XCTestCase {
             appCredential: .init(identifier: "ID1", secret: "****"),
             redirectURI: "redirected")
         
-        let grantType = sut.queryItems.first{$0.name=="grant_type"}?.value
+        let grantType = sut.queryParams.first{$0.name=="grant_type"}?.value
         XCTAssertEqual(grantType, "authorization_code")
-        XCTAssertTrue(sut.queryItems.contains(where: {$0.name == "code"}))
-        XCTAssertEqual(sut.queryItems.count, 4)
+        XCTAssertTrue(sut.queryParams.contains(where: {$0.name == "code"}))
+        XCTAssertEqual(sut.queryParams.count, 5)
     }
 }

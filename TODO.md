@@ -2,4 +2,4 @@
 
 - Support Refreshing tokens
 - Support Cancelling log in
-- Make tests pass again
+- Make PlanningCenterSwift tests pass again

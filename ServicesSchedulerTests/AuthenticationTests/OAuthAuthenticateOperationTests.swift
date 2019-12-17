@@ -7,13 +7,18 @@
 //
 
 import XCTest
-import Scheduler
+@testable import Scheduler
 
 class OAuthAuthenticateOperationTests: XCTestCase {
 
     let creds = OAuthAppConfiguration.Credentials(identifier: "anID", secret: "aSecret")
     
-    let token = OAuthToken(raw: "", refreshToken: "", expiresAt: Date(), refreshTokenExpiresAt: Date())
+    let token = OAuthToken(
+        raw: "AToken",
+        refreshToken: "ARefresh",
+        expiresIn: 2 * 60 * 60,
+        createdAt: 0
+    )
     
     func test_refresh_callsAuthTokenLoader() {
         
