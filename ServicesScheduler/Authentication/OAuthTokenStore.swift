@@ -37,7 +37,7 @@ public class OAuthTokenStore: AuthenticationProvider {
     let tokenGetter: ()->(OAuthToken?)
     let now: ()->Date
     
-    private var token: OAuthToken?
+    private(set) var token: OAuthToken?
     
     public init(tokenSaver: @escaping (OAuthToken)->(), tokenGetter: @escaping ()->(OAuthToken?), now: @escaping ()->Date) {
         self.tokenSaver = tokenSaver
@@ -67,5 +67,21 @@ public class OAuthTokenStore: AuthenticationProvider {
     public var refreshToken: String? {
         guard let token = token, token.refreshTokenExpiresAt > now() else { return nil }
         return token.refreshToken
+    }
+}
+
+extension OAuthTokenStore {
+    public convenience init() {
+        self.init(tokenSaver: { token in
+            do {
+                try KeychainPasswordItem.authToken.saveToken(token)
+            } catch {
+                // In production, silent failure is ok. The token will just be refetched next time. The browser already remembers their credentials so it will still be decently fast.
+                // Consider deleting the keychain item in this situation.
+                assertionFailure(error.localizedDescription)
+            }
+        }, tokenGetter: {
+            try? KeychainPasswordItem.authToken.readToken()
+        }, now: Date.init)
     }
 }

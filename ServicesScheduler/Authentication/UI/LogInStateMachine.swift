@@ -11,14 +11,36 @@ import PlanningCenterSwift
 
 class LogInStateMachine: ObservableObject {
     
+    let tokenStore: OAuthTokenStore
     let browserAuthorizer: Authorizer
     let fetchAuthToken: (AuthInputCredential, @escaping Completion<OAuthToken>)->()
     
-    @Published var state: LogInState = .welcome
+    @Published var state: LogInState = .welcome {
+        didSet {
+            print("Transitioned LogInState from \(oldValue) to \(state)")
+        }
+    }
     
-    init(browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, @escaping Completion<OAuthToken>)->()) {
+    init(tokenStore: OAuthTokenStore, browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, @escaping Completion<OAuthToken>)->()) {
+        self.tokenStore = tokenStore
         self.browserAuthorizer = browserAuthorizer
         self.fetchAuthToken = fetchAuthToken
+    }
+    
+    func attemptToLoadTokenFromDisk() {
+        guard case .welcome = state else {
+            preconditionFailure()
+        }
+        state = .welcomeCheckingKeychain
+        tokenStore.loadToken()
+        if let token = tokenStore.token, tokenStore.isAuthenticated {
+            state = .success(token)
+        } else if let oldToken = tokenStore.token {
+            state = .welcomeRefreshing(refreshToken: oldToken.refreshToken)
+            refreshToken(oldToken.refreshToken)
+        } else {
+            state = .welcome
+        }
     }
     
     func presentBrowserLogIn() {
@@ -48,6 +70,7 @@ class LogInStateMachine: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(token):
+                    self.tokenStore.setToken(token)
                     self.state = .success(token)
                 case let .failure(error):
                     self.state = .failed(error)
@@ -56,12 +79,8 @@ class LogInStateMachine: ObservableObject {
         }
     }
     
-    func refreshToken() {
-        guard case let .success(oldToken) = state else {
-            preconditionFailure()
-        }
-        state = .prevSuccessRefreshing(oldToken)
-        self.fetchAuthToken(.refreshToken(oldToken.refreshToken)) { result in
+    func refreshToken(_ refreshToken: String) {
+        self.fetchAuthToken(.refreshToken(refreshToken)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(token):

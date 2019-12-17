@@ -11,11 +11,11 @@ import Foundation
 enum LogInState {
     case welcome
     case welcomeCheckingKeychain
-    case welcomeRefreshing(OAuthToken)
+    case welcomeRefreshing(refreshToken: String)
     case browserPrompting
     case fetchingToken(browserCode: String)
     case success(OAuthToken)
-    case prevSuccessRefreshing(OAuthToken)
+    case prevSuccessRefreshing(refreshToken: String)
     case failed(Error)
 }
 

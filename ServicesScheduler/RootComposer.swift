@@ -38,14 +38,17 @@ class RootComposer {
             network: service,
             appConfig: .servicesScheduler
         )
+        let tokenStore = OAuthTokenStore()
         self.logInStateMachine = LogInStateMachine(
+            tokenStore: tokenStore,
             browserAuthorizer: BrowserAuthorizer(
                 app: .servicesScheduler,
                 uiContext: browserContext
             ),
             fetchAuthToken: authTokenService.fetchToken(with:completion:)
         )
-        authenticationWrapper.wrapped = logInStateMachine
+        authenticationWrapper.wrapped = tokenStore
+        logInStateMachine.attemptToLoadTokenFromDisk()
     }
     
     let service: URLSessionService

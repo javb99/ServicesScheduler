@@ -47,6 +47,10 @@ class KeychainTests: XCTestCase {
         XCTAssertEqual(try! KeychainPasswordItem.passwordItems(forService: KeychainPasswordItem.servicesSchedulerService).count, 0)
     }
     
+    override class func tearDown() {
+        resetKeychain()
+    }
+    
     // MARK: Helpers
     
     class func resetKeychain() {
