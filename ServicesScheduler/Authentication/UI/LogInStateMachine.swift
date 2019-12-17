@@ -16,7 +16,7 @@ class LogInStateMachine: ObservableObject {
     let browserAuthorizer: Authorizer
     let fetchAuthToken: (AuthInputCredential, @escaping Completion<OAuthToken>)->()
     
-    @Published var state: LogInState = .welcome {
+    @Published private(set) var state: LogInState = .welcome {
         didSet {
             print("Transitioned LogInState from \(oldValue) to \(state)")
         }

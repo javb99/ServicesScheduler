@@ -2,5 +2,5 @@
 
 - Support Refreshing tokens
 - Support Cancelling log in
-- Make PlanningCenterSwift tests pass again
+-   Use Combine to implement the StateMachine, helps get off the main queue, simplifies cancelation.
 - Consider deleting the keychain item when saving fails.
