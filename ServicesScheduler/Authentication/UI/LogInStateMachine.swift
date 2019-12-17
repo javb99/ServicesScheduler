@@ -8,6 +8,7 @@
 
 import Foundation
 import PlanningCenterSwift
+import AuthenticationServices
 
 class LogInStateMachine: ObservableObject {
     
@@ -54,6 +55,8 @@ class LogInStateMachine: ObservableObject {
                 case let .success(code):
                     self.state = .fetchingToken
                     self.fetchAuthToken(.browserCode(code), self.handleFetchResult)
+                case let .failure(error as ASWebAuthenticationSessionError) where error.code == .canceledLogin:
+                    self.state = .welcome
                 case let .failure(error):
                     self.state = .failed(error)
                 }
