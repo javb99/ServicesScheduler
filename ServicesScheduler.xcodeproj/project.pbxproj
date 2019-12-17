@@ -58,6 +58,7 @@
 		5CCFF99E23A830A100596110 /* LogInStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99D23A830A100596110 /* LogInStateMachine.swift */; };
 		5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF99F23A8332400596110 /* BrowserContext.swift */; };
 		5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9A223A8482900596110 /* AuthTokenService.swift */; };
+		5CCFF9A623A8A67800596110 /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9A523A8A67800596110 /* Completion.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -138,6 +139,8 @@
 		5CCFF99F23A8332400596110 /* BrowserContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserContext.swift; sourceTree = "<group>"; };
 		5CCFF9A123A83D9900596110 /* Scheduler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scheduler.entitlements; sourceTree = "<group>"; };
 		5CCFF9A223A8482900596110 /* AuthTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenService.swift; sourceTree = "<group>"; };
+		5CCFF9A423A8A58C00596110 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		5CCFF9A523A8A67800596110 /* Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +175,7 @@
 			children = (
 				5CAFDD142349827700162DE0 /* SequenceExtensions.swift */,
 				5C17CDC62336AC1800E4E7C5 /* Identified.swift */,
+				5CCFF9A523A8A67800596110 /* Completion.swift */,
 			);
 			path = StandardExtensions;
 			sourceTree = "<group>";
@@ -239,6 +243,7 @@
 		5C96DED722ED13CC00BB643A = {
 			isa = PBXGroup;
 			children = (
+				5CCFF9A423A8A58C00596110 /* TODO.md */,
 				5C96DEE222ED13CC00BB643A /* ServicesScheduler */,
 				5C96DEF922ED13D000BB643A /* ServicesSchedulerTests */,
 				5C96DF0422ED13D000BB643A /* ServicesSchedulerUITests */,
@@ -497,6 +502,7 @@
 				5C320BB92379E563003CDEE8 /* MeService.swift in Sources */,
 				5CAD90A0234855DF00F02002 /* ServiceTypeTeamsLoader.swift in Sources */,
 				5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */,
+				5CCFF9A623A8A67800596110 /* Completion.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,

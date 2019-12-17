@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias Completion<T> = (Result<T, Error>)->()
-
 public class OAuthAuthenticateOperation {
     public typealias AppCredentials = OAuthAppConfiguration.Credentials
     
