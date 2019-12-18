@@ -69,7 +69,7 @@ class RootComposer {
     func makeRootView() -> some View {
         LogInProtected {
             DerivedBinding(for: \.currentTab, on: self.navigationState) {
-                HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen)
+                HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen, makeProfileView: self.profileScreen)
             }
         }
         .environmentObject(logInStateMachine)
@@ -121,5 +121,9 @@ class RootComposer {
             }
             
         }
+    }
+    
+    func profileScreen() -> some View {
+        ProfileView()
     }
 }

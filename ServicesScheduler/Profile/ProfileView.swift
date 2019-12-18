@@ -1,0 +1,41 @@
+//
+//  ProfileView.swift
+//  ServicesScheduler
+//
+//  Created by Joseph Van Boxtel on 12/17/19.
+//  Copyright © 2019 Joseph Van Boxtel. All rights reserved.
+//
+
+import SwiftUI
+
+struct ProfileView: View {
+    var userName: String?
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Spacer()
+                WebLink(url: URL.constant("http://josephvb.com/services-scheduler/privacy-policy"), label: Text("privacy policy"))
+                    .padding()
+                WebLink(url: URL.constant("http://josephvb.com/about"), label: Text("about the developer"))
+                    .padding()
+                WebLink(url: URL.constant("https://api.planningcenteronline.com/access_tokens"), label: Text("revoke access"))
+                    .padding()
+                    .accentColor(.red)
+            }
+            .padding(.bottom)
+            .navigationBarTitle(userName ?? "Profile")
+            .navigationBarItems(trailing:
+                Button(action: {}) {
+                    Text("log out")
+                }
+            )
+        }
+    }
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView().accentColor(.servicesGreen)
+    }
+}

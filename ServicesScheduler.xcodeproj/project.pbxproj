@@ -21,6 +21,7 @@
 		5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */; };
 		5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8E2376893D00AD2255 /* HomeView.swift */; };
 		5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D9023774C7000AD2255 /* RootComposer.swift */; };
+		5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C3BB223AAD7C6003DF918 /* WebLink.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -61,6 +62,7 @@
 		5CCFF9AC23A8A99300596110 /* KeychainPasswordItem+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9AB23A8A99300596110 /* KeychainPasswordItem+Token.swift */; };
 		5CCFF9AF23A8AB6400596110 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9AE23A8AB6400596110 /* KeychainTests.swift */; };
 		5CCFF9B123A9BE1800596110 /* LogInStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */; };
+		5CCFF9B423A9E12400596110 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9B323A9E12400596110 /* ProfileView.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +99,7 @@
 		5C521D8C2376669200AD2255 /* MyTeamsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsScreen.swift; sourceTree = "<group>"; };
 		5C521D8E2376893D00AD2255 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5C521D9023774C7000AD2255 /* RootComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComposer.swift; sourceTree = "<group>"; };
+		5C6C3BB223AAD7C6003DF918 /* WebLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLink.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 		5CCFF9AB23A8A99300596110 /* KeychainPasswordItem+Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainPasswordItem+Token.swift"; sourceTree = "<group>"; };
 		5CCFF9AE23A8AB6400596110 /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachineTests.swift; sourceTree = "<group>"; };
+		5CCFF9B323A9E12400596110 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +283,7 @@
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
 				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
 				5C320BB72379E1FE003CDEE8 /* MyTeams */,
+				5CCFF9B223A9E10200596110 /* Profile */,
 				5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */,
 				5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */,
 				5C96DEE922ED13D000BB643A /* Assets.xcassets */,
@@ -361,6 +366,15 @@
 				5CCFF9AB23A8A99300596110 /* KeychainPasswordItem+Token.swift */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		5CCFF9B223A9E10200596110 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5CCFF9B323A9E12400596110 /* ProfileView.swift */,
+				5C6C3BB223AAD7C6003DF918 /* WebLink.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,6 +519,7 @@
 				5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */,
 				5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */,
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
+				5CCFF9B423A9E12400596110 /* ProfileView.swift in Sources */,
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
 				5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */,
 				5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */,
@@ -536,6 +551,7 @@
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */,
 				5CCFF99C23A8303300596110 /* PresentableLogInState.swift in Sources */,
+				5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,

@@ -12,14 +12,16 @@ enum HomeViewTab: Int {
     case feed
     case myTeams
     case browse
+    case profile
 }
 
-struct HomeView<TeamsView: View, FeedView: View, BrowserView: View>: View {
+struct HomeView<TeamsView: View, FeedView: View, BrowserView: View, ProfileView: View>: View {
     
     @Binding var selectedTab: HomeViewTab
     var makeTeamsView: ()->TeamsView
     var makeFeedView: ()->FeedView
     var makeBrowserView: ()->BrowserView
+    var makeProfileView: ()->ProfileView
     
     var body: some View {
         VStack {
@@ -42,6 +44,12 @@ struct HomeView<TeamsView: View, FeedView: View, BrowserView: View>: View {
                         Image(systemName: "folder.badge.person.crop")
                         Text("Browse")
                     }
+                profileTab()
+                    .tag(HomeViewTab.profile)
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("Profile")
+                    }
             }
         }
         .accentColor(.servicesGreen)
@@ -58,10 +66,14 @@ struct HomeView<TeamsView: View, FeedView: View, BrowserView: View>: View {
     func browseTab() -> some View {
         makeBrowserView().onAppear { print("Browser!") }
     }
+    
+    func profileTab() -> some View {
+        makeProfileView().onAppear { print("Profile!") }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(selectedTab: .constant(.browse), makeTeamsView: {Text("Teams!!")}, makeFeedView: {Text("Feed!!")}, makeBrowserView: {Text("Browser!!")})
+        HomeView(selectedTab: .constant(.browse), makeTeamsView: {Text("Teams!!")}, makeFeedView: {Text("Feed!!")}, makeBrowserView: {Text("Browser!!")}, makeProfileView: {Text("Profile!")})
     }
 }
