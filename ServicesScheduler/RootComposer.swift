@@ -124,6 +124,6 @@ class RootComposer {
     }
     
     func profileScreen() -> some View {
-        ProfileView()
+        ProfileView(logOut: logInStateMachine.logOut)
     }
 }

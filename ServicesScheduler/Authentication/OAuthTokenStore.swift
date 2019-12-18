@@ -33,13 +33,13 @@ public struct OAuthToken: Codable {
 }
 
 public class OAuthTokenStore: AuthenticationProvider {
-    let tokenSaver: (OAuthToken)->()
+    let tokenSaver: (OAuthToken?)->()
     let tokenGetter: ()->(OAuthToken?)
     let now: ()->Date
     
     private var token: OAuthToken?
     
-    public init(tokenSaver: @escaping (OAuthToken)->(), tokenGetter: @escaping ()->(OAuthToken?), now: @escaping ()->Date) {
+    public init(tokenSaver: @escaping (OAuthToken?)->(), tokenGetter: @escaping ()->(OAuthToken?), now: @escaping ()->Date) {
         self.tokenSaver = tokenSaver
         self.tokenGetter = tokenGetter
         self.now = now
@@ -51,8 +51,11 @@ public class OAuthTokenStore: AuthenticationProvider {
     
     public func setToken(_ token: OAuthToken?) {
         self.token = token
-        guard let token = token else { return }
         tokenSaver(token)
+    }
+    
+    public func deleteToken() {
+        setToken(nil)
     }
     
     public var isAuthenticated: Bool {
@@ -74,6 +77,10 @@ extension OAuthTokenStore {
     public convenience init() {
         self.init(tokenSaver: { token in
             do {
+                guard let token = token else {
+                    try KeychainPasswordItem.authToken.deleteItem()
+                    return
+                }
                 try KeychainPasswordItem.authToken.saveToken(token)
             } catch {
                 // In production, silent failure is ok. The token will just be refetched next time. The browser already remembers their credentials so it will still be decently fast.

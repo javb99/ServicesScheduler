@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileView: View {
     var userName: String?
+    var logOut: ()->()
     
     var body: some View {
         NavigationView {
@@ -26,7 +27,7 @@ struct ProfileView: View {
             .padding(.bottom)
             .navigationBarTitle(userName ?? "Profile")
             .navigationBarItems(trailing:
-                Button(action: {}) {
+                Button(action: logOut) {
                     Text("log out")
                 }
             )
@@ -36,6 +37,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView().accentColor(.servicesGreen)
+        ProfileView(logOut: {}).accentColor(.servicesGreen)
     }
 }

@@ -94,6 +94,11 @@ class LogInStateMachine: ObservableObject {
         state = .notLoggedIn
     }
     
+    func logOut() {
+        state = .notLoggedIn
+        tokenStore.deleteToken()
+    }
+    
     func cancel() {
         currentActionCancellable?.cancel()
         currentActionCancellable = nil
