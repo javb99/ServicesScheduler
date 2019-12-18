@@ -46,7 +46,6 @@
 		5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */; };
 		5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */; };
 		5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */; };
-		5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */; };
 		5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */; };
 		5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */; };
 		5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */; };
@@ -129,7 +128,6 @@
 		5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpoint.swift; sourceTree = "<group>"; };
 		5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStore.swift; sourceTree = "<group>"; };
 		5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAppConfiguration.swift; sourceTree = "<group>"; };
-		5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticateOperation.swift; sourceTree = "<group>"; };
 		5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserAuthorizer.swift; sourceTree = "<group>"; };
 		5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpointTests.swift; sourceTree = "<group>"; };
 		5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStoreTests.swift; sourceTree = "<group>"; };
@@ -327,7 +325,6 @@
 				5CCFF99D23A830A100596110 /* LogInStateMachine.swift */,
 				5CCFF9A223A8482900596110 /* AuthTokenService.swift */,
 				5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */,
-				5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */,
 				5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */,
 				5CB726FA23A72542006BD2F4 /* OAuthTokenStore.swift */,
 			);
@@ -542,7 +539,6 @@
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
-				5CB7270123A72542006BD2F4 /* OAuthAuthenticateOperation.swift in Sources */,
 				5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */,
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,

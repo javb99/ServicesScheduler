@@ -27,20 +27,6 @@ public struct OAuthAppConfiguration {
             self.secret = secret
         }
     }
-    
-    public var authorizeEndpoint: URL {
-        let queryItems = [URLQueryItem(name: "client_id", value: credentials.identifier),
-                          URLQueryItem(name: "client_secret", value: credentials.secret),
-                          URLQueryItem(name: "redirect_uri", value: redirectURI),
-                          URLQueryItem(name: "response_type", value: "code"),
-                          URLQueryItem(name: "scope", value: scopes.joined(separator: " "))]
-        
-        guard var oAuthURLComps = URLComponents(url: baseURL.appendingPathComponent("authorize"), resolvingAgainstBaseURL: false) else {
-            fatalError("Failed to create URLComponents using the baseEndpoint adding authorize.")
-        }
-        oAuthURLComps.queryItems = queryItems
-        return oAuthURLComps.url!
-    }
 }
 
 extension OAuthAppConfiguration {
