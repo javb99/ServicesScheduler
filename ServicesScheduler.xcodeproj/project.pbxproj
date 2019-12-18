@@ -323,7 +323,9 @@
 			children = (
 				5CB7270B23A72B5C006BD2F4 /* UI */,
 				5CCFF9AD23A8A9B900596110 /* Keychain */,
-				5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */,
+				5CB7270E23A7361F006BD2F4 /* LogInState.swift */,
+				5CCFF99D23A830A100596110 /* LogInStateMachine.swift */,
+				5CCFF9A223A8482900596110 /* AuthTokenService.swift */,
 				5CB726FB23A72542006BD2F4 /* OAuthAppConfiguration.swift */,
 				5CB726FC23A72542006BD2F4 /* OAuthAuthenticateOperation.swift */,
 				5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */,
@@ -347,12 +349,10 @@
 			isa = PBXGroup;
 			children = (
 				5CB7270C23A72B69006BD2F4 /* ErrorView.swift */,
-				5CB7270E23A7361F006BD2F4 /* LogInState.swift */,
-				5CCFF99D23A830A100596110 /* LogInStateMachine.swift */,
 				5CCFF99B23A8303300596110 /* PresentableLogInState.swift */,
 				5CB7271023A743D5006BD2F4 /* LogInProtected.swift */,
-				5CCFF9A223A8482900596110 /* AuthTokenService.swift */,
 				5CCFF99F23A8332400596110 /* BrowserContext.swift */,
+				5CB726FD23A72542006BD2F4 /* BrowserAuthorizer.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
