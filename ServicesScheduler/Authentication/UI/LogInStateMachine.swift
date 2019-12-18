@@ -91,22 +91,16 @@ class LogInStateMachine: ObservableObject {
         state = .browserPrompting
     }
     
-    private func handleFetchResult(_ result: Result<OAuthToken, Error>) {
-        DispatchQueue.main.async {
-            switch result {
-            case let .success(token):
-                self.tokenStore.setToken(token)
-                self.state = .loggedIn
-            case let .failure(error):
-                self.state = .failed(error)
-            }
-        }
-    }
-    
     func goBackToLogIn() {
         guard case .failed(_) = state else {
             preconditionFailure()
         }
+        state = .notLoggedIn
+    }
+    
+    func cancel() {
+        currentActionCancellable?.cancel()
+        currentActionCancellable = nil
         state = .notLoggedIn
     }
 }

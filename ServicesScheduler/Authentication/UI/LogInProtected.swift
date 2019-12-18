@@ -17,7 +17,7 @@ struct LogInProtected<Content: View>: View {
     var body: some View {
         _LogInProtected(
             state: presentableStateMachine.state,
-            cancel: {},
+            cancel: stateMachine.cancel,
             logIn: stateMachine.presentBrowserLogIn,
             backToLogIn: stateMachine.goBackToLogIn,
             content: content
