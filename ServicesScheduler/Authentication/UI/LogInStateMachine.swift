@@ -15,7 +15,7 @@ class LogInStateMachine: ObservableObject {
     
     let tokenStore: OAuthTokenStore
     let browserAuthorizer: Authorizer
-    let fetchAuthToken: (AuthInputCredential, @escaping Completion<OAuthToken>)->()
+    let fetchAuthToken: (AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError>
     
     @Published private(set) var state: LogInState = .notLoggedIn {
         didSet {
@@ -26,7 +26,7 @@ class LogInStateMachine: ObservableObject {
     private var masterCancellable: AnyCancellable?
     private var currentActionCancellable: AnyCancellable?
     
-    init(tokenStore: OAuthTokenStore, browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential, @escaping Completion<OAuthToken>)->()) {
+    init(tokenStore: OAuthTokenStore, browserAuthorizer: Authorizer, fetchAuthToken: @escaping (AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError>) {
         self.tokenStore = tokenStore
         self.browserAuthorizer = browserAuthorizer
         self.fetchAuthToken = fetchAuthToken
@@ -56,18 +56,14 @@ class LogInStateMachine: ObservableObject {
                     }.eraseToAnyPublisher()
                 
             case let .loadingAccessToken(credential):
-                return Future<LogInState, Never> { promise in
-                    self.fetchAuthToken(credential) { result in
-                        switch result {
-                        case let .success(token):
-                            self.tokenStore.setToken(token) // This is kinda smelly.
-                            promise(.success(.loggedIn))
-                        case let .failure(error):
-                            promise(.success(.failed(error)))
-                        }
-                    }
-                }.eraseToAnyPublisher()
-                
+                return self.fetchAuthToken(credential)
+                    .handleEvents(receiveOutput: { token in
+                        // This is kinda smelly.
+                        self.tokenStore.setToken(token)
+                    })
+                    .map { _ in LogInState.loggedIn }
+                    .catch { Just(LogInState.failed($0)) }
+                    .eraseToAnyPublisher()
             default:
                 return nil
             }

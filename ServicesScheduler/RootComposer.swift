@@ -45,7 +45,7 @@ class RootComposer {
                 app: .servicesScheduler,
                 uiContext: browserContext
             ),
-            fetchAuthToken: authTokenService.fetchToken(with:completion:)
+            fetchAuthToken: authTokenService.fetchToken(with:)
         )
         authenticationWrapper.wrapped = tokenStore
         logInStateMachine.attemptToLoadTokenFromDisk()
