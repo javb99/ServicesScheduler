@@ -27,11 +27,81 @@ class LogInStateMachineTests: XCTestCase {
         )
         XCTAssertEqual(sut.state, .notLoggedIn)
     }
+    
+    let token = OAuthToken(raw: "", refreshToken: "", expiresIn: 100, createdAt: 0)
+    
+    func test_browser_browserSuccessful_loaderSuccessful_movesToLoggedIn() {
+        let e = expectation(description: "")
+        let tokenStore = OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: Date.init)
+        let browser = MockAuthorizer(code: "successful code")
+        let mockLoader = { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
+            Just<OAuthToken>(self.token).setFailureType(to: NetworkError.self).eraseToAnyPublisher()
+        }
+        let sut = LogInStateMachine(
+            tokenStore: tokenStore,
+            browserAuthorizer: browser,
+            fetchAuthToken: mockLoader
+        )
+        var stateHistory = [LogInState]()
+        let stateSink = sut.$state.sink { stateHistory.append($0) }
+        let expectSink = sut.$state.filter{ $0 == .loggedIn }.sink { _ in
+            e.fulfill()
+        }
+        
+        sut.presentBrowserLogIn()
+        
+        wait(for: [e], timeout: 2)
+        
+        XCTAssertEqual(stateHistory, [
+            .notLoggedIn,
+            .browserPrompting,
+            .loadingAccessToken(.browserCode("successful code")),
+            .loggedIn
+        ])
+        
+        stateSink.cancel()
+        expectSink.cancel()
+    }
+    
+    func test_browser_browserSuccessful_loaderFails_movesToFailed() {
+        let e = expectation(description: "")
+        let tokenStore = OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: Date.init)
+        let browser = MockAuthorizer(code: "successful code")
+        let mockLoader = { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
+            Fail(outputType: OAuthToken.self, failure: NetworkError.system(URLError(.timedOut)))
+                .eraseToAnyPublisher()
+        }
+        let sut = LogInStateMachine(
+            tokenStore: tokenStore,
+            browserAuthorizer: browser,
+            fetchAuthToken: mockLoader
+        )
+        var stateHistory = [LogInState]()
+        let stateSink = sut.$state.sink { stateHistory.append($0) }
+        let expectSink = sut.$state.filter{ $0 == .failed(NetworkError.system(URLError(.timedOut))) }.sink { _ in
+            e.fulfill()
+        }
+        
+        sut.presentBrowserLogIn()
+        
+        wait(for: [e], timeout: 2)
+        
+        XCTAssertEqual(stateHistory, [
+            .notLoggedIn,
+            .browserPrompting,
+            .loadingAccessToken(.browserCode("successful code")),
+            .failed(NetworkError.system(URLError(.timedOut)))
+        ])
+        
+        stateSink.cancel()
+        expectSink.cancel()
+    }
 }
 
 struct MockAuthorizer: Authorizer {
+    var code: BrowserCode = ""
     func requestAuthorization() -> AnyPublisher<BrowserCode, Error> {
-        Empty<BrowserCode, Error>().eraseToAnyPublisher()
+        Just<BrowserCode>(code).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
 
