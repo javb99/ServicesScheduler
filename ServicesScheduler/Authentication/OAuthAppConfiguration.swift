@@ -45,6 +45,6 @@ public struct OAuthAppConfiguration {
 
 extension OAuthAppConfiguration {
     static var servicesScheduler: OAuthAppConfiguration {
-        return .init(credentials: .init(identifier: "e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561", secret: "0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26"), redirectURI: "services-scheduler://auth/complete", scopes: ["services", "people"], baseURL: URL(string: "https://api.planningcenteronline.com/oauth")!)
+        return .init(credentials: .init(identifier: "e6e07583544a3ac81356f90f8c60d54023d89a16eced19517b0f840b690fc561", secret: "0f204b6ead6e45c0df4f25878bd403af58aa4f18b792541396518a5ea578ef26"), redirectURI: "services-scheduler://auth/complete", scopes: ["services"], baseURL: URL(string: "https://api.planningcenteronline.com/oauth")!)
     }
 }
