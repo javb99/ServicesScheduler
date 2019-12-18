@@ -15,13 +15,12 @@ import PlanningCenterSwift
 class LogInStateMachineTests: XCTestCase {
 
     func test_initialState_isNotLoggedIn() {
-        let tokenStore = OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: Date.init)
         let browser = MockAuthorizer()
         let mockLoader = { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
             Empty<OAuthToken, NetworkError>().eraseToAnyPublisher()
         }
         let sut = LogInStateMachine(
-            tokenStore: tokenStore,
+            tokenStore: makeEmptyStore(),
             browserAuthorizer: browser,
             fetchAuthToken: mockLoader
         )
@@ -32,19 +31,14 @@ class LogInStateMachineTests: XCTestCase {
     
     func test_browser_browserSuccessful_loaderSuccessful_movesToLoggedIn() {
         let e = expectation(description: "")
-        let tokenStore = OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: Date.init)
-        let browser = MockAuthorizer(code: "successful code")
-        let mockLoader = { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
-            Just<OAuthToken>(self.token).setFailureType(to: NetworkError.self).eraseToAnyPublisher()
-        }
         let sut = LogInStateMachine(
-            tokenStore: tokenStore,
-            browserAuthorizer: browser,
-            fetchAuthToken: mockLoader
+            tokenStore: makeEmptyStore(),
+            browserAuthorizer: MockAuthorizer(code: "a code"),
+            fetchAuthToken: makeTokenLoader(.success(token))
         )
         var stateHistory = [LogInState]()
         let stateSink = sut.$state.sink { stateHistory.append($0) }
-        let expectSink = sut.$state.filter{ $0 == .loggedIn }.sink { _ in
+        let expectSink = sut.$state.dropFirst().filter{ $0.isIdleState }.sink { _ in
             e.fulfill()
         }
         
@@ -55,7 +49,7 @@ class LogInStateMachineTests: XCTestCase {
         XCTAssertEqual(stateHistory, [
             .notLoggedIn,
             .browserPrompting,
-            .loadingAccessToken(.browserCode("successful code")),
+            .loadingAccessToken(.browserCode("a code")),
             .loggedIn
         ])
         
@@ -65,36 +59,41 @@ class LogInStateMachineTests: XCTestCase {
     
     func test_browser_browserSuccessful_loaderFails_movesToFailed() {
         let e = expectation(description: "")
-        let tokenStore = OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: Date.init)
-        let browser = MockAuthorizer(code: "successful code")
-        let mockLoader = { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
-            Fail(outputType: OAuthToken.self, failure: NetworkError.system(URLError(.timedOut)))
-                .eraseToAnyPublisher()
-        }
         let sut = LogInStateMachine(
-            tokenStore: tokenStore,
-            browserAuthorizer: browser,
-            fetchAuthToken: mockLoader
+            tokenStore: makeEmptyStore(),
+            browserAuthorizer: MockAuthorizer(code: "a code"),
+            fetchAuthToken: makeTokenLoader(.failure(NetworkError.system(URLError(.timedOut))))
         )
         var stateHistory = [LogInState]()
         let stateSink = sut.$state.sink { stateHistory.append($0) }
-        let expectSink = sut.$state.filter{ $0 == .failed(NetworkError.system(URLError(.timedOut))) }.sink { _ in
+        let expectSink = sut.$state.dropFirst().filter{ $0.isIdleState }.sink { _ in
             e.fulfill()
         }
         
         sut.presentBrowserLogIn()
         
         wait(for: [e], timeout: 2)
-        
         XCTAssertEqual(stateHistory, [
             .notLoggedIn,
             .browserPrompting,
-            .loadingAccessToken(.browserCode("successful code")),
+            .loadingAccessToken(.browserCode("a code")),
             .failed(NetworkError.system(URLError(.timedOut)))
         ])
         
         stateSink.cancel()
         expectSink.cancel()
+    }
+    
+    func makeEmptyStore() -> OAuthTokenStore {
+        OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: { Date(timeIntervalSince1970: 0) })
+    }
+    
+    func makeTokenLoader(_ result: Result<OAuthToken, NetworkError>) -> (AuthInputCredential)->AnyPublisher<OAuthToken, NetworkError> {
+        { (cred: AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError> in
+            Future { promise in
+                promise(result)
+            }.eraseToAnyPublisher()
+        }
     }
 }
 
@@ -129,6 +128,15 @@ extension LogInState: Equatable {
             return lError.localizedDescription == rError.localizedDescription
         default:
             return false
+        }
+    }
+    
+    var isIdleState: Bool {
+        switch self {
+        case .checkingKeychain, .browserPrompting, .loadingAccessToken:
+            return false
+        case .notLoggedIn, .loggedIn, .failed:
+            return true
         }
     }
 }
