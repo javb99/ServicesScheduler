@@ -61,6 +61,7 @@
 		5CCFF9A823A8A91600596110 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9A723A8A91600596110 /* KeychainPasswordItem.swift */; };
 		5CCFF9AC23A8A99300596110 /* KeychainPasswordItem+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9AB23A8A99300596110 /* KeychainPasswordItem+Token.swift */; };
 		5CCFF9AF23A8AB6400596110 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9AE23A8AB6400596110 /* KeychainTests.swift */; };
+		5CCFF9B123A9BE1800596110 /* LogInStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -145,6 +146,7 @@
 		5CCFF9A723A8A91600596110 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		5CCFF9AB23A8A99300596110 /* KeychainPasswordItem+Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainPasswordItem+Token.swift"; sourceTree = "<group>"; };
 		5CCFF9AE23A8AB6400596110 /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
+		5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachineTests.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB7270623A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift */,
+				5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */,
 				5CB7270423A72563006BD2F4 /* OAuthTokenEndpointTests.swift */,
 				5CB7270523A72563006BD2F4 /* OAuthTokenStoreTests.swift */,
 				5CCFF9AE23A8AB6400596110 /* KeychainTests.swift */,
@@ -557,6 +560,7 @@
 				5CB7270923A72563006BD2F4 /* OAuthAuthenticateOperationTests.swift in Sources */,
 				5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */,
 				5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */,
+				5CCFF9B123A9BE1800596110 /* LogInStateMachineTests.swift in Sources */,
 				5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */,
 				5CCFF9AF23A8AB6400596110 /* KeychainTests.swift in Sources */,
 			);
