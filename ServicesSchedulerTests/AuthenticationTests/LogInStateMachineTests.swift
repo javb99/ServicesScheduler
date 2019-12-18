@@ -8,6 +8,7 @@
 
 import XCTest
 import Combine
+import AuthenticationServices
 import PlanningCenterSwift
 @testable import Scheduler
 
@@ -33,7 +34,7 @@ class LogInStateMachineTests: XCTestCase {
         let e = expectation(description: "")
         let sut = LogInStateMachine(
             tokenStore: makeEmptyStore(),
-            browserAuthorizer: MockAuthorizer(code: "a code"),
+            browserAuthorizer: MockAuthorizer(result: .success("a code")),
             fetchAuthToken: makeTokenLoader(.success(token))
         )
         var stateHistory = [LogInState]()
@@ -61,7 +62,7 @@ class LogInStateMachineTests: XCTestCase {
         let e = expectation(description: "")
         let sut = LogInStateMachine(
             tokenStore: makeEmptyStore(),
-            browserAuthorizer: MockAuthorizer(code: "a code"),
+            browserAuthorizer: MockAuthorizer(result: .success("a code")),
             fetchAuthToken: makeTokenLoader(.failure(NetworkError.system(URLError(.timedOut))))
         )
         var stateHistory = [LogInState]()
@@ -84,6 +85,58 @@ class LogInStateMachineTests: XCTestCase {
         expectSink.cancel()
     }
     
+    func test_browser_browserFails_loaderNotUsed_movesToFailed() {
+        let e = expectation(description: "")
+        let sut = LogInStateMachine(
+            tokenStore: makeEmptyStore(),
+            browserAuthorizer: MockAuthorizer(result: .failure(URLError(.timedOut))),
+            fetchAuthToken: makeTokenLoader(.failure(NetworkError.system(URLError(.timedOut))))
+        )
+        var stateHistory = [LogInState]()
+        let stateSink = sut.$state.sink { stateHistory.append($0) }
+        let expectSink = sut.$state.dropFirst().filter{ $0.isIdleState }.sink { _ in
+            e.fulfill()
+        }
+        
+        sut.presentBrowserLogIn()
+        
+        wait(for: [e], timeout: 2)
+        XCTAssertEqual(stateHistory, [
+            .notLoggedIn,
+            .browserPrompting,
+            .failed(URLError(.timedOut))
+        ])
+        
+        stateSink.cancel()
+        expectSink.cancel()
+    }
+    
+    func test_browser_browserFailsByCancel_loaderNotUsed_movesToNotLoggedIn() {
+        let e = expectation(description: "")
+        let sut = LogInStateMachine(
+            tokenStore: makeEmptyStore(),
+            browserAuthorizer: MockAuthorizer(result: .failure(ASWebAuthenticationSessionError(.canceledLogin))),
+            fetchAuthToken: makeTokenLoader(.failure(NetworkError.system(URLError(.timedOut))))
+        )
+        var stateHistory = [LogInState]()
+        let stateSink = sut.$state.sink { stateHistory.append($0) }
+        let expectSink = sut.$state.dropFirst().filter{ $0.isIdleState }.sink { _ in
+            e.fulfill()
+        }
+        
+        sut.presentBrowserLogIn()
+        
+        wait(for: [e], timeout: 2)
+        XCTAssertEqual(stateHistory, [
+            .notLoggedIn,
+            .browserPrompting,
+            .notLoggedIn
+        ])
+        
+        stateSink.cancel()
+        expectSink.cancel()
+    }
+    
     func makeEmptyStore() -> OAuthTokenStore {
         OAuthTokenStore(tokenSaver: {_ in }, tokenGetter: {nil}, now: { Date(timeIntervalSince1970: 0) })
     }
@@ -98,9 +151,11 @@ class LogInStateMachineTests: XCTestCase {
 }
 
 struct MockAuthorizer: Authorizer {
-    var code: BrowserCode = ""
+    var result: Result<BrowserCode, Error> = .success("")
     func requestAuthorization() -> AnyPublisher<BrowserCode, Error> {
-        Just<BrowserCode>(code).setFailureType(to: Error.self).eraseToAnyPublisher()
+        Future { promise in
+            promise(self.result)
+        }.eraseToAnyPublisher()
     }
 }
 
