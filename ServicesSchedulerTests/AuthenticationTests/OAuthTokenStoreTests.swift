@@ -93,7 +93,7 @@ class OAuthTokenStoreTests: XCTestCase {
     
     // MARK: Helpers
     
-    func makeSUT(tokenSaver: @escaping (OAuthToken)->() = {_ in}, tokenGetter: @escaping ()->(OAuthToken?) = {return nil}, evaluatingAt: @escaping ()->Date = { Date(timeIntervalSince1970: 0) }) -> OAuthTokenStore {
+    func makeSUT(tokenSaver: @escaping (OAuthToken?)->() = {_ in}, tokenGetter: @escaping ()->(OAuthToken?) = {return nil}, evaluatingAt: @escaping ()->Date = { Date(timeIntervalSince1970: 0) }) -> OAuthTokenStore {
         return OAuthTokenStore(tokenSaver: tokenSaver, tokenGetter: tokenGetter, now: evaluatingAt)
     }
 }
