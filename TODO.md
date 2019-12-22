@@ -7,3 +7,7 @@
 -   Possibly also allow dragging people in the feed to needed positions.
 -   WIth the lower sheet visible maybe touching or holding a needed position would highlight or filter the content of the sheet for that postion.
 -   This approach might be better fitted for a horizontal paging list instead of a vertical list.
+- 401 code="bad_scope"
+- 403 "Forbidden"
+- 401 after having credentials revoked.
+- general permission: scheduler viewer but editor on nested folder.
