@@ -22,6 +22,7 @@
 		5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8E2376893D00AD2255 /* HomeView.swift */; };
 		5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D9023774C7000AD2255 /* RootComposer.swift */; };
 		5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C3BB223AAD7C6003DF918 /* WebLink.swift */; };
+		5C794FA923AF1A7500EC4A52 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5C794FA823AF1A7500EC4A52 /* SnapshotTesting */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -180,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C794FA923AF1A7500EC4A52 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +258,13 @@
 			path = MyTeams;
 			sourceTree = "<group>";
 		};
+		5C794FA723AF1A7500EC4A52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5C96DED722ED13CC00BB643A = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +273,7 @@
 				5C96DEF922ED13D000BB643A /* ServicesSchedulerTests */,
 				5C96DF0422ED13D000BB643A /* ServicesSchedulerUITests */,
 				5C96DEE122ED13CC00BB643A /* Products */,
+				5C794FA723AF1A7500EC4A52 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -463,6 +473,9 @@
 				5C96DF0322ED13D000BB643A /* PBXTargetDependency */,
 			);
 			name = ServicesSchedulerUITests;
+			packageProductDependencies = (
+				5C794FA823AF1A7500EC4A52 /* SnapshotTesting */,
+			);
 			productName = ServicesSchedulerUITests;
 			productReference = 5C96DF0122ED13D000BB643A /* ServicesSchedulerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -950,6 +963,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5C794FA823AF1A7500EC4A52 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CCDA6B423AC9DF800741660 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
 		5CCDA6B523AC9DF800741660 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5CCDA6B423AC9DF800741660 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
