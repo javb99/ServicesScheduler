@@ -76,7 +76,7 @@ struct PrimaryActionRow: View {
                     Image(systemName: iconName)
                     Text(title)
                 }
-            }.frame(alignment: .center)
+            }
             Spacer()
         }
     }
