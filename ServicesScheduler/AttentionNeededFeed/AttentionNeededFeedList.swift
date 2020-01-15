@@ -25,6 +25,7 @@ struct TeamMember: Identifiable {
     var name: String
     var position: String
     var status: PresentableStatus
+    var hasUnsentNotification: Bool
 }
 
 protocol AttentionNeededFeedDataSource: ObservableObject {
@@ -86,6 +87,12 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
                 Text(teamMember.position)
                     .lineLimit(2)
             }
+            Spacer()
+            if teamMember.hasUnsentNotification {
+                NotificationNotSentView()
+                .fixedSize()
+                .font(.headline)
+            }
         }
     }
 }
@@ -93,7 +100,12 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
 #if DEBUG
 struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
-        AttentionNeededFeedList(dataSource: ConstAttentionNeededFeedListData.sample)
+        LightAndDark {
+            NavigationView {
+                AttentionNeededFeedList(dataSource: ConstAttentionNeededFeedListData.sample)
+                .navigationBarTitle("Title")
+            }
+        }
     }
 }
 #endif

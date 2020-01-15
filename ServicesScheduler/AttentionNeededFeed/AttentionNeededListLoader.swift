@@ -101,7 +101,7 @@ class AttentionNeededListLoader {
                                 }
                             })
                     )
-            }
+        }.eraseToAnyPublisher()
         let peopleSub = plansPublisher
             .flatMap { (both: (MServiceType, MPlan)) in
                 self.teamMembersPublisher(forServiceType: both.0.identifer.id, planID: both.1.identifer)

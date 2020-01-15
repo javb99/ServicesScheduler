@@ -22,6 +22,7 @@
 		5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D8E2376893D00AD2255 /* HomeView.swift */; };
 		5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C521D9023774C7000AD2255 /* RootComposer.swift */; };
 		5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C3BB223AAD7C6003DF918 /* WebLink.swift */; };
+		5C6FF0CD23C68FA900369A91 /* NotificationNotSentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */; };
 		5C794FA923AF1A7500EC4A52 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5C794FA823AF1A7500EC4A52 /* SnapshotTesting */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
@@ -105,6 +106,7 @@
 		5C521D8E2376893D00AD2255 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5C521D9023774C7000AD2255 /* RootComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComposer.swift; sourceTree = "<group>"; };
 		5C6C3BB223AAD7C6003DF918 /* WebLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLink.swift; sourceTree = "<group>"; };
+		5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotSentView.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
+				5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */,
 				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
 				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
@@ -595,6 +598,7 @@
 				5C17CDC72336AC1800E4E7C5 /* Identified.swift in Sources */,
 				5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */,
 				5CCFF99C23A8303300596110 /* PresentableLogInState.swift in Sources */,
+				5C6FF0CD23C68FA900369A91 /* NotificationNotSentView.swift in Sources */,
 				5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,

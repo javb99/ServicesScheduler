@@ -131,7 +131,8 @@ extension Collection where Element == MPlanPerson {
             return TeamMember(id: person.identifer.id,
                               name: person.name,
                               position: positionName,
-                              status: PresentableStatus(person.status))
+                              status: PresentableStatus(person.status),
+                              hasUnsentNotification: person.isNotificationPrepared)
         }
     }
 }

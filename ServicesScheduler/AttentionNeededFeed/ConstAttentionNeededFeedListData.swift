@@ -61,7 +61,8 @@ extension ConstAttentionNeededFeedListData {
                                 id: "1",
                                 name: "Joseph Van Boxtel",
                                 position: "Music Director",
-                                status: .confirmed
+                                status: .confirmed,
+                                hasUnsentNotification: false
                             )
                         ]
                     )
@@ -81,7 +82,8 @@ extension ConstAttentionNeededFeedListData {
                                 id: "2",
                                 name: "Remington Smith",
                                 position: "Head Hancho",
-                                status: .confirmed
+                                status: .confirmed,
+                                hasUnsentNotification: true
                             )
                         ]
                     )
