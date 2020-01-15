@@ -125,7 +125,7 @@ class AttentionNeededListLoader {
     }
     
     func teamPublisher(team: String) -> AnyPublisher<MTeam, NetworkError> {
-        let id = ResourceIdentifier<Models.Team>(stringLiteral: team)
+        let id = MTeam.ID(stringLiteral: team)
         let endpoint = Endpoints.services.teams[id: id]
         return network.future(for: endpoint)
             .map(\.2.data)
@@ -134,7 +134,7 @@ class AttentionNeededListLoader {
     }
     
     func serviceTypesPublisher(serviceType: String) -> AnyPublisher<MServiceType, NetworkError> {
-        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
+        let id = MServiceType.ID(stringLiteral: serviceType)
         let endpoint = Endpoints.services.serviceTypes[id: id]
         return network.future(for: endpoint)
             .map(\.2.data)
@@ -143,22 +143,22 @@ class AttentionNeededListLoader {
     }
     
     func futurePlansPublisher(forServiceType serviceType: String) -> AnyPublisher<MPlan, NetworkError> {
-        let id = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceType)
+        let id = MServiceType.ID(stringLiteral: serviceType)
         let endpoint = Endpoints.services.serviceTypes[id: id].plans.filter(.future)
         return network.publisher(for: endpoint)
             .eraseToAnyPublisher()
     }
     
-    func teamMembersPublisher(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) -> AnyPublisher<[Resource<Models.PlanPerson>], NetworkError> {
-        let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
+    func teamMembersPublisher(forServiceType serviceTypeID: String, planID: MPlan.ID) -> AnyPublisher<[MPlanPerson], NetworkError> {
+        let serviceID = MServiceType.ID(stringLiteral: serviceTypeID)
         let membersEndpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].teamMembers
         return network.publisher(for: membersEndpoint)
             .collect()
             .eraseToAnyPublisher()
     }
     
-    func neededPositionsPublisher(forServiceType serviceTypeID: String, planID: ResourceIdentifier<Models.Plan>) -> AnyPublisher<[Resource<Models.NeededPosition>], NetworkError> {
-        let serviceID = ResourceIdentifier<Models.ServiceType>(stringLiteral: serviceTypeID)
+    func neededPositionsPublisher(forServiceType serviceTypeID: String, planID: MPlan.ID) -> AnyPublisher<[MNeededPosition], NetworkError> {
+        let serviceID = MServiceType.ID(stringLiteral: serviceTypeID)
         let endpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].neededPositions
         return network.publisher(for: endpoint)
             .collect()
