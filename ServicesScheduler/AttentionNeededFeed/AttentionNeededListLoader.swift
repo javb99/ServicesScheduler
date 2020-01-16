@@ -6,10 +6,10 @@
 //  Copyright © 2019 Joseph Van Boxtel. All rights reserved.
 //
 
-import Foundation
-import PlanningCenterSwift
-import JSONAPISpec
 import Combine
+import Foundation
+import JSONAPISpec
+import PlanningCenterSwift
 
 extension Resource {
     typealias ID = ResourceIdentifier<Type>
@@ -29,7 +29,7 @@ class AttentionNeededListLoader {
     
     @Published var teams: [MServiceType.ID: [MTeam]] = [:] {
         didSet {
-            print("Teams: " + teams.values.flatMap{$0}.commaSeparated(\.name))
+            print("Teams: " + teams.values.flatMap { $0 }.commaSeparated(\.name))
         }
     }
     
@@ -47,7 +47,7 @@ class AttentionNeededListLoader {
     
     @Published var planPeople: [MPlanPerson] = [] {
         didSet {
-            let peopleNames = planPeople.map{ $0.name + "-" + $0.status.rawValue }.commaSeparated(\.self)
+            let peopleNames = planPeople.map { $0.name + "-" + $0.status.rawValue }.commaSeparated(\.self)
             print("\(planPeople.count) Plan People: " + peopleNames)
         }
     }
@@ -70,7 +70,7 @@ class AttentionNeededListLoader {
         currentLoad?.cancel()
         let plansPublisher = Publishers.Sequence(sequence: teams)
             .setFailureType(to: NetworkError.self)
-            .flatMap{ self.teamPublisher(team: $0) }
+            .flatMap { self.teamPublisher(team: $0) }
             .handleEvents(receiveOutput: { mTeam in
                 guard let serviceTypeID = mTeam.serviceType.data else { return }
                 DispatchQueue.main.async {
@@ -81,16 +81,16 @@ class AttentionNeededListLoader {
                     }
                 }
             })
-            .compactMap{ mTeam in mTeam.serviceType.data }
+            .compactMap { mTeam in mTeam.serviceType.data }
             .flatMap { serviceTypeID in
                 self.serviceTypesPublisher(serviceType: serviceTypeID.id)
             }
-            .handleEvents(receiveOutput: {(serviceType: MServiceType) in
+            .handleEvents(receiveOutput: { (serviceType: MServiceType) in
                 DispatchQueue.main.async {
                     self.serviceTypes.append(serviceType)
                 }
             })
-            .flatMap{ serviceType in
+            .flatMap { serviceType in
                 Just(serviceType).setFailureType(to: NetworkError.self)
                     .combineLatest(
                         self.futurePlansPublisher(forServiceType: serviceType.identifer.id)
@@ -101,14 +101,14 @@ class AttentionNeededListLoader {
                                 }
                             })
                     )
-        }.eraseToAnyPublisher()
+            }.eraseToAnyPublisher()
         let peopleSub = plansPublisher
             .flatMap { (both: (MServiceType, MPlan)) in
                 self.teamMembersPublisher(forServiceType: both.0.identifer.id, planID: both.1.identifer)
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .sink{ self.planPeople.append(contentsOf: $0) }
+            .sink { self.planPeople.append(contentsOf: $0) }
         
         let positionsSub = plansPublisher
             .flatMap { (both: (MServiceType, MPlan)) in
@@ -116,7 +116,7 @@ class AttentionNeededListLoader {
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .sink{ self.neededPositions.append(contentsOf: $0) }
+            .sink { self.neededPositions.append(contentsOf: $0) }
         
         currentLoad = AnyCancellable {
             peopleSub.cancel()
@@ -162,7 +162,7 @@ class AttentionNeededListLoader {
         let endpoint = Endpoints.services.serviceTypes[id: serviceID].plans[id: planID].neededPositions
         return network.publisher(for: endpoint)
             .collect()
-            .handleEvents(receiveCompletion: {print("NeededPositions.complete: \($0)")}, receiveCancel: {print("NeededPositions.cancel")})
+            .handleEvents(receiveCompletion: { print("NeededPositions.complete: \($0)") }, receiveCancel: { print("NeededPositions.cancel") })
             .eraseToAnyPublisher()
     }
 }
