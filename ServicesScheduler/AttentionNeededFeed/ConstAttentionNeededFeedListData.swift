@@ -23,16 +23,19 @@ class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
     }
 }
 
-extension ConstAttentionNeededFeedListData {
-    static let sample = ConstAttentionNeededFeedListData([
-        (
-            Plan(
-                id: "1",
-                date: "Sunday Aug. 12",
-                serviceTypeName: "Vancouver - Services - Weekend"
-            ),
-            [
-                PresentableFeedTeam(id: "1", name: "Band", neededPostions: [
+extension Array where Element == PresentableFeedPlan {
+    
+    static let sample = [
+        PresentableFeedPlan(
+            id: "1",
+            sortDate: Date(),
+            date: "Sunday Aug. 12",
+            serviceTypeName: "Vancouver - Services - Weekend",
+            teams: [
+                PresentableFeedTeam(
+                    id: "1",
+                    name: "Band",
+                    neededPostions: [
                         PresentableNeededPosition(
                             id: "1",
                             title: "Drums",
@@ -70,6 +73,5 @@ extension ConstAttentionNeededFeedListData {
                     ]
                 )
             ]
-        )
-    ])
+    )]
 }

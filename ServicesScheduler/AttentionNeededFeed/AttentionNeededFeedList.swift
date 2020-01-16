@@ -161,7 +161,7 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
         LightAndDark {
             NavigationView {
-                FeedListContainer(controller: AdapterFeedController(ConstAttentionNeededFeedListData.sample))
+                AttentionNeededFeedList(plans: .sample, canLoadMorePlans: false, loadMorePlans: {})
                 .navigationBarTitle("Title")
             }
         }
