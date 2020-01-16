@@ -68,6 +68,8 @@ class AdapterFeedController<DataSource>: FeedController where DataSource: Attent
     func loadMorePlans() {
         // Can't.
     }
+    
+    var objectWillChange: DataSource.ObjectWillChangePublisher { dataSource.objectWillChange }
 }
 
 protocol AttentionNeededFeedDataSource: ObservableObject {
