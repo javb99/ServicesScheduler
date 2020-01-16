@@ -10,7 +10,7 @@ import SwiftUI
 
 class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
     
-    init(_ data: [(Plan, [(Team, ([NeededPosition], [TeamMember]))])]) {
+    init(_ data: [(Plan, [(Team, ([PresentableNeededPosition], [PresentableTeamMember]))])]) {
         self.plans = data.map{$0.0}
         let teamTuplesByPlan = Dictionary(uniqueKeysWithValues: data.map{ ($0.0.id, $0.1) })
         self.teams = teamTuplesByPlan.mapValues { $0.map{ team in team.0 }}
@@ -21,18 +21,18 @@ class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
     
     @Published var plans: [Plan]
     @Published var teams: [Plan.ID: [Team]]
-    @Published var neededPositions: [Plan.ID: [Team.ID: [NeededPosition]]]
-    @Published var teamMembers: [Plan.ID: [Team.ID: [TeamMember]]]
+    @Published var neededPositions: [Plan.ID: [Team.ID: [PresentableNeededPosition]]]
+    @Published var teamMembers: [Plan.ID: [Team.ID: [PresentableTeamMember]]]
     
     func teams(plan: Plan) -> [Team] {
         teams[plan.id] ?? []
     }
     
-    func neededPositions(plan: Plan, team: Team) -> [NeededPosition] {
+    func neededPositions(plan: Plan, team: Team) -> [PresentableNeededPosition] {
         neededPositions[plan.id]?[team.id] ?? []
     }
     
-    func teamMembers(plan: Plan, team: Team) -> [TeamMember] {
+    func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember] {
         teamMembers[plan.id]?[team.id] ?? []
     }
 }
@@ -50,14 +50,14 @@ extension ConstAttentionNeededFeedListData {
                     Team("Band", id: "1"),
                     (
                         [
-                            NeededPosition(
+                            PresentableNeededPosition(
                                 id: "1",
                                 title: "Drums",
                                 count: 1
                             )
                         ],
                         [
-                            TeamMember(
+                            PresentableTeamMember(
                                 id: "1",
                                 name: "Joseph Van Boxtel",
                                 position: "Music Director",
@@ -71,14 +71,14 @@ extension ConstAttentionNeededFeedListData {
                     Team("Tech", id: "2"),
                     (
                         [
-                            NeededPosition(
+                            PresentableNeededPosition(
                                 id: "1",
                                 title: "Front Of House",
                                 count: 1
                             )
                         ],
                         [
-                            TeamMember(
+                            PresentableTeamMember(
                                 id: "2",
                                 name: "Remington Smith",
                                 position: "Head Hancho",

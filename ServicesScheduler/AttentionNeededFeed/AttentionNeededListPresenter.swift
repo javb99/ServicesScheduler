@@ -37,15 +37,15 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         return teams.filter { self.teamMembers(plan: plan, team: $0).isEmpty == false }
     }
     
-    @Published var neededPositions: [MPlan.ID: [MTeam.ID: [NeededPosition]]] = [:]
-    func neededPositions(plan: Plan, team: Team) -> [NeededPosition] {
+    @Published var neededPositions: [MPlan.ID: [MTeam.ID: [PresentableNeededPosition]]] = [:]
+    func neededPositions(plan: Plan, team: Team) -> [PresentableNeededPosition] {
         let planID = MPlan.ID(stringLiteral: plan.id)
         let teamID = MTeam.ID(stringLiteral: team.id)
         return neededPositions[planID]?[teamID] ?? []
     }
     
-    @Published var teamMembers: [MPlan.ID: [MTeam.ID: [TeamMember]]] = [:]
-    func teamMembers(plan: Plan, team: Team) -> [TeamMember] {
+    @Published var teamMembers: [MPlan.ID: [MTeam.ID: [PresentableTeamMember]]] = [:]
+    func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember] {
         let planID = MPlan.ID(stringLiteral: plan.id)
         let teamID = MTeam.ID(stringLiteral: team.id)
         let members = teamMembers[planID]?[teamID] ?? []
@@ -94,7 +94,7 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
             }.eraseToAnyPublisher()
     }
     
-    func teamMembersPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [TeamMember]]], Never> {
+    func teamMembersPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [PresentableTeamMember]]], Never> {
         
         loader.$planPeople.map { mPlanPeople in
             mPlanPeople.group(by: \.plan.data!).mapValues { mPlanPeopleForPlan in
@@ -105,7 +105,7 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         }.eraseToAnyPublisher()
     }
     
-    func neededPositionsPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [NeededPosition]]], Never> {
+    func neededPositionsPublisher() -> AnyPublisher<[MPlan.ID: [MTeam.ID: [PresentableNeededPosition]]], Never> {
         
         loader.$neededPositions.map { mNeededPosition in
             mNeededPosition.group(by: \.plan.data!).mapValues { mPositionsForPlan in
@@ -121,14 +121,14 @@ extension Collection where Element == MPlanPerson {
     
     /// Transform  a list of PlanPeople to TeamMembers that can be displayed.
     /// This does the sorting, uniquing, and the merging of positions.
-    func createPresentableList() -> [TeamMember] {
+    func createPresentableList() -> [PresentableTeamMember] {
         self
         .uniq(by: \.identifer)
         .sorted(by: statusThenNameThenPersonId)
         .mergeAdjacent(ifElementsShare: \MPlanPerson.person.data?.id, merge: MPlanPerson.joinPositions(_:_:))
-        .compactMap { (person: MPlanPerson) -> TeamMember? in
+        .compactMap { (person: MPlanPerson) -> PresentableTeamMember? in
             guard let positionName = person.positionName else { return nil }
-            return TeamMember(id: person.identifer.id,
+            return PresentableTeamMember(id: person.identifer.id,
                               name: person.name,
                               position: positionName,
                               status: PresentableStatus(person.status),
@@ -141,11 +141,11 @@ extension Collection where Element == MNeededPosition {
     
     /// Transform  a list of PlanPeople to TeamMembers that can be displayed.
     /// This does the sorting, uniquing, and the merging of positions.
-    func createPresentableList() -> [NeededPosition] {
+    func createPresentableList() -> [PresentableNeededPosition] {
         self
         .uniq(by: \.identifer)
-        .compactMap { (mPosition: MNeededPosition) -> NeededPosition? in
-            return NeededPosition(
+        .compactMap { (mPosition: MNeededPosition) -> PresentableNeededPosition? in
+            return PresentableNeededPosition(
                 id: mPosition.identifer.id,
                 title: mPosition.positionName,
                 count: mPosition.quantity

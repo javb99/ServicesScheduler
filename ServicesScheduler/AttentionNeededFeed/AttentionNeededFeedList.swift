@@ -14,13 +14,13 @@ struct Plan: Identifiable {
     var serviceTypeName: String
 }
 
-struct NeededPosition: Identifiable {
+struct PresentableNeededPosition: Identifiable {
     var id: String
     var title: String
     var count: Int
 }
 
-struct TeamMember: Identifiable {
+struct PresentableTeamMember: Identifiable {
     var id: String
     var name: String
     var position: String
@@ -32,8 +32,8 @@ protocol AttentionNeededFeedDataSource: ObservableObject {
     
     var plans: [Plan] { get }
     func teams(plan: Plan) -> [Team]
-    func neededPositions(plan: Plan, team: Team) -> [NeededPosition]
-    func teamMembers(plan: Plan, team: Team) -> [TeamMember]
+    func neededPositions(plan: Plan, team: Team) -> [PresentableNeededPosition]
+    func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember]
 }
 
 struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeededFeedDataSource {
@@ -70,7 +70,7 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
         }
     }
     
-    func neededPositionRow(for neededPosition: NeededPosition) -> some View {
+    func neededPositionRow(for neededPosition: PresentableNeededPosition) -> some View {
         HStack(spacing: 8) {
             NeededPositionCircle(count: neededPosition.count)
                 .frame(width: 44, height: 44, alignment: .leading)
@@ -78,7 +78,7 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
         }
     }
     
-    func teamMemberRow(for teamMember: TeamMember) -> some View {
+    func teamMemberRow(for teamMember: PresentableTeamMember) -> some View {
         HStack(spacing: 8) {
             StatusCircle(status: teamMember.status)
                 .frame(width: 44, height: 44, alignment: .leading)
