@@ -10,30 +10,24 @@ import SwiftUI
 
 class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
     
-    init(_ data: [(Plan, [(Team, ([PresentableNeededPosition], [PresentableTeamMember]))])]) {
+    init(_ data: [(Plan, [PresentableFeedTeam])]) {
         self.plans = data.map{$0.0}
-        let teamTuplesByPlan = Dictionary(uniqueKeysWithValues: data.map{ ($0.0.id, $0.1) })
-        self.teams = teamTuplesByPlan.mapValues { $0.map{ team in team.0 }}
-        let teamContent = teamTuplesByPlan.mapValues { teamTuple in Dictionary(uniqueKeysWithValues: teamTuple.map{ ($0.0.id, $0.1) }) }
-        self.neededPositions = teamContent.mapValues { $0.mapValues{ content in content.0 } }
-        self.teamMembers = teamContent.mapValues { $0.mapValues{ content in content.1 } }
+        self.teams = Dictionary(uniqueKeysWithValues: data.map{ ($0.0.id, $0.1) })
     }
     
     @Published var plans: [Plan]
-    @Published var teams: [Plan.ID: [Team]]
-    @Published var neededPositions: [Plan.ID: [Team.ID: [PresentableNeededPosition]]]
-    @Published var teamMembers: [Plan.ID: [Team.ID: [PresentableTeamMember]]]
+    @Published var teams: [Plan.ID: [PresentableFeedTeam]]
     
-    func teams(plan: Plan) -> [Team] {
+    func teams(plan: Plan) -> [PresentableFeedTeam] {
         teams[plan.id] ?? []
     }
     
-    func neededPositions(plan: Plan, team: Team) -> [PresentableNeededPosition] {
-        neededPositions[plan.id]?[team.id] ?? []
+    func neededPositions(plan: Plan, team: PresentableFeedTeam) -> [PresentableNeededPosition] {
+        team.neededPostions
     }
     
-    func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember] {
-        teamMembers[plan.id]?[team.id] ?? []
+    func teamMembers(plan: Plan, team: PresentableFeedTeam) -> [PresentableTeamMember] {
+        team.teamMembers
     }
 }
 
@@ -46,47 +40,42 @@ extension ConstAttentionNeededFeedListData {
                 serviceTypeName: "Vancouver - Services - Weekend"
             ),
             [
-                (
-                    Team("Band", id: "1"),
-                    (
-                        [
-                            PresentableNeededPosition(
-                                id: "1",
-                                title: "Drums",
-                                count: 1
-                            )
-                        ],
-                        [
-                            PresentableTeamMember(
-                                id: "1",
-                                name: "Joseph Van Boxtel",
-                                position: "Music Director",
-                                status: .confirmed,
-                                hasUnsentNotification: false
-                            )
-                        ]
-                    )
+                PresentableFeedTeam(id: "1", name: "Band", neededPostions: [
+                        PresentableNeededPosition(
+                            id: "1",
+                            title: "Drums",
+                            count: 1
+                        )
+                    ],
+                    teamMembers: [
+                        PresentableTeamMember(
+                            id: "1",
+                            name: "Joseph Van Boxtel",
+                            position: "Music Director",
+                            status: .confirmed,
+                            hasUnsentNotification: false
+                        )
+                    ]
                 ),
-                (
-                    Team("Tech", id: "2"),
-                    (
-                        [
-                            PresentableNeededPosition(
-                                id: "1",
-                                title: "Front Of House",
-                                count: 1
-                            )
-                        ],
-                        [
-                            PresentableTeamMember(
-                                id: "2",
-                                name: "Remington Smith",
-                                position: "Head Hancho",
-                                status: .confirmed,
-                                hasUnsentNotification: true
-                            )
-                        ]
-                    )
+                PresentableFeedTeam(
+                    id: "2",
+                    name: "Tech",
+                    neededPostions: [
+                        PresentableNeededPosition(
+                            id: "1",
+                            title: "Front Of House",
+                            count: 1
+                        )
+                    ],
+                    teamMembers: [
+                        PresentableTeamMember(
+                            id: "2",
+                            name: "Remington Smith",
+                            position: "Head Hancho",
+                            status: .confirmed,
+                            hasUnsentNotification: true
+                        )
+                    ]
                 )
             ]
         )

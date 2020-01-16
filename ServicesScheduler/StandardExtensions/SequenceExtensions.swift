@@ -82,3 +82,7 @@ extension Sequence {
         return map{ $0[keyPath: keyPath] }
     }
 }
+
+extension Collection {
+    var isNotEmpty: Bool { !isEmpty }
+}

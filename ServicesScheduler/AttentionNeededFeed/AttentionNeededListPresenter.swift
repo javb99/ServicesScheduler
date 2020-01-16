@@ -31,10 +31,16 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
     @Published var plans: [Plan] = []
     
     @Published var teams: [MPlan.ID: [Team]] = [:]
-    func teams(plan: Plan) -> [Team] {
+    func teams(plan: Plan) -> [PresentableFeedTeam] {
         let planID = MPlan.ID(stringLiteral: plan.id)
         let teams = self.teams[planID] ?? []
-        return teams.filter { self.teamMembers(plan: plan, team: $0).isEmpty == false }
+        let feedTeams: [PresentableFeedTeam] = teams.map { basicTeam in
+            let rawTeamID = basicTeam.id
+            let neededPositions = self.neededPositions(plan: plan, team: basicTeam)
+            let teamMembers = self.teamMembers(plan: plan, team: basicTeam)
+            return PresentableFeedTeam(id: PresentableFeedTeam.ID(stringLiteral: rawTeamID), name: basicTeam.value, neededPostions: neededPositions, teamMembers: teamMembers)
+        }
+        return feedTeams.filter { team in team.teamMembers.isNotEmpty || team.neededPostions.isNotEmpty }
     }
     
     @Published var neededPositions: [MPlan.ID: [MTeam.ID: [PresentableNeededPosition]]] = [:]
@@ -43,6 +49,9 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         let teamID = MTeam.ID(stringLiteral: team.id)
         return neededPositions[planID]?[teamID] ?? []
     }
+    func neededPositions(plan: Plan, team: PresentableFeedTeam) -> [PresentableNeededPosition] {
+        return team.neededPostions
+    }
     
     @Published var teamMembers: [MPlan.ID: [MTeam.ID: [PresentableTeamMember]]] = [:]
     func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember] {
@@ -50,6 +59,9 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         let teamID = MTeam.ID(stringLiteral: team.id)
         let members = teamMembers[planID]?[teamID] ?? []
         return members.filter { $0.status.iconName == PresentableStatus(.unconfirmed).iconName }
+    }
+    func teamMembers(plan: Plan, team: PresentableFeedTeam) -> [PresentableTeamMember] {
+        return team.teamMembers
     }
     
     func plansPublisher() -> AnyPublisher<[Plan], Never> {
