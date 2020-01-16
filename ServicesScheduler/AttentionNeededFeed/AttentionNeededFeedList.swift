@@ -28,6 +28,13 @@ struct PresentableTeamMember: Identifiable {
     var hasUnsentNotification: Bool
 }
 
+struct PresentableFeedTeam: Identifiable {
+    var id: MTeam.ID
+    var name: String
+    var neededPostions: [PresentableNeededPosition]
+    var teamMembers: [PresentableTeamMember]
+}
+
 protocol AttentionNeededFeedDataSource: ObservableObject {
     
     var plans: [Plan] { get }
