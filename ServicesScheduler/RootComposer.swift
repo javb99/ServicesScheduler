@@ -97,7 +97,7 @@ class RootComposer {
     
     func feedScreen() -> some View {
         NavigationView {
-            AttentionNeededFeedList(controller: feedPresenter)
+            FeedListContainer(controller: feedPresenter)
                 .onAppear(perform: {
                     print(self.teamPresenter.selectedTeams)
                     self.feedLoader.load(teams: self.teamPresenter.selectedTeams)

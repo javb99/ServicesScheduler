@@ -78,13 +78,30 @@ protocol AttentionNeededFeedDataSource: ObservableObject {
     func teams(plan: Plan) -> [PresentableFeedTeam]
 }
 
-struct AttentionNeededFeedList<Controller>: View where Controller: FeedController {
+struct FeedListContainer<Controller>: View where Controller: FeedController {
     @ObservedObject var controller: Controller
     
     var body: some View {
+        AttentionNeededFeedList(plans: controller.plans,
+                                canLoadMorePlans: controller.canLoadMorePlans,
+                                loadMorePlans: controller.loadMorePlans)
+    }
+}
+
+struct AttentionNeededFeedList: View {
+    var plans: [PresentableFeedPlan]
+    var canLoadMorePlans: Bool
+    var loadMorePlans: ()->()
+    
+    var body: some View {
         List{
-            ForEach(controller.plans) { plan in
+            ForEach(plans) { plan in
                 self.planSection(for: plan)
+            }
+            if canLoadMorePlans {
+                Button(action: loadMorePlans) {
+                    Text("Load more")
+                }
             }
         }
     }
@@ -144,7 +161,7 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
         LightAndDark {
             NavigationView {
-                AttentionNeededFeedList(controller: AdapterFeedController(ConstAttentionNeededFeedListData.sample))
+                FeedListContainer(controller: AdapterFeedController(ConstAttentionNeededFeedListData.sample))
                 .navigationBarTitle("Title")
             }
         }
