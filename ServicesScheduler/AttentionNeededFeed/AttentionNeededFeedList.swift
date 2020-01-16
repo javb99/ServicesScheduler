@@ -45,6 +45,8 @@ struct PresentableFeedPlan: Identifiable {
 
 protocol FeedController: ObservableObject {
     var plans: [PresentableFeedPlan] { get }
+    var canLoadMorePlans: Bool { get }
+    func loadMorePlans()
 }
 
 class AdapterFeedController<DataSource>: FeedController where DataSource: AttentionNeededFeedDataSource {
@@ -59,6 +61,12 @@ class AdapterFeedController<DataSource>: FeedController where DataSource: Attent
         dataSource.plans.map { plan in
             PresentableFeedPlan(id: PresentableFeedPlan.ID(stringLiteral: plan.id), sortDate: Date(), date: plan.date, serviceTypeName: plan.serviceTypeName, teams: dataSource.teams(plan: plan))
         }
+    }
+    
+    let canLoadMorePlans: Bool = false
+    
+    func loadMorePlans() {
+        // Can't.
     }
 }
 
