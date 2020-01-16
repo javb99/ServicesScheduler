@@ -35,39 +35,66 @@ struct PresentableFeedTeam: Identifiable {
     var teamMembers: [PresentableTeamMember]
 }
 
+struct PresentableFeedPlan: Identifiable {
+    var id: MPlan.ID
+    var sortDate: Date
+    var date: String
+    var serviceTypeName: String
+    var teams: [PresentableFeedTeam]
+}
+
+protocol FeedController: ObservableObject {
+    var plans: [PresentableFeedPlan] { get }
+}
+
+class AdapterFeedController<DataSource>: FeedController where DataSource: AttentionNeededFeedDataSource {
+    
+    var dataSource: DataSource
+    
+    init(_ dataSource: DataSource) {
+        self.dataSource = dataSource
+    }
+    
+    var plans: [PresentableFeedPlan] {
+        dataSource.plans.map { plan in
+            PresentableFeedPlan(id: PresentableFeedPlan.ID(stringLiteral: plan.id), sortDate: Date(), date: plan.date, serviceTypeName: plan.serviceTypeName, teams: dataSource.teams(plan: plan))
+        }
+    }
+}
+
 protocol AttentionNeededFeedDataSource: ObservableObject {
     
     var plans: [Plan] { get }
     func teams(plan: Plan) -> [PresentableFeedTeam]
 }
 
-struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeededFeedDataSource {
-    @ObservedObject var dataSource: DataSource
+struct AttentionNeededFeedList<Controller>: View where Controller: FeedController {
+    @ObservedObject var controller: Controller
     
     var body: some View {
         List{
-            ForEach(dataSource.plans) { plan in
+            ForEach(controller.plans) { plan in
                 self.planSection(for: plan)
             }
         }
     }
     
-    func planHeader(for plan: Plan) -> some View {
+    func planHeader(for plan: PresentableFeedPlan) -> some View {
         VStack(alignment: .leading) {
             Text(plan.date).font(.headline)
             Text(plan.serviceTypeName).font(.body)
         }.padding(.vertical)
     }
     
-    func planSection(for plan: Plan) -> some View {
+    func planSection(for plan: PresentableFeedPlan) -> some View {
         Section(header: planHeader(for: plan)) {
-            ForEach(dataSource.teams(plan: plan)) { team in
-                self.teamSection(for: team, in: plan)
+            ForEach(plan.teams) { team in
+                self.teamSection(for: team)
             }
         }
     }
     
-    func teamSection(for team: PresentableFeedTeam, in plan: Plan) -> some View {
+    func teamSection(for team: PresentableFeedTeam) -> some View {
         Group {
             Text(team.name).font(.headline)
             ForEach(team.neededPostions, content: neededPositionRow)
@@ -107,7 +134,7 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
         LightAndDark {
             NavigationView {
-                AttentionNeededFeedList(dataSource: ConstAttentionNeededFeedListData.sample)
+                AttentionNeededFeedList(controller: AdapterFeedController(ConstAttentionNeededFeedListData.sample))
                 .navigationBarTitle("Title")
             }
         }
