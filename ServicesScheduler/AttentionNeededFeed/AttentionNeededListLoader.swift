@@ -74,11 +74,7 @@ class AttentionNeededListLoader {
             .handleEvents(receiveOutput: { mTeam in
                 guard let serviceTypeID = mTeam.serviceType.data else { return }
                 DispatchQueue.main.async {
-                    if self.teams[serviceTypeID] != nil {
-                        self.teams[serviceTypeID]!.append(mTeam)
-                    } else {
-                        self.teams[serviceTypeID] = [mTeam]
-                    }
+                    self.teams.appendOrInitialize(mTeam, for: serviceTypeID)
                 }
             })
             .compactMap { mTeam in mTeam.serviceType.data }
@@ -164,5 +160,16 @@ class AttentionNeededListLoader {
             .collect()
             .handleEvents(receiveCompletion: { print("NeededPositions.complete: \($0)") }, receiveCancel: { print("NeededPositions.cancel") })
             .eraseToAnyPublisher()
+    }
+}
+
+extension Dictionary where Value: RangeReplaceableCollection, Value: ExpressibleByArrayLiteral {
+    /// Append an element or initialize with a single element collection with the value at the given key.
+    mutating func appendOrInitialize(_ element: Value.Element, for key: Key) {
+        if self[key] != nil {
+            self[key]!.append(element)
+        } else {
+            self[key] = Value([element])
+        }
     }
 }
