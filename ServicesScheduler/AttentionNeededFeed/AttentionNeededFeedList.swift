@@ -159,13 +159,19 @@ struct AttentionNeededFeedList: View {
 #if DEBUG
 struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
-        LightAndDark {
-            NavigationView {
-                AttentionNeededFeedList(plans: .sample, canLoadMorePlans: false, loadMorePlans: {})
-                .navigationBarTitle("Title")
+        ForEach(Bool.allCases, id: \.self) { canLoadPlans in
+            LightAndDark {
+                NavigationView {
+                    AttentionNeededFeedList(plans: .sample, canLoadMorePlans: canLoadPlans, loadMorePlans: {})
+                    .navigationBarTitle("Title")
+                }
             }
         }
     }
+}
+
+extension Bool: CaseIterable {
+    public static var allCases = [true, false]
 }
 
 extension Array where Element == PresentableFeedPlan {
