@@ -167,4 +167,57 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
         }
     }
 }
+
+extension Array where Element == PresentableFeedPlan {
+    
+    static let sample = [
+        PresentableFeedPlan(
+            id: "1",
+            sortDate: Date(),
+            date: "Sunday Aug. 12",
+            serviceTypeName: "Vancouver - Services - Weekend",
+            teams: [
+                PresentableFeedTeam(
+                    id: "1",
+                    name: "Band",
+                    neededPostions: [
+                        PresentableNeededPosition(
+                            id: "1",
+                            title: "Drums",
+                            count: 1
+                        )
+                    ],
+                    teamMembers: [
+                        PresentableTeamMember(
+                            id: "1",
+                            name: "Joseph Van Boxtel",
+                            position: "Music Director",
+                            status: .confirmed,
+                            hasUnsentNotification: false
+                        )
+                    ]
+                ),
+                PresentableFeedTeam(
+                    id: "2",
+                    name: "Tech",
+                    neededPostions: [
+                        PresentableNeededPosition(
+                            id: "1",
+                            title: "Front Of House",
+                            count: 1
+                        )
+                    ],
+                    teamMembers: [
+                        PresentableTeamMember(
+                            id: "2",
+                            name: "Remington Smith",
+                            position: "Head Hancho",
+                            status: .confirmed,
+                            hasUnsentNotification: true
+                        )
+                    ]
+                )
+            ]
+    )]
+}
 #endif

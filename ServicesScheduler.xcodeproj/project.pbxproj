@@ -40,7 +40,6 @@
 		5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */; };
 		5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */; };
 		5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */; };
-		5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */; };
 		5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */; };
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */; };
 		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
@@ -129,7 +128,6 @@
 		5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeededPositionCircle.swift; sourceTree = "<group>"; };
 		5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+PlanningCenter.swift"; sourceTree = "<group>"; };
 		5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededFeedList.swift; sourceTree = "<group>"; };
-		5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstAttentionNeededFeedListData.swift; sourceTree = "<group>"; };
 		5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListLoader.swift; sourceTree = "<group>"; };
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BasicAuthenticationProvider+ServiceScheduler.swift"; sourceTree = "<group>"; };
 		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
 				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
-				5CAD90AB23488B9000F02002 /* ConstAttentionNeededFeedListData.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
 			);
 			path = AttentionNeededFeed;
@@ -570,7 +567,6 @@
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
 				5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */,
 				5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */,
-				5CAD90AC23488B9000F02002 /* ConstAttentionNeededFeedListData.swift in Sources */,
 				5C521D9123774C7000AD2255 /* RootComposer.swift in Sources */,
 				5CAD909B2348198D00F02002 /* PreviewHelpers.swift in Sources */,
 				5C17CDC52336AA4300E4E7C5 /* RecursiveFolderFactory.swift in Sources */,
