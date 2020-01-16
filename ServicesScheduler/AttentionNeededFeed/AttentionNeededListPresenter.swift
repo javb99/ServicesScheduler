@@ -49,9 +49,6 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         let teamID = MTeam.ID(stringLiteral: team.id)
         return neededPositions[planID]?[teamID] ?? []
     }
-    func neededPositions(plan: Plan, team: PresentableFeedTeam) -> [PresentableNeededPosition] {
-        return team.neededPostions
-    }
     
     @Published var teamMembers: [MPlan.ID: [MTeam.ID: [PresentableTeamMember]]] = [:]
     func teamMembers(plan: Plan, team: Team) -> [PresentableTeamMember] {
@@ -59,9 +56,6 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         let teamID = MTeam.ID(stringLiteral: team.id)
         let members = teamMembers[planID]?[teamID] ?? []
         return members.filter { $0.status.iconName == PresentableStatus(.unconfirmed).iconName }
-    }
-    func teamMembers(plan: Plan, team: PresentableFeedTeam) -> [PresentableTeamMember] {
-        return team.teamMembers
     }
     
     func plansPublisher() -> AnyPublisher<[Plan], Never> {

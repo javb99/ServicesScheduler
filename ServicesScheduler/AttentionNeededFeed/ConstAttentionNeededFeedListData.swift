@@ -21,14 +21,6 @@ class ConstAttentionNeededFeedListData: AttentionNeededFeedDataSource {
     func teams(plan: Plan) -> [PresentableFeedTeam] {
         teams[plan.id] ?? []
     }
-    
-    func neededPositions(plan: Plan, team: PresentableFeedTeam) -> [PresentableNeededPosition] {
-        team.neededPostions
-    }
-    
-    func teamMembers(plan: Plan, team: PresentableFeedTeam) -> [PresentableTeamMember] {
-        team.teamMembers
-    }
 }
 
 extension ConstAttentionNeededFeedListData {

@@ -39,8 +39,6 @@ protocol AttentionNeededFeedDataSource: ObservableObject {
     
     var plans: [Plan] { get }
     func teams(plan: Plan) -> [PresentableFeedTeam]
-    func neededPositions(plan: Plan, team: PresentableFeedTeam) -> [PresentableNeededPosition]
-    func teamMembers(plan: Plan, team: PresentableFeedTeam) -> [PresentableTeamMember]
 }
 
 struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeededFeedDataSource {
@@ -72,8 +70,8 @@ struct AttentionNeededFeedList<DataSource>: View where DataSource: AttentionNeed
     func teamSection(for team: PresentableFeedTeam, in plan: Plan) -> some View {
         Group {
             Text(team.name).font(.headline)
-            ForEach(dataSource.neededPositions(plan: plan, team: team), content: neededPositionRow)
-            ForEach(dataSource.teamMembers(plan: plan, team: team), content: teamMemberRow)
+            ForEach(team.neededPostions, content: neededPositionRow)
+            ForEach(team.teamMembers, content: teamMemberRow)
         }
     }
     
