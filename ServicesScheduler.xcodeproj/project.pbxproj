@@ -24,6 +24,7 @@
 		5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C3BB223AAD7C6003DF918 /* WebLink.swift */; };
 		5C6FF0CD23C68FA900369A91 /* NotificationNotSentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */; };
 		5C794FA923AF1A7500EC4A52 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 5C794FA823AF1A7500EC4A52 /* SnapshotTesting */; };
+		5C7E42FA23D22A7E0010FA92 /* MServiceTypeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E42F923D22A7E0010FA92 /* MServiceTypeService.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -106,6 +107,7 @@
 		5C521D9023774C7000AD2255 /* RootComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootComposer.swift; sourceTree = "<group>"; };
 		5C6C3BB223AAD7C6003DF918 /* WebLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLink.swift; sourceTree = "<group>"; };
 		5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotSentView.swift; sourceTree = "<group>"; };
+		5C7E42F923D22A7E0010FA92 /* MServiceTypeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MServiceTypeService.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5C7E42F823D22A620010FA92 /* FeedTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C7E42F923D22A7E0010FA92 /* MServiceTypeService.swift */,
+			);
+			path = FeedTests;
+			sourceTree = "<group>";
+		};
 		5C96DED722ED13CC00BB643A = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +333,7 @@
 		5C96DEF922ED13D000BB643A /* ServicesSchedulerTests */ = {
 			isa = PBXGroup;
 			children = (
+				5C7E42F823D22A620010FA92 /* FeedTests */,
 				5CCDA6BC23ACA02100741660 /* ViewTests */,
 				5CCDA6B723AC9ED000741660 /* SnapshotTestingExtensions */,
 				5CB7270A23A72569006BD2F4 /* AuthenticationTests */,
@@ -615,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CCDA6B923AC9EF300741660 /* Snapshottting+SwiftUI.swift in Sources */,
+				5C7E42FA23D22A7E0010FA92 /* MServiceTypeService.swift in Sources */,
 				5CCDA6BE23ACA67700741660 /* Snapshotting+AppStore.swift in Sources */,
 				5CB7270823A72563006BD2F4 /* OAuthTokenStoreTests.swift in Sources */,
 				5CB7270723A72563006BD2F4 /* OAuthTokenEndpointTests.swift in Sources */,

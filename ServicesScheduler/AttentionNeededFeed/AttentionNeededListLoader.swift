@@ -12,13 +12,13 @@ import JSONAPISpec
 import PlanningCenterSwift
 
 extension Resource {
-    typealias ID = ResourceIdentifier<Type>
+    public typealias ID = ResourceIdentifier<Type>
 }
 
-typealias MServiceType = Resource<Models.ServiceType>
-typealias MPlan = Resource<Models.Plan>
-typealias MPlanPerson = Resource<Models.PlanPerson>
-typealias MNeededPosition = Resource<Models.NeededPosition>
+public typealias MServiceType = Resource<Models.ServiceType>
+public typealias MPlan = Resource<Models.Plan>
+public typealias MPlanPerson = Resource<Models.PlanPerson>
+public typealias MNeededPosition = Resource<Models.NeededPosition>
 
 class AttentionNeededListLoader {
     init(network: URLSessionService) {
