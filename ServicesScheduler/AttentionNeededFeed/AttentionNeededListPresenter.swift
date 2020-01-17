@@ -11,7 +11,7 @@ import PlanningCenterSwift
 import JSONAPISpec
 import Combine
 
-class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
+class AttentionNeededListPresenter {
     
     let loader: AttentionNeededListLoader
     var cancelables: [Cancellable] = []
@@ -28,7 +28,7 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         cancelables.forEach { $0.cancel() }
     }
     
-    @Published var plans: [Plan] = []
+    @Published var plans: [PresentableFeedPlan] = []
     
     @Published var teams: [MPlan.ID: [Team]] = [:]
     func teams(plan: Plan) -> [PresentableFeedTeam] {
@@ -58,7 +58,7 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
         return members.filter { $0.status.iconName == PresentableStatus(.unconfirmed).iconName }
     }
     
-    func plansPublisher() -> AnyPublisher<[Plan], Never> {
+    func plansPublisher() -> AnyPublisher<[PresentableFeedPlan], Never> {
         
         return loader.$plans.map { mplans in
             let serviceTypesById = Dictionary(self.loader.serviceTypes.map{ ($0.identifer, $0) }) { _, serviceType in serviceType }
@@ -78,7 +78,9 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                 let (sortA, _) = a
                 let (sortB, _) = b
                 return sortA < sortB
-            }).map{ $0.1 }
+            }).map{ $0.1 }.map { plan in
+                PresentableFeedPlan(id: PresentableFeedPlan.ID(stringLiteral: plan.id), sortDate: Date(), date: plan.date, serviceTypeName: plan.serviceTypeName, teams: self.teams(plan: plan))
+            }
         }.eraseToAnyPublisher()
     }
     
@@ -120,6 +122,19 @@ class AttentionNeededListPresenter: AttentionNeededFeedDataSource {
                 }
             }
         }.eraseToAnyPublisher()
+    }
+}
+
+extension AttentionNeededListPresenter: FeedController {
+    
+    var canLoadMorePlans: Bool { false }
+    
+    func loadMorePlans() {
+        // Can't.
+    }
+    
+    func reset(for teams: Set<Team.ID>) {
+        loader.load(teams: teams)
     }
 }
 

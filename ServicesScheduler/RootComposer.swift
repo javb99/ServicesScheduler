@@ -56,7 +56,7 @@ class RootComposer {
     let logInStateMachine: LogInStateMachine
     
     lazy var feedLoader = AttentionNeededListLoader(network: service)
-    lazy var feedPresenter = AdapterFeedController(AttentionNeededListPresenter(loader: feedLoader))
+    lazy var feedPresenter = AttentionNeededListPresenter(loader: feedLoader)
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var meLoader = NetworkMeService(network: service)
@@ -97,12 +97,10 @@ class RootComposer {
     
     func feedScreen() -> some View {
         NavigationView {
-            FeedListContainer(controller: feedPresenter)
-                .onAppear(perform: {
-                    print(self.teamPresenter.selectedTeams)
-                    self.feedLoader.load(teams: self.teamPresenter.selectedTeams)
-                })
-                .navigationBarTitle("Feed")
+            FeedListContainer(
+                controller: feedPresenter,
+                selectedTeams: self.teamPresenter.selectedTeams
+            ).navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)
     }
     
