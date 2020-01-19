@@ -16,30 +16,6 @@ public func compose<A, B, C>(_ h: @escaping (A)->B, into g: @escaping (B)->C) ->
     }
 }
 
-struct Protected<Value> {
-    
-    init(_ value: Value) {
-        _value = value
-    }
-    
-    private var lock = NSLock()
-    
-    public var value: Value {
-        get {
-            lock.lock()
-            defer { lock.unlock() }
-            return _value
-        }
-    }
-    private var _value: Value
-    
-    public mutating func mutate(_ mutation: (inout Value)->()) {
-        lock.lock()
-        mutation(&_value)
-        lock.unlock()
-    }
-}
-
 extension PCODownloadService {
     func basicFetch<Endpt: Endpoint, R: ResourceProtocol>(
         _ endpoint: Endpt,

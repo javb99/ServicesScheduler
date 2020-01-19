@@ -30,6 +30,7 @@
 		5C7E430123D299210010FA92 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E430023D299210010FA92 /* FeedController.swift */; };
 		5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E623D3FE6B00380458 /* FeedPlan.swift */; };
 		5C9060E923D3FEEE00380458 /* PresentableFeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */; };
+		5C9060EB23D4001100380458 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EA23D4001100380458 /* Protected.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -118,6 +119,7 @@
 		5C7E430023D299210010FA92 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		5C9060E623D3FE6B00380458 /* FeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlan.swift; sourceTree = "<group>"; };
 		5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableFeedPlan.swift; sourceTree = "<group>"; };
+		5C9060EA23D4001100380458 /* Protected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				5C7E430023D299210010FA92 /* FeedController.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
+				5C9060EA23D4001100380458 /* Protected.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
 			);
 			path = AttentionNeededFeed;
@@ -640,6 +643,7 @@
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
 				5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
+				5C9060EB23D4001100380458 /* Protected.swift in Sources */,
 				5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */,
 				5CB7270F23A7361F006BD2F4 /* LogInState.swift in Sources */,
 				5CCFF9A823A8A91600596110 /* KeychainPasswordItem.swift in Sources */,
