@@ -86,25 +86,6 @@ extension PCODownloadService {
     }
 }
 
-extension Result {
-    var value: Success? {
-        switch self {
-        case let .success(v):
-            return v
-        case .failure:
-            return nil
-        }
-    }
-    var error: Failure? {
-        switch self {
-        case .success:
-            return nil
-        case let .failure(e):
-            return e
-        }
-    }
-}
-
 extension Collection where Element: Hashable {
     func asSet() -> Set<Element> {
         Set(self)
