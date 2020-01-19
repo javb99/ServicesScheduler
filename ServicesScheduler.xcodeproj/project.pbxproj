@@ -28,6 +28,7 @@
 		5C7E42FC23D2797F0010FA92 /* FeedServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E42FB23D2797F0010FA92 /* FeedServiceTests.swift */; };
 		5C7E42FF23D298460010FA92 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E42FD23D297D70010FA92 /* FeedService.swift */; };
 		5C7E430123D299210010FA92 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7E430023D299210010FA92 /* FeedController.swift */; };
+		5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E623D3FE6B00380458 /* FeedPlan.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -114,6 +115,7 @@
 		5C7E42FB23D2797F0010FA92 /* FeedServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedServiceTests.swift; sourceTree = "<group>"; };
 		5C7E42FD23D297D70010FA92 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		5C7E430023D299210010FA92 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		5C9060E623D3FE6B00380458 /* FeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlan.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */ = {
 			isa = PBXGroup;
 			children = (
+				5C9060E523D3FE5C00380458 /* Models */,
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */,
@@ -282,6 +285,14 @@
 				5C7E42FB23D2797F0010FA92 /* FeedServiceTests.swift */,
 			);
 			path = FeedTests;
+			sourceTree = "<group>";
+		};
+		5C9060E523D3FE5C00380458 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C9060E623D3FE6B00380458 /* FeedPlan.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5C96DED722ED13CC00BB643A = {
@@ -623,6 +634,7 @@
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
 				5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */,
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
+				5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
 				5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */,
 				5CB7270F23A7361F006BD2F4 /* LogInState.swift in Sources */,

@@ -16,16 +16,6 @@ public func compose<A, B, C>(_ h: @escaping (A)->B, into g: @escaping (B)->C) ->
     }
 }
 
-struct FeedPlan: Identifiable {
-    var id: MPlan.ID
-    var sortDate: Date
-    var date: String
-    var serviceTypeName: String
-    var serviceTypeID: MServiceType.ID
-    var neededPositions: [MNeededPosition]
-    var teamMembers: [MPlanPerson]
-}
-
 struct Protected<Value> {
     
     init(_ value: Value) {
