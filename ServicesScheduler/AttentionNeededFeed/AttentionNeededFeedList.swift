@@ -47,7 +47,7 @@ protocol FeedController: ObservableObject {
     var plans: [PresentableFeedPlan] { get }
     var canLoadMorePlans: Bool { get }
     func loadMorePlans()
-    func reset(for teams: Set<Team.ID>)
+    func reset(for teams: Set<MTeam.ID>)
 }
 
 class AdapterFeedController<DataSource>: FeedController where DataSource: AttentionNeededFeedDataSource {
@@ -70,9 +70,14 @@ class AdapterFeedController<DataSource>: FeedController where DataSource: Attent
         // Can't.
     }
     
-    func reset(for teams: Set<Team.ID>) {}
+    func reset(for teams: Set<MTeam.ID>) {}
     
     var objectWillChange: DataSource.ObjectWillChangePublisher { dataSource.objectWillChange }
+}
+extension FeedController {
+    func reset(for teams: Set<Team.ID>) {
+        self.reset(for: teams.map { raw in MTeam.ID(stringLiteral: raw) }.asSet())
+    }
 }
 
 protocol AttentionNeededFeedDataSource: ObservableObject {

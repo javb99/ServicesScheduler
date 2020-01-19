@@ -4,3 +4,4 @@
 //
 
 public typealias Completion<T> = (Result<T, Error>)->()
+public typealias UserCompletion<T> = (Result<T, UserFacingError>)->()

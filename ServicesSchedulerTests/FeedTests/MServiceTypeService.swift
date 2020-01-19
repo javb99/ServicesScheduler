@@ -11,12 +11,6 @@ import Scheduler
 import PlanningCenterSwift
 import JSONAPISpec
 
-func compose<A, B, C>(_ h: @escaping (A)->B, into g: @escaping (B)->C) -> (A)->C {
-    return { a in
-        g(h(a))
-    }
-}
-
 class MServiceTypeService {
     
     let network: PCODownloadService

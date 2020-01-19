@@ -133,8 +133,8 @@ extension AttentionNeededListPresenter: FeedController {
         // Can't.
     }
     
-    func reset(for teams: Set<Team.ID>) {
-        loader.load(teams: teams)
+    func reset(for teams: Set<MTeam.ID>) {
+        loader.load(teams: teams.map { $0.id }.asSet())
     }
 }
 
