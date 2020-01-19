@@ -14,35 +14,6 @@ struct Plan: Identifiable {
     var serviceTypeName: String
 }
 
-struct PresentableNeededPosition: Identifiable {
-    var id: String
-    var title: String
-    var count: Int
-}
-
-struct PresentableTeamMember: Identifiable {
-    var id: String
-    var name: String
-    var position: String
-    var status: PresentableStatus
-    var hasUnsentNotification: Bool
-}
-
-struct PresentableFeedTeam: Identifiable {
-    var id: MTeam.ID
-    var name: String
-    var neededPostions: [PresentableNeededPosition]
-    var teamMembers: [PresentableTeamMember]
-}
-
-struct PresentableFeedPlan: Identifiable {
-    var id: MPlan.ID
-    var sortDate: Date
-    var date: String
-    var serviceTypeName: String
-    var teams: [PresentableFeedTeam]
-}
-
 protocol FeedController: ObservableObject {
     var plans: [PresentableFeedPlan] { get }
     var canLoadMorePlans: Bool { get }
