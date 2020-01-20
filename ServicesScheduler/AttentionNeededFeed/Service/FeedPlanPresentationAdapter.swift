@@ -75,7 +75,7 @@ extension Collection where Element == MNeededPosition {
 extension MPlanPerson {
     static func joinPositions(_ personA: MPlanPerson, _ personB: MPlanPerson) -> MPlanPerson {
         var sum = personA
-        sum.positionName = [personA, personB].compactMap{ $0.positionName }.joined(separator: ", ")
+        sum.positionName = [personA, personB].commaSeparated(\.positionName)
         return sum
     }
 }
