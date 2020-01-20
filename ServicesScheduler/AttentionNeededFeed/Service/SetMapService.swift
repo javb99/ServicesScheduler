@@ -8,26 +8,33 @@
 
 import Foundation
 
-class SetMapService<Input: Hashable, Output: Hashable> {
+/// Input collection -> Output collection asynchronously as a group.
+class MapReduceService<Input, Output> where Input: Sequence, Output: Collection {
     
-    let mapping: (Input, @escaping Completion<Output>)->()
+    let mapper: (Input.Element, @escaping Completion<Output.Element>)->()
+    let initialValue: Output
+    let reducer: (inout Output, Output.Element)->()
     
-    init(mapping: @escaping (Input, @escaping Completion<Output>) -> ()) {
-        self.mapping = mapping
+    init(mapper: @escaping (Input.Element, @escaping Completion<Output.Element>)->(),
+         initialValue: Output,
+         reducer: @escaping (inout Output, Output.Element)->()) {
+        self.mapper = mapper
+        self.initialValue = initialValue
+        self.reducer = reducer
     }
     
-    func fetchMapped(
-        _ inputSet: Set<Input>,
-        completion: @escaping Completion<Set<Output>>
+    func fetch(
+        _ input: Input,
+        completion: @escaping Completion<Output>
     ) {
-        var results = Protected(Set<Output>())
+        var results = Protected(initialValue)
         let group = DispatchGroup()
-        inputSet.forEach { input in
+        input.forEach { inputElement in
             group.enter()
-            self.mapping(input) { result in
-                if let output = result.value {
+            self.mapper(inputElement) { result in
+                if let individualOutput = result.value {
                     results.mutate { partialResults in
-                        partialResults.insert(output)
+                        self.reducer(&partialResults, individualOutput)
                     }
                 }
                 group.leave()
@@ -36,5 +43,25 @@ class SetMapService<Input: Hashable, Output: Hashable> {
         group.notify(queue: .global()) {
             completion(.success(results.value))
         }
+    }
+}
+
+class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceService<Set<InputElement>, Set<OutputElement>> {
+    
+    init(mapping: @escaping (InputElement, @escaping Completion<OutputElement>) -> ()) {
+        super.init(
+            mapper: mapping,
+            initialValue: Set(),
+            reducer: { partialResults, nextOutput in
+                partialResults.insert(nextOutput)
+            }
+        )
+    }
+    
+    func fetchMapped(
+        _ inputSet: Set<InputElement>,
+        completion: @escaping Completion<Set<OutputElement>>
+    ) {
+        super.fetch(inputSet, completion: completion)
     }
 }
