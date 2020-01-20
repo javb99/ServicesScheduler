@@ -253,6 +253,7 @@
 		5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */ = {
 			isa = PBXGroup;
 			children = (
+				5C9060EE23D5478700380458 /* Service */,
 				5C9060E523D3FE5C00380458 /* Models */,
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
@@ -261,8 +262,6 @@
 				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5C7E430023D299210010FA92 /* FeedController.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
-				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
-				5C9060EA23D4001100380458 /* Protected.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
 			);
 			path = AttentionNeededFeed;
@@ -302,6 +301,15 @@
 				5C9060E623D3FE6B00380458 /* FeedPlan.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5C9060EE23D5478700380458 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
+				5C9060EA23D4001100380458 /* Protected.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		5C96DED722ED13CC00BB643A = {
