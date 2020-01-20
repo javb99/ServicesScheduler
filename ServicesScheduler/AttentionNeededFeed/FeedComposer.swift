@@ -13,10 +13,12 @@ class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
         let feedPlanService = FeedPlanService(network: network)
         let teamsService = TeamsService(network: network)
+        let serviceTypesService = ServiceTypesService(network: network)
         let service = FeedService(
             network: network,
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
             feedPlanService: feedPlanService.fetchFeedPlans,
+            serviceTypesService: serviceTypesService.fetchServiceTypes,
             teamsService: teamsService.fetchTeams)
         let controller = ConcreteFeedController(feedService: service.fetchPlans)
         return controller
