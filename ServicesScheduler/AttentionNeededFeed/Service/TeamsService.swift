@@ -9,21 +9,32 @@
 import Foundation
 import PlanningCenterSwift
 
-class TeamsService {
+typealias TeamService = (MTeam.ID, @escaping Completion<MTeam>) -> ()
+
+class TeamsService: SetMapService<MTeam.ID, MTeam> {
     
-    let network: PCODownloadService
+    init(teamService: @escaping TeamService) {
+        super.init(mapping: teamService)
+    }
     
-    init(network: PCODownloadService) {
-        self.network = network
+    static func teamService(using network: PCODownloadService)
+        -> (MTeam.ID, @escaping Completion<MTeam>) -> ()
+    {
+        return { teamID, completion in
+            let endpoint = Endpoints.services.teams[id: teamID]
+            network.basicFetch(endpoint, completion: completion)
+        }
     }
     
     func fetchTeams(
         _ teamIDs: Set<MTeam.ID>,
         completion: @escaping Completion<Set<MTeam>>
     ) {
-        let endpoints = teamIDs.map { teamID in Endpoints.services.teams[id: teamID] }
-        network.fetchGroup(endpoints) { result in
-            completion(result.map { $0.asSet() })
-        }
+        fetchMapped(teamIDs, completion: completion)
+    }
+}
+extension TeamsService {
+    convenience init(network: PCODownloadService) {
+        self.init(teamService: Self.teamService(using: network))
     }
 }
