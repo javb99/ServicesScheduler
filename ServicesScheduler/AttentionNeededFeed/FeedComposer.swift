@@ -11,7 +11,11 @@ import PlanningCenterSwift
 
 class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
-        let service = FeedService(network: network, feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable)
+        let feedPlanService = FeedPlanService(network: network)
+        let service = FeedService(
+            network: network,
+            feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
+            feedPlanService: feedPlanService.fetchFeedPlans)
         let controller = ConcreteFeedController(feedService: service.fetchPlans)
         return controller
     }

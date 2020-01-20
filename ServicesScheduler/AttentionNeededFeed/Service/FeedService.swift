@@ -103,9 +103,16 @@ class FeedService {
     typealias FeedPlanAdapter = (FeedPlan, Set<MTeam>) -> PresentableFeedPlan
     let feedPlanAdapter: FeedPlanAdapter
     
-    init(network: PCODownloadService, feedPlanAdapter: @escaping FeedPlanAdapter) {
+    typealias FeedPlanService = (DateRange, Set<MServiceType>, @escaping Completion<[FeedPlan]>) -> ()
+    let feedPlanService: FeedPlanService
+    
+    init(network: PCODownloadService,
+         feedPlanAdapter: @escaping FeedPlanAdapter,
+         feedPlanService: @escaping FeedPlanService
+    ) {
         self.network = network
         self.feedPlanAdapter = feedPlanAdapter
+        self.feedPlanService = feedPlanService
     }
     
     func fetchPlans(
@@ -167,7 +174,7 @@ class FeedService {
         }
         
         var feedPlansResult: Result<[FeedPlan], Error>?
-        feedPlans(in: dateRange, forServiceTypes: serviceTypes) { result in
+        fetchFeedPlans(in: dateRange, forServiceTypes: serviceTypes) { result in
             feedPlansResult = result
             semaphore.signal()
         }
@@ -194,83 +201,12 @@ class FeedService {
         return self.feedPlanAdapter(feedPlan, allFetchedTeams)
     }
     
-    func feedPlans(
+    func fetchFeedPlans(
         in dateRange: DateRange,
         forServiceTypes serviceTypes: Set<MServiceType>,
         completion: @escaping Completion<[FeedPlan]>
     ) {
-        let group = DispatchGroup()
-        var results = Protected(Array<FeedPlan>())
-        serviceTypes.forEach { serviceType in
-            let plansInRange = Endpoints.services.serviceTypes[id: serviceType.identifer].plans.filter(dateRange)
-            group.enter()
-            network.basicFetch(plansInRange) { result in
-                let subGroup = DispatchGroup()
-                for plan in (result.value ?? []).prefix(4) {
-                    // Also wait for each plan to be populated.
-                    subGroup.enter()
-                    self.populatePlan(plan, in: serviceType) { feedPlanResult in
-                        if let feedPlan = feedPlanResult.value {
-                            results.mutate { $0.append(feedPlan) }
-                        }
-                        subGroup.leave()
-                    }
-                }
-                subGroup.notify(queue: .global()) {
-                    group.leave()
-                }
-            }
-        }
-        
-        let _ = group.wait()
-        results.mutate {
-            $0.sort{ a, b in a.sortDate < b.sortDate }
-        }
-        completion(.success(results.value))
-    }
-    
-    func populatePlan(
-        _ plan: MPlan,
-        in serviceType: MServiceType,
-        completion: @escaping Completion<FeedPlan>
-    ) {
-        let group = DispatchGroup()
-        let initialFeedPlan = FeedPlan(id: plan.identifer,
-                                       sortDate: plan.sortDate ?? Date(),
-                                       date: plan.shortDates ?? plan.longDates ?? "???",
-                                       serviceTypeName: serviceType.name ?? "???",
-                                       serviceTypeID: serviceType.identifer,
-                                       neededPositions: [], teamMembers: [])
-        
-        var results = Protected(initialFeedPlan)
-        
-        let neededPositionsEndpoint = Endpoints.services.serviceTypes[id: serviceType.identifer].plans[id: plan.identifer].neededPositions.page(offset: 0, pageSize: 100)
-        
-        let teamMembersEndpoint = Endpoints.services.serviceTypes[id: serviceType.identifer].plans[id: plan.identifer].teamMembers.page(offset: 0, pageSize: 100)
-        
-        group.enter()
-        network.basicFetch(neededPositionsEndpoint) { result in
-            if let modelNeededPositions = result.value {
-                results.mutate { partialFeedPlan in
-                    partialFeedPlan.neededPositions = modelNeededPositions
-                }
-            }
-            group.leave()
-        }
-        
-        group.enter()
-        network.basicFetch(teamMembersEndpoint) { result in
-            if let modelTeamMembers = result.value {
-                results.mutate { partialFeedPlan in
-                    partialFeedPlan.teamMembers = modelTeamMembers
-                }
-            }
-            group.leave()
-        }
-        
-        group.notify(queue: .global()) {
-            completion(.success(results.value))
-        }
+        self.feedPlanService(dateRange, serviceTypes, completion)
     }
     
     func serviceTypeIDs(for teams: Set<MTeam>) -> Set<MServiceType.ID> {
