@@ -55,7 +55,6 @@ class RootComposer {
     let authTokenService: AuthTokenService
     let logInStateMachine: LogInStateMachine
     
-    lazy var feedLoader = AttentionNeededListLoader(network: service)
     lazy var feedPresenter = FeedComposer.createFeedController(network: service) as! ConcreteFeedController//AttentionNeededListPresenter(loader: feedLoader)
     lazy var rootFolderLoader = FolderLoader(network: service)
     

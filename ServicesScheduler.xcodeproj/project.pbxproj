@@ -49,9 +49,7 @@
 		5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */; };
 		5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */; };
 		5CAD90AA23486F9500F02002 /* AttentionNeededFeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */; };
-		5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */; };
 		5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */; };
-		5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */; };
 		5CAFDD13234971B000162DE0 /* TestMergeAdjacent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */; };
 		5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAFDD142349827700162DE0 /* SequenceExtensions.swift */; };
 		5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */; };
@@ -146,9 +144,7 @@
 		5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeededPositionCircle.swift; sourceTree = "<group>"; };
 		5CAD90A723486C2000F02002 /* Color+PlanningCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+PlanningCenter.swift"; sourceTree = "<group>"; };
 		5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededFeedList.swift; sourceTree = "<group>"; };
-		5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListLoader.swift; sourceTree = "<group>"; };
 		5CAE5A3C2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BasicAuthenticationProvider+ServiceScheduler.swift"; sourceTree = "<group>"; };
-		5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionNeededListPresenter.swift; sourceTree = "<group>"; };
 		5CAFDD12234971B000162DE0 /* TestMergeAdjacent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMergeAdjacent.swift; sourceTree = "<group>"; };
 		5CAFDD142349827700162DE0 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		5CB726F923A72541006BD2F4 /* OAuthTokenEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenEndpoint.swift; sourceTree = "<group>"; };
@@ -260,8 +256,6 @@
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */,
-				5CAD90AD23488D1600F02002 /* AttentionNeededListLoader.swift */,
-				5CAFDD10234908F800162DE0 /* AttentionNeededListPresenter.swift */,
 				5C7E430023D299210010FA92 /* FeedController.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
@@ -634,13 +628,11 @@
 				5CB7271123A743D5006BD2F4 /* LogInProtected.swift in Sources */,
 				5CAE5A3D2336092000568962 /* BasicAuthenticationProvider+ServiceScheduler.swift in Sources */,
 				5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */,
-				5CAFDD11234908F800162DE0 /* AttentionNeededListPresenter.swift in Sources */,
 				5CB7270D23A72B69006BD2F4 /* ErrorView.swift in Sources */,
 				5CB726FE23A72542006BD2F4 /* OAuthTokenEndpoint.swift in Sources */,
 				5CCFF9AC23A8A99300596110 /* KeychainPasswordItem+Token.swift in Sources */,
 				5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */,
 				5CCFF99E23A830A100596110 /* LogInStateMachine.swift in Sources */,
-				5CAD90AE23488D1600F02002 /* AttentionNeededListLoader.swift in Sources */,
 				5CAD9099234816C700F02002 /* BindingHelpers.swift in Sources */,
 				5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */,
 				5CAD90A42348689400F02002 /* PresentableStatus.swift in Sources */,

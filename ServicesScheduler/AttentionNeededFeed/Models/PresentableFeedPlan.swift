@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PlanningCenterSwift
 
 /// A plan as needed by the Feed UI.
 struct PresentableFeedPlan: Identifiable {

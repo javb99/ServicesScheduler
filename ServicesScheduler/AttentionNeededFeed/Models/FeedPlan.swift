@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PlanningCenterSwift
 
 struct FeedPlan: Identifiable {
     var id: MPlan.ID

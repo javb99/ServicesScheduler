@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-struct Plan: Identifiable {
-    var id: String
-    var date: String
-    var serviceTypeName: String
-}
-
 protocol FeedController: ObservableObject {
     var plans: [PresentableFeedPlan] { get }
     var canLoadMorePlans: Bool { get }
@@ -21,45 +15,15 @@ protocol FeedController: ObservableObject {
     func reset(for teams: Set<MTeam.ID>)
 }
 
-class AdapterFeedController<DataSource>: FeedController where DataSource: AttentionNeededFeedDataSource {
-    
-    var dataSource: DataSource
-    
-    init(_ dataSource: DataSource) {
-        self.dataSource = dataSource
-    }
-    
-    var plans: [PresentableFeedPlan] {
-        dataSource.plans.map { plan in
-            PresentableFeedPlan(id: PresentableFeedPlan.ID(stringLiteral: plan.id), sortDate: Date(), date: plan.date, serviceTypeName: plan.serviceTypeName, teams: dataSource.teams(plan: plan))
-        }
-    }
-    
-    let canLoadMorePlans: Bool = false
-    
-    func loadMorePlans() {
-        // Can't.
-    }
-    
-    func reset(for teams: Set<MTeam.ID>) {}
-    
-    var objectWillChange: DataSource.ObjectWillChangePublisher { dataSource.objectWillChange }
-}
 extension FeedController {
-    func reset(for teams: Set<Team.ID>) {
+    func reset(for teams: Set<String>) {
         self.reset(for: teams.map { raw in MTeam.ID(stringLiteral: raw) }.asSet())
     }
 }
 
-protocol AttentionNeededFeedDataSource: ObservableObject {
-    
-    var plans: [Plan] { get }
-    func teams(plan: Plan) -> [PresentableFeedTeam]
-}
-
 struct FeedListContainer<Controller>: View where Controller: FeedController {
     @ObservedObject var controller: Controller
-    var selectedTeams: Set<Team.ID>
+    var selectedTeams: Set<String>
     
     var body: some View {
         AttentionNeededFeedList(

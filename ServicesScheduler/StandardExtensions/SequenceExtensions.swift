@@ -86,3 +86,14 @@ extension Sequence {
 extension Collection {
     var isNotEmpty: Bool { !isEmpty }
 }
+
+extension Dictionary where Value: RangeReplaceableCollection, Value: ExpressibleByArrayLiteral {
+    /// Append an element or initialize with a single element collection with the value at the given key.
+    mutating func appendOrInitialize(_ element: Value.Element, for key: Key) {
+        if self[key] != nil {
+            self[key]!.append(element)
+        } else {
+            self[key] = Value([element])
+        }
+    }
+}
