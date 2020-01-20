@@ -192,26 +192,6 @@ class FeedService {
     
     func modelToPresentationPlanAdapter(_ feedPlan: FeedPlan, _ allFetchedTeams: Set<MTeam>) -> PresentableFeedPlan {
         return self.feedPlanAdapter(feedPlan, allFetchedTeams)
-//        let teams = allFetchedTeams.filter {
-//            $0.serviceType.data == feedPlan.serviceTypeID
-//        }
-//        let neededPositionsByTeam = feedPlan.neededPositions
-//            .group(by: \.team.data)
-//            .mapValues { $0.createPresentableList() }
-//        let teamMembersByTeam = feedPlan.teamMembers
-//            .group(by: \.team.data)
-//            .mapValues { $0.createPresentableList() }
-//        let presentableTeams = teams.compactMap { team -> PresentableFeedTeam? in
-//            guard let name = team.name else { return nil }
-//            return PresentableFeedTeam(
-//                id: team.identifer,
-//                name: name,
-//                neededPostions: neededPositionsByTeam[team.identifer] ?? [],
-//                teamMembers: teamMembersByTeam[team.identifer] ?? []
-//            )
-//        }
-//        let plan = PresentableFeedPlan(id: feedPlan.id, sortDate: feedPlan.sortDate, date: feedPlan.date, serviceTypeName: feedPlan.serviceTypeName, teams: presentableTeams)
-//        return plan
     }
     
     func feedPlans(
