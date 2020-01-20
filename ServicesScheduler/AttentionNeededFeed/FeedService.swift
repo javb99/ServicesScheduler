@@ -316,6 +316,6 @@ class FeedService {
     }
 }
 
-typealias DateRange = Endpoints.ServiceType.PlanFilter
+typealias DateRange = [Endpoints.ServiceType.PlanFilter]
 
 public typealias UserFacingError = Error

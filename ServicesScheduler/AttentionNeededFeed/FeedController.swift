@@ -25,7 +25,7 @@ class ConcreteFeedController: FeedController {
     private var teams: Set<MTeam.ID> = []
     
     func loadMorePlans() {
-        loadInDateRange(.past, teams) { result in
+        loadInDateRange([.past], teams) { result in
             DispatchQueue.main.async {
                 if let newPlans = result.value {
                     self.plans.append(contentsOf: newPlans)
@@ -38,7 +38,7 @@ class ConcreteFeedController: FeedController {
     func reset(for teams: Set<MTeam.ID>) {
         plans.removeAll()
         self.teams = teams
-        loadInDateRange(.future, teams) { result in
+        loadInDateRange([.future], teams) { result in
             DispatchQueue.main.async {
                 if let newPlans = result.value {
                     self.plans = newPlans
