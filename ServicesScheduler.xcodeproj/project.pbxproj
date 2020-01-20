@@ -80,6 +80,7 @@
 		5CF855D523D6564C00C27EDC /* TeamsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D423D6564C00C27EDC /* TeamsService.swift */; };
 		5CF855D723D657FC00C27EDC /* ServiceTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D623D657FC00C27EDC /* ServiceTypesService.swift */; };
 		5CF855D923D6654800C27EDC /* SetMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D823D6654800C27EDC /* SetMapService.swift */; };
+		5CF855DB23D6697100C27EDC /* PrimaryOrSecondaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -181,6 +182,7 @@
 		5CF855D423D6564C00C27EDC /* TeamsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsService.swift; sourceTree = "<group>"; };
 		5CF855D623D657FC00C27EDC /* ServiceTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypesService.swift; sourceTree = "<group>"; };
 		5CF855D823D6654800C27EDC /* SetMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMapService.swift; sourceTree = "<group>"; };
+		5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryOrSecondaryService.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +316,7 @@
 				5CF855D623D657FC00C27EDC /* ServiceTypesService.swift */,
 				5CF855D823D6654800C27EDC /* SetMapService.swift */,
 				5CF855D423D6564C00C27EDC /* TeamsService.swift */,
+				5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */,
 				5CF855D223D652D600C27EDC /* FeedPlanService.swift */,
 				5C9060EA23D4001100380458 /* Protected.swift */,
 				5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */,
@@ -677,6 +680,7 @@
 				5CAD90A823486C2000F02002 /* Color+PlanningCenter.swift in Sources */,
 				5CCFF9A323A8482900596110 /* AuthTokenService.swift in Sources */,
 				5CB726FF23A72542006BD2F4 /* OAuthTokenStore.swift in Sources */,
+				5CF855DB23D6697100C27EDC /* PrimaryOrSecondaryService.swift in Sources */,
 				5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */,
 				5CB7270223A72542006BD2F4 /* BrowserAuthorizer.swift in Sources */,
 				5C9060EB23D4001100380458 /* Protected.swift in Sources */,
