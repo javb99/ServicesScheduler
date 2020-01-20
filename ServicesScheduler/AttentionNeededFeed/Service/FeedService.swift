@@ -106,13 +106,18 @@ class FeedService {
     typealias FeedPlanService = (DateRange, Set<MServiceType>, @escaping Completion<[FeedPlan]>) -> ()
     let feedPlanService: FeedPlanService
     
+    typealias TeamsService = (Set<MTeam.ID>, @escaping Completion<Set<MTeam>>)->()
+    let teamsService: TeamsService
+    
     init(network: PCODownloadService,
          feedPlanAdapter: @escaping FeedPlanAdapter,
-         feedPlanService: @escaping FeedPlanService
+         feedPlanService: @escaping FeedPlanService,
+         teamsService: @escaping TeamsService
     ) {
         self.network = network
         self.feedPlanAdapter = feedPlanAdapter
         self.feedPlanService = feedPlanService
+        self.teamsService = teamsService
     }
     
     func fetchPlans(
@@ -230,10 +235,7 @@ class FeedService {
         _ teamIDs: Set<MTeam.ID>,
         completion: @escaping Completion<Set<MTeam>>
     ) {
-        let endpoints = teamIDs.map { teamID in Endpoints.services.teams[id: teamID] }
-        network.fetchGroup(endpoints) { result in
-            completion(result.map { $0.asSet() })
-        }
+        teamsService(teamIDs, completion)
     }
 }
 

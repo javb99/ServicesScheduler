@@ -77,6 +77,7 @@
 		5CCFF9B123A9BE1800596110 /* LogInStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */; };
 		5CCFF9B423A9E12400596110 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFF9B323A9E12400596110 /* ProfileView.swift */; };
 		5CF855D323D652D600C27EDC /* FeedPlanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D223D652D600C27EDC /* FeedPlanService.swift */; };
+		5CF855D523D6564C00C27EDC /* TeamsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D423D6564C00C27EDC /* TeamsService.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
 		5CF8784923336EF100B8A2DF /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -175,6 +176,7 @@
 		5CCFF9B023A9BE1800596110 /* LogInStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInStateMachineTests.swift; sourceTree = "<group>"; };
 		5CCFF9B323A9E12400596110 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5CF855D223D652D600C27EDC /* FeedPlanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanService.swift; sourceTree = "<group>"; };
+		5CF855D423D6564C00C27EDC /* TeamsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsService.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -305,6 +307,7 @@
 			children = (
 				5C7E430023D299210010FA92 /* FeedController.swift */,
 				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
+				5CF855D423D6564C00C27EDC /* TeamsService.swift */,
 				5CF855D223D652D600C27EDC /* FeedPlanService.swift */,
 				5C9060EA23D4001100380458 /* Protected.swift */,
 				5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */,
@@ -618,6 +621,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CF855D523D6564C00C27EDC /* TeamsService.swift in Sources */,
 				5C9060ED23D4006100380458 /* Result.swift in Sources */,
 				5C320BBB2379E8CC003CDEE8 /* MyTeamsService.swift in Sources */,
 				5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */,
