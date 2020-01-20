@@ -33,6 +33,7 @@
 		5C9060EB23D4001100380458 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EA23D4001100380458 /* Protected.swift */; };
 		5C9060ED23D4006100380458 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EC23D4006100380458 /* Result.swift */; };
 		5C9060F023D547EB00380458 /* FeedPlanPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */; };
+		5C9060F323D54CF300380458 /* FeedComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060F223D54CF300380458 /* FeedComposer.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -122,6 +123,7 @@
 		5C9060EA23D4001100380458 /* Protected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
 		5C9060EC23D4006100380458 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanPresentationAdapter.swift; sourceTree = "<group>"; };
+		5C9060F223D54CF300380458 /* FeedComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedComposer.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				5C9060EE23D5478700380458 /* Service */,
 				5C9060E523D3FE5C00380458 /* Models */,
 				5C9060F123D54C9500380458 /* Views */,
+				5C9060F223D54CF300380458 /* FeedComposer.swift */,
 			);
 			path = AttentionNeededFeed;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				5CCFF9A623A8A67800596110 /* Completion.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C7E430123D299210010FA92 /* FeedController.swift in Sources */,
+				5C9060F323D54CF300380458 /* FeedComposer.swift in Sources */,
 				5C320BBD237A2544003CDEE8 /* MyTeamsScreenPresenter.swift in Sources */,
 				5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */,
 				5CB7271123A743D5006BD2F4 /* LogInProtected.swift in Sources */,
