@@ -50,7 +50,7 @@ class ConcreteFeedController: FeedController {
 
 class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
-        let service = FeedService(network: network)
+        let service = FeedService(network: network, feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable)
         let controller = ConcreteFeedController(feedService: service.fetchPlans)
         return controller
     }

@@ -32,6 +32,7 @@
 		5C9060E923D3FEEE00380458 /* PresentableFeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */; };
 		5C9060EB23D4001100380458 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EA23D4001100380458 /* Protected.swift */; };
 		5C9060ED23D4006100380458 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EC23D4006100380458 /* Result.swift */; };
+		5C9060F023D547EB00380458 /* FeedPlanPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */; };
 		5C96DEE422ED13CC00BB643A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE322ED13CC00BB643A /* AppDelegate.swift */; };
 		5C96DEE622ED13CC00BB643A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */; };
 		5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96DEE722ED13CC00BB643A /* FolderContentView.swift */; };
@@ -122,6 +123,7 @@
 		5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableFeedPlan.swift; sourceTree = "<group>"; };
 		5C9060EA23D4001100380458 /* Protected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
 		5C9060EC23D4006100380458 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanPresentationAdapter.swift; sourceTree = "<group>"; };
 		5C96DEE022ED13CC00BB643A /* Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C96DEE322ED13CC00BB643A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C96DEE522ED13CC00BB643A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
 				5C9060EA23D4001100380458 /* Protected.swift */,
+				5C9060EF23D547EB00380458 /* FeedPlanPresentationAdapter.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				5C9060E923D3FEEE00380458 /* PresentableFeedPlan.swift in Sources */,
 				5C6FF0CD23C68FA900369A91 /* NotificationNotSentView.swift in Sources */,
 				5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */,
+				5C9060F023D547EB00380458 /* FeedPlanPresentationAdapter.swift in Sources */,
 				5C7E42FF23D298460010FA92 /* FeedService.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
