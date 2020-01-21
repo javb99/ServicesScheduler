@@ -23,11 +23,17 @@ class FeedPlanPresentationAdapter {
             .mapValues { $0.createPresentableList() }
         let presentableTeams = teams.compactMap { team -> PresentableFeedTeam? in
             guard let name = team.name else { return nil }
+            let neededPositions = neededPositionsByTeam[team.identifer] ?? []
+            let teamMembers = teamMembersByTeam[team.identifer] ?? []
+            
+            let shouldFilterOut = neededPositions.isNotEmpty && teamMembers.isNotEmpty
+            if shouldFilterOut { return nil }
+            
             return PresentableFeedTeam(
                 id: team.identifer,
                 name: name,
-                neededPostions: neededPositionsByTeam[team.identifer] ?? [],
-                teamMembers: teamMembersByTeam[team.identifer] ?? []
+                neededPostions: neededPositions,
+                teamMembers: teamMembers
             )
         }
         let plan = PresentableFeedPlan(id: feedPlan.id, sortDate: feedPlan.sortDate, date: feedPlan.date, serviceTypeName: feedPlan.serviceTypeName, teams: presentableTeams)
