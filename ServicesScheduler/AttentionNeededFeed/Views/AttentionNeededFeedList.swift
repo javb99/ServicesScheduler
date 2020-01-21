@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol FeedController: ObservableObject {
     var plans: [PresentableFeedPlan] { get }
+    var isLoading: Bool { get }
     var canLoadMorePlans: Bool { get }
     func loadMorePlans()
     func reset(for teams: Set<MTeam.ID>)
@@ -28,6 +29,7 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
     var body: some View {
         AttentionNeededFeedList(
             plans: controller.plans,
+            isLoading: controller.isLoading,
             canLoadMorePlans: controller.canLoadMorePlans,
             loadMorePlans: controller.loadMorePlans
         ).onAppear { self.controller.reset(for: self.selectedTeams) }
@@ -36,6 +38,7 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
 
 struct AttentionNeededFeedList: View {
     var plans: [PresentableFeedPlan]
+    var isLoading: Bool = false
     var canLoadMorePlans: Bool
     var loadMorePlans: ()->()
     
@@ -44,7 +47,9 @@ struct AttentionNeededFeedList: View {
             ForEach(plans) { plan in
                 self.planSection(for: plan)
             }
-            if canLoadMorePlans {
+            if isLoading {
+                Text("Loading...")
+            } else if canLoadMorePlans {
                 Button(action: loadMorePlans) {
                     Text("Load more")
                 }

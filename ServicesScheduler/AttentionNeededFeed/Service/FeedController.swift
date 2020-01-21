@@ -20,17 +20,21 @@ class ConcreteFeedController: FeedController {
     
     @Published var plans: [PresentableFeedPlan] = []
     
+    @Published var isLoading: Bool = false
+    
     var canLoadMorePlans: Bool { true }
     
     private var teams: Set<MTeam.ID> = []
     
     func loadMorePlans() {
+        isLoading = true
         loadInDateRange([.past], teams) { result in
             DispatchQueue.main.async {
                 if let newPlans = result.value {
                     self.plans.append(contentsOf: newPlans)
                     self.plans.sort { $0.sortDate < $1.sortDate }
                 }
+                self.isLoading = false
             }
         }
     }
@@ -38,11 +42,13 @@ class ConcreteFeedController: FeedController {
     func reset(for teams: Set<MTeam.ID>) {
         plans.removeAll()
         self.teams = teams
+        isLoading = true
         loadInDateRange([.future], teams) { result in
             DispatchQueue.main.async {
                 if let newPlans = result.value {
                     self.plans = newPlans
                 }
+                self.isLoading = false
             }
         }
     }
