@@ -22,7 +22,6 @@ class FeedComposer {
         let serviceTypesService = ServiceTypesService(network: network)
         
         let service = FeedService(
-            network: network,
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
             feedPlanService: feedPlanService.fetchFeedPlans,
             serviceTypesService: serviceTypesService.fetchServiceTypes,

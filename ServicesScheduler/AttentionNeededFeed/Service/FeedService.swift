@@ -98,8 +98,6 @@ enum FeedError: Error {
 
 class FeedService {
     
-    let network: PCODownloadService
-    
     typealias FeedPlanAdapter = (FeedPlan, Set<MTeam>) -> PresentableFeedPlan
     let feedPlanAdapter: FeedPlanAdapter
     
@@ -112,13 +110,11 @@ class FeedService {
     typealias TeamsService = (Set<MTeam.ID>, @escaping Completion<Set<MTeam>>)->()
     let teamsService: TeamsService
     
-    init(network: PCODownloadService,
-         feedPlanAdapter: @escaping FeedPlanAdapter,
+    init(feedPlanAdapter: @escaping FeedPlanAdapter,
          feedPlanService: @escaping FeedPlanService,
          serviceTypesService: @escaping ServiceTypesService,
          teamsService: @escaping TeamsService
     ) {
-        self.network = network
         self.feedPlanAdapter = feedPlanAdapter
         self.feedPlanService = feedPlanService
         self.serviceTypesService = serviceTypesService
