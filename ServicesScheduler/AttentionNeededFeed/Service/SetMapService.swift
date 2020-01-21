@@ -65,3 +65,16 @@ class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceS
         super.fetch(inputSet, completion: completion)
     }
 }
+
+class ArrayMapService<InputElement, OutputElement>: MapReduceService<Array<InputElement>, Array<OutputElement>> {
+    
+    init(mapping: @escaping (InputElement, @escaping Completion<OutputElement>) -> ()) {
+        super.init(
+            mapper: mapping,
+            initialValue: Array(),
+            reducer: { partialResults, nextOutput in
+                partialResults.append(nextOutput)
+            }
+        )
+    }
+}

@@ -97,3 +97,9 @@ extension Dictionary where Value: RangeReplaceableCollection, Value: Expressible
         }
     }
 }
+
+extension Sequence where Element: Sequence {
+    func flattened() -> Array<Element.Element> {
+        self.flatMap(identity(_:))
+    }
+}

@@ -22,24 +22,15 @@ class FeedPlanService {
         forServiceTypes serviceTypes: Set<MServiceType>,
         completion: @escaping Completion<[FeedPlan]>
     ) {
-        let group = DispatchGroup()
-        var results = Protected(Array<FeedPlan>())
-        serviceTypes.forEach { serviceType in
-            group.enter()
-            let query = FeedPlanQuery(dateRange: dateRange, serviceType: serviceType)
-            self.fetchFeedPlans(for: query) { result in
-                if let plansForServiceType = result.value {
-                    results.mutate { $0.append(contentsOf: plansForServiceType) }
-                }
-                group.leave()
-            }
+        let groupedService = ArrayMapService(mapping: self.fetchFeedPlans)
+        let queries = serviceTypes.map { serviceType in
+            FeedPlanQuery(dateRange: dateRange, serviceType: serviceType)
         }
-        
-        let _ = group.wait()
-        results.mutate {
-            $0.sort{ a, b in a.sortDate < b.sortDate }
+        groupedService.fetch(queries) { result in
+            completion(result.map { nestedPlans in
+                nestedPlans.flattened().sorted { a, b in a.sortDate < b.sortDate }
+            })
         }
-        completion(.success(results.value))
     }
     
     struct FeedPlanQuery: Hashable {
