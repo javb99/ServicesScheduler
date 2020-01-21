@@ -11,10 +11,14 @@ import PlanningCenterSwift
 
 class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
+        func afterTenSeconds<V>(_ _:V) -> Date? {
+            return Date(timeIntervalSinceNow: 10)
+        }
+        
         let individualFeedPlanService = FeedPlanService(network: network).fetchFeedPlans(for:completion:)
         let cachedIndivFeedPlanService = CachedService(
             service: individualFeedPlanService,
-            cache: PersistentCache.loadOrCreate()
+            cache: PersistentCache.loadOrCreate(invalidationStrategy: afterTenSeconds)
         ).fetch
         let feedPlanSetService = MultiServiceTypeFeedPlanService.create(using:
             cachedIndivFeedPlanService)

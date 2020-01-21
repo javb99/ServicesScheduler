@@ -11,23 +11,42 @@ import Foundation
 final class PersistentCache<Key, Value>: AsyncCache
 where Key: Codable, Key: Hashable, Value: Codable {
     
+    private struct TimestampedValue: Codable {
+        var value: Value
+        var expiration: Date?
+    }
+    
     let name: String
-    private var inMemory: Dictionary<Key, Value>
+    let expirationDateForValue: (Value)->Date?
+    let getNow: ()->Date
+    private var inMemory: Dictionary<Key, TimestampedValue>
     private var needsToSave: Bool = false
     
-    private init(name: String, storage: Dictionary<Key, Value>) {
+    private init(
+        name: String,
+        storage: Dictionary<Key, TimestampedValue>,
+        invalidationStrategy: @escaping (Value)->Date?,
+        now: @escaping ()->Date = Date.init
+    ) {
         self.name = name
         self.inMemory = storage
+        self.expirationDateForValue = invalidationStrategy
+        self.getNow = now
     }
     
     func setCached(_ value: Value, for key: Key) {
-        inMemory[key] = value
+        let timeStamped = TimestampedValue(value: value, expiration: expirationDateForValue(value))
+        inMemory[key] = timeStamped
         needsToSave = true
         saveIfNeeded()
     }
     
     func getCachedValue(for key: Key, completion: (Value?)->()) {
-        completion(inMemory[key])
+        if let timeStamped = inMemory[key], timeStamped.expiration.isNilOrAfter(getNow()) {
+            completion(timeStamped.value)
+        } else {
+            completion(nil)
+        }
     }
     
     func removeCachedValue(for key: Key) {
@@ -35,22 +54,32 @@ where Key: Codable, Key: Hashable, Value: Codable {
         needsToSave = true
     }
     
-    static func load(name: String) -> Self? {
+    static func load(name: String, invalidationStrategy: @escaping (Value)->Date? = {_ in nil}) -> Self? {
         let decoder = JSONDecoder()
         let url = makeURL(forName: name)
         do {
             let data = try Data(contentsOf: url)
-            let storedCache = try decoder.decode(Dictionary<Key, Value>.self, from: data)
-            let loaded = Self(name: name, storage: storedCache)
+            let storedCache = try decoder.decode(Dictionary<Key, TimestampedValue>.self, from: data)
+            let loaded = Self(name: name, storage: storedCache, invalidationStrategy: invalidationStrategy)
             return loaded
         } catch {
             return nil
         }
     }
     
-    static func loadOrCreate(name: String = "\(Key.self)-\(Value.self)") -> PersistentCache<Key, Value> {
-        return PersistentCache<Key, Value>.load(name: name)
-            ?? PersistentCache<Key, Value>(name: name, storage: [:])
+    static func loadOrCreate(
+        name: String = "\(Key.self)-\(Value.self)",
+        invalidationStrategy: @escaping (Value)->Date? = {_ in nil}
+    ) -> PersistentCache<Key, Value> {
+        PersistentCache<Key, Value>.load(
+            name: name,
+            invalidationStrategy: invalidationStrategy
+        )
+        ?? PersistentCache<Key, Value>(
+            name: name,
+            storage: [:],
+            invalidationStrategy: invalidationStrategy
+        )
     }
     
     private static func makeURL(forName name: String) -> URL {
@@ -74,5 +103,14 @@ where Key: Codable, Key: Hashable, Value: Codable {
         inMemory = [:]
         try? FileManager.default.removeItem(at: Self.makeURL(forName: name))
         needsToSave = false
+    }
+}
+
+extension Optional where Wrapped == Date {
+    func isNilOrAfter(_ comparable: Date) -> Bool {
+        if let value = self {
+            return value > comparable
+        }
+        return true
     }
 }
