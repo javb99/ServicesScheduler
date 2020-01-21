@@ -71,18 +71,25 @@ class FeedPlanService {
         completion: @escaping Completion<FeedPlan>
     ) {
         let group = DispatchGroup()
-        let initialFeedPlan = FeedPlan(id: plan.identifer,
-                                       sortDate: plan.sortDate ?? Date(),
-                                       date: plan.shortDates ?? plan.longDates ?? "???",
-                                       serviceTypeName: serviceType.name ?? "???",
-                                       serviceTypeID: serviceType.identifer,
-                                       neededPositions: [], teamMembers: [])
+        let initialFeedPlan = FeedPlan(
+            id: plan.identifer,
+            sortDate: plan.sortDate ?? Date(),
+            date: plan.shortDates ?? plan.longDates ?? "???",
+            serviceTypeName: serviceType.name ?? "???",
+            serviceTypeID: serviceType.identifer,
+            neededPositions: [],
+            teamMembers: []
+        )
         
         var results = Protected(initialFeedPlan)
         
-        let neededPositionsEndpoint = Endpoints.services.serviceTypes[id: serviceType.identifer].plans[id: plan.identifer].neededPositions.page(offset: 0, pageSize: 100)
-        
-        let teamMembersEndpoint = Endpoints.services.serviceTypes[id: serviceType.identifer].plans[id: plan.identifer].teamMembers.page(offset: 0, pageSize: 100)
+        let basePlanEndpoint = Endpoints.services
+            .serviceTypes[id: serviceType.identifer]
+            .plans[id: plan.identifer]
+        let neededPositionsEndpoint = basePlanEndpoint.neededPositions
+            .page(offset: 0, pageSize: 100)
+        let teamMembersEndpoint = basePlanEndpoint.teamMembers
+            .page(offset: 0, pageSize: 100)
         
         group.enter()
         network.basicFetch(neededPositionsEndpoint) { result in
