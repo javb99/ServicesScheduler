@@ -8,6 +8,23 @@
 
 import Foundation
 
+struct CacheInvalidationStrategy<Value> {
+    
+    var calculateExpiration: (Value) -> Date?
+    
+    /// Values expire after the given interval.
+    static func after(_ interval: TimeInterval) -> Self {
+        Self() { _ in Date(timeIntervalSinceNow: interval) }
+    }
+    static var afterOneHour: Self {
+        after(3600)
+    }
+    /// Values never expire.
+    static var never: Self {
+        Self() { _ in nil }
+    }
+}
+
 final class PersistentCache<Key, Value>: AsyncCache
 where Key: Codable, Key: Hashable, Value: Codable {
     
@@ -17,7 +34,7 @@ where Key: Codable, Key: Hashable, Value: Codable {
     }
     
     let name: String
-    let expirationDateForValue: (Value)->Date?
+    let invalidationStrategy: CacheInvalidationStrategy<Value>
     let getNow: ()->Date
     private var inMemory: Dictionary<Key, TimestampedValue>
     private var needsToSave: Bool = false
@@ -25,17 +42,17 @@ where Key: Codable, Key: Hashable, Value: Codable {
     private init(
         name: String,
         storage: Dictionary<Key, TimestampedValue>,
-        invalidationStrategy: @escaping (Value)->Date?,
+        invalidationStrategy: CacheInvalidationStrategy<Value>,
         now: @escaping ()->Date = Date.init
     ) {
         self.name = name
         self.inMemory = storage
-        self.expirationDateForValue = invalidationStrategy
+        self.invalidationStrategy = invalidationStrategy
         self.getNow = now
     }
     
     func setCached(_ value: Value, for key: Key) {
-        let timeStamped = TimestampedValue(value: value, expiration: expirationDateForValue(value))
+        let timeStamped = TimestampedValue(value: value, expiration: invalidationStrategy.calculateExpiration(value))
         inMemory[key] = timeStamped
         needsToSave = true
         saveIfNeeded()
@@ -54,7 +71,7 @@ where Key: Codable, Key: Hashable, Value: Codable {
         needsToSave = true
     }
     
-    static func load(name: String, invalidationStrategy: @escaping (Value)->Date? = {_ in nil}) -> Self? {
+    static func load(name: String, invalidationStrategy: CacheInvalidationStrategy<Value> = .never) -> Self? {
         let decoder = JSONDecoder()
         let url = makeURL(forName: name)
         do {
@@ -69,7 +86,7 @@ where Key: Codable, Key: Hashable, Value: Codable {
     
     static func loadOrCreate(
         name: String = "\(Key.self)-\(Value.self)",
-        invalidationStrategy: @escaping (Value)->Date? = {_ in nil}
+        invalidationStrategy: CacheInvalidationStrategy<Value> = .never
     ) -> PersistentCache<Key, Value> {
         PersistentCache<Key, Value>.load(
             name: name,
