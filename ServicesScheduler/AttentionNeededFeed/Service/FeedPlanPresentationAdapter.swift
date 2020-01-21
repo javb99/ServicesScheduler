@@ -26,7 +26,7 @@ class FeedPlanPresentationAdapter {
             let neededPositions = neededPositionsByTeam[team.identifer] ?? []
             let teamMembers = teamMembersByTeam[team.identifer] ?? []
             
-            let shouldFilterOut = neededPositions.isNotEmpty && teamMembers.isNotEmpty
+            let shouldFilterOut = neededPositions.isEmpty && teamMembers.isEmpty
             if shouldFilterOut { return nil }
             
             return PresentableFeedTeam(
