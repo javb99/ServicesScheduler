@@ -8,16 +8,16 @@
 
 import Foundation
 
-/// Input collection -> Output collection asynchronously as a group.
-class MapReduceService<Input, Output> where Input: Sequence, Output: Collection {
+/// Converts a sequence to output in parallel while ensuring safe(locked) execution while reducing a given output.
+class MapReduceService<Input, Output, Result> where Input: Sequence {
     
-    let mapper: (Input.Element, @escaping Completion<Output.Element>)->()
-    let initialValue: Output
-    let reducer: (inout Output, Output.Element)->()
+    let mapper: (Input.Element, @escaping Completion<Output>)->()
+    let initialValue: Result
+    let reducer: (inout Result, Output)->()
     
-    init(mapper: @escaping (Input.Element, @escaping Completion<Output.Element>)->(),
-         initialValue: Output,
-         reducer: @escaping (inout Output, Output.Element)->()) {
+    init(mapper: @escaping (Input.Element, @escaping Completion<Output>)->(),
+         initialValue: Result,
+         reducer: @escaping (inout Result, Output)->()) {
         self.mapper = mapper
         self.initialValue = initialValue
         self.reducer = reducer
@@ -25,7 +25,7 @@ class MapReduceService<Input, Output> where Input: Sequence, Output: Collection 
     
     func fetch(
         _ input: Input,
-        completion: @escaping Completion<Output>
+        completion: @escaping Completion<Result>
     ) {
         var results = Protected(initialValue)
         let group = DispatchGroup()
@@ -46,7 +46,7 @@ class MapReduceService<Input, Output> where Input: Sequence, Output: Collection 
     }
 }
 
-class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceService<Set<InputElement>, Set<OutputElement>> {
+class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceService<Set<InputElement>, OutputElement, Set<OutputElement>> {
     
     init(mapping: @escaping (InputElement, @escaping Completion<OutputElement>) -> ()) {
         super.init(
@@ -59,7 +59,7 @@ class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceS
     }
 }
 
-class ArrayMapService<InputElement, OutputElement>: MapReduceService<Array<InputElement>, Array<OutputElement>> {
+class ArrayMapService<InputElement, OutputElement>: MapReduceService<Array<InputElement>, OutputElement, Array<OutputElement>> {
     
     init(mapping: @escaping (InputElement, @escaping Completion<OutputElement>) -> ()) {
         super.init(
