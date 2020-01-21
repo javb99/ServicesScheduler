@@ -139,10 +139,8 @@ class FeedService {
         completion: @escaping Completion<[PresentableFeedPlan]>
     ) {
         func fail(_ error: Error) {
-            print("Failing FeedPlanService: \(error)")
             completion(.failure(error))
         }
-        print("Starting to fetch plans")
         let semaphore = DispatchSemaphore(value: 0)
         
         var teamsResult: Result<Set<MTeam>, Error>?
@@ -150,9 +148,7 @@ class FeedService {
             teamsResult = result
             semaphore.signal()
         }
-        print("Waiting for fetching teams")
         let _ = semaphore.wait(timeout: .now() + 5)
-        print("Finished to fetching teams")
         guard let teams = teamsResult?.value else {
             if let error = teamsResult?.error {
                 fail(error)
@@ -167,9 +163,7 @@ class FeedService {
             serviceTypesResult = result
             semaphore.signal()
         }
-        print("Waiting for fetching service types")
         let _ = semaphore.wait(timeout: .now() + 5)
-        print("Finished to fetching service types")
         guard let serviceTypes = serviceTypesResult?.value else {
             if let error = serviceTypesResult?.error {
                 fail(error)
@@ -184,7 +178,6 @@ class FeedService {
             feedPlansResult = result
             semaphore.signal()
         }
-        print("Waiting for fetching feed plans")
         let _ = semaphore.wait(timeout: .now() + 5)
         
         guard let feedPlans = feedPlansResult?.value else {
@@ -195,7 +188,6 @@ class FeedService {
             }
             return
         }
-        print("Finished to fetching feed plans: \(feedPlans)")
         
         let presentablePlans = feedPlans.map { feedPlan in
             modelToPresentationPlanAdapter(feedPlan, teams)

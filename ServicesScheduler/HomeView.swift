@@ -25,7 +25,7 @@ struct HomeView<TeamsView: View, FeedView: View, BrowserView: View, ProfileView:
     
     var body: some View {
         VStack {
-            TabView(selection: $selectedTab.debugingSetter(name: "TabViewCurrentTab")) {
+            TabView(selection: $selectedTab) {
                 feedTab()
                     .tag(HomeViewTab.feed)
                     .tabItem {
@@ -56,19 +56,19 @@ struct HomeView<TeamsView: View, FeedView: View, BrowserView: View, ProfileView:
     }
     
     func feedTab() -> some View {
-        makeFeedView().onAppear { print("Feed!") }
+        makeFeedView()
     }
     
     func myTeamsTab() -> some View {
-        makeTeamsView().onAppear { print("My Teams!") }
+        makeTeamsView()
     }
     
     func browseTab() -> some View {
-        makeBrowserView().onAppear { print("Browser!") }
+        makeBrowserView()
     }
     
     func profileTab() -> some View {
-        makeProfileView().onAppear { print("Profile!") }
+        makeProfileView()
     }
 }
 

@@ -36,8 +36,6 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
                 
                 if let teams = try? result.get() {
                     self.processTeams(teams)
-                } else {
-                    print("Failed \(result)")
                 }
             }
         }

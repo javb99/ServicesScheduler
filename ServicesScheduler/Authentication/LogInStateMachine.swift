@@ -17,11 +17,7 @@ class LogInStateMachine: ObservableObject {
     let browserAuthorizer: Authorizer
     let fetchAuthToken: (AuthInputCredential) -> AnyPublisher<OAuthToken, NetworkError>
     
-    @Published private(set) var state: LogInState = .notLoggedIn {
-        didSet {
-            print("Transitioned LogInState from \(oldValue) to \(state)")
-        }
-    }
+    @Published private(set) var state: LogInState = .notLoggedIn
     
     private var masterCancellable: AnyCancellable?
     private var currentActionCancellable: AnyCancellable?

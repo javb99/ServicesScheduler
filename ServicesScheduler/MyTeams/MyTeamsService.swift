@@ -100,8 +100,7 @@ final class NetworkMyTeamsService: MyTeamsService {
                                 completion(.success(teams.uniq(by: \.identifer)))
                             }
                         case let .failure(error):
-                            print("Failed to load team: \(error)")
-                            //completion(.failure(error))
+                            completion(.failure(error))
                         }
                     }
                 }

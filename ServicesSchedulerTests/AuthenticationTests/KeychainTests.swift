@@ -58,7 +58,6 @@ class KeychainTests: XCTestCase {
             let items = try KeychainPasswordItem.passwordItems(forService: KeychainPasswordItem.servicesSchedulerService)
             for item in items {
                 try item.deleteItem()
-                print("Deleted Item: \(item)")
             }
         } catch {}
     }

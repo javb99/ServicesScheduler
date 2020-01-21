@@ -64,7 +64,7 @@ extension Sequence {
             if let successful = transform($0) {
                 return successful
             } else {
-                print("Assert map failed\nfile: \(file)\nfunction: \(function))\n\($0) -> \(T.self)")
+                assertionFailure("Assert map failed\nfile: \(file)\nfunction: \(function))\n\($0) -> \(T.self)")
                 return nil
             }
         }
