@@ -19,12 +19,16 @@ class FeedComposer {
         ).fetch
         let teamSetService = TeamSetService(mapping: teamService).fetch
         
-        let serviceTypesService = ServiceTypesService(network: network)
+        let serviceTypeService = CachedService(
+            service: ServiceTypeService.create(using: network),
+            cache: InMemoryCache()
+        ).fetch
+        let serviceTypeSetService = ServiceTypeSetService(mapping: serviceTypeService).fetch
         
         let service = FeedService(
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
             feedPlanService: feedPlanService.fetchFeedPlans,
-            serviceTypesService: serviceTypesService.fetchServiceTypes,
+            serviceTypesService: serviceTypeSetService,
             teamsService: teamSetService
         )
         
