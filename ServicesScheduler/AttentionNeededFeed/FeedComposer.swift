@@ -12,14 +12,23 @@ import PlanningCenterSwift
 class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
         let feedPlanService = FeedPlanService(network: network)
-        let teamsService = TeamsService(network: network)
+        
+        let teamService = CachedService(
+            service: TeamsService.create(using: network),
+            cache: InMemoryCache()
+        ).fetch
+        let teamsService = TeamsService(teamService: teamService).fetchTeams
+        
         let serviceTypesService = ServiceTypesService(network: network)
+        
         let service = FeedService(
             network: network,
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
             feedPlanService: feedPlanService.fetchFeedPlans,
             serviceTypesService: serviceTypesService.fetchServiceTypes,
-            teamsService: teamsService.fetchTeams)
+            teamsService: teamsService
+        )
+        
         let controller = ConcreteFeedController(feedService: service.fetchPlans)
         return controller
     }

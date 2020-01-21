@@ -10,7 +10,7 @@ import Foundation
 
 /// Acts as the primary and uses the secondar in the case of failure of the primary.
 class PrimaryOrSecondaryService<Input, Output> {
-    typealias Service = (Input, Completion<Output>)->()
+    typealias Service = (Input, @escaping Completion<Output>)->()
     
     let fetch: Service
     

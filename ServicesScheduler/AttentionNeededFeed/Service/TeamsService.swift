@@ -17,7 +17,7 @@ class TeamsService: SetMapService<MTeam.ID, MTeam> {
         super.init(mapping: teamService)
     }
     
-    static func teamService(using network: PCODownloadService)
+    static func create(using network: PCODownloadService)
         -> (MTeam.ID, @escaping Completion<MTeam>) -> ()
     {
         return { teamID, completion in
@@ -35,6 +35,6 @@ class TeamsService: SetMapService<MTeam.ID, MTeam> {
 }
 extension TeamsService {
     convenience init(network: PCODownloadService) {
-        self.init(teamService: Self.teamService(using: network))
+        self.init(teamService: Self.create(using: network))
     }
 }
