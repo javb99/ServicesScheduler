@@ -30,27 +30,6 @@ extension PCODownloadService {
             .mapError { $0 as Error }
     }
     
-    func fetchGroup<Endpt: Endpoint, R: ResourceProtocol>(
-        _ endpoints: [Endpt],
-        completion: @escaping Completion<[Resource<R>]>
-    ) where Endpt.RequestBody == JSONAPISpec.Empty, Endpt.ResponseBody == ResourceDocument<R> {
-        var results = Protected<[Resource<R>]>([])
-        let group = DispatchGroup()
-        endpoints.forEach { endpoint in
-            group.enter()
-            self.basicFetch(endpoint) { result in
-                if let team = result.value {
-                    results.mutate { partialResults in
-                        partialResults.append(team)
-                    }
-                }
-                group.leave()
-            }
-        }
-        let _ = group.wait(timeout: .now() + 5)
-        completion(.success(results.value))
-    }
-    
     func basicFetch<Endpt: Endpoint, R: ResourceProtocol>(
         _ endpoint: Endpt,
         completion: @escaping Completion<[Resource<R>]>
@@ -62,27 +41,6 @@ extension PCODownloadService {
         result
             .map{ (response, endpoint, body) in body.data! }
             .mapError { $0 as Error }
-    }
-    
-    func fetchGroup<Endpt: Endpoint, R: ResourceProtocol>(
-        _ endpoints: [Endpt],
-        completion: @escaping Completion<[Resource<R>]>
-    ) where Endpt.RequestBody == JSONAPISpec.Empty, Endpt.ResponseBody == ResourceCollectionDocument<R> {
-        var results = Protected<[Resource<R>]>([])
-        let group = DispatchGroup()
-        endpoints.forEach { endpoint in
-            group.enter()
-            self.basicFetch(endpoint) { result in
-                if let success = result.value {
-                    results.mutate { partialResults in
-                        partialResults.append(contentsOf: success)
-                    }
-                }
-                group.leave()
-            }
-        }
-        let _ = group.wait(timeout: .now() + 5)
-        completion(.success(results.value))
     }
 }
 
