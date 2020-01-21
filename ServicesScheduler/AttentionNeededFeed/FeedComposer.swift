@@ -11,7 +11,8 @@ import PlanningCenterSwift
 
 class FeedComposer {
     static func createFeedController(network: PCODownloadService) -> some FeedController {
-        let feedPlanService = FeedPlanService(network: network)
+        let feedPlanSetService = MultiServiceTypeFeedPlanService.create(using:
+            FeedPlanService(network: network).fetchFeedPlans(for:completion:))
         
         let teamService = CachedService(
             service: TeamService.create(using: network),
@@ -27,7 +28,7 @@ class FeedComposer {
         
         let service = FeedService(
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
-            feedPlanService: feedPlanService.fetchFeedPlans,
+            feedPlanService: feedPlanSetService,
             serviceTypesService: serviceTypeSetService,
             teamsService: teamSetService
         )

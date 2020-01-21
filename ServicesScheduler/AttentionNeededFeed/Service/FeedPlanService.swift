@@ -9,33 +9,37 @@
 import Foundation
 import PlanningCenterSwift
 
+enum MultiServiceTypeFeedPlanService {
+    typealias Function = (DateRange, Set<MServiceType>, @escaping Completion<[FeedPlan]>) -> ()
+    
+    public typealias FeedPlanService = (FeedPlanQuery, @escaping Completion<[FeedPlan]>) -> ()
+    
+    static func create(using implementationService: @escaping FeedPlanService) -> Function {
+        return { dateRange, serviceTypes, completion in
+            let groupedService = ArrayMapService(mapping: implementationService)
+            let queries = serviceTypes.map { serviceType in
+                FeedPlanQuery(dateRange: dateRange, serviceType: serviceType)
+            }
+            groupedService.fetch(queries) { result in
+                completion(result.map { nestedPlans in
+                    nestedPlans.flattened().sorted { a, b in a.sortDate < b.sortDate }
+                })
+            }
+        }
+    }
+}
+
+struct FeedPlanQuery: Hashable {
+    var dateRange: DateRange
+    var serviceType: MServiceType
+}
+
 class FeedPlanService {
     
     let network: PCODownloadService
     
     init(network: PCODownloadService) {
         self.network = network
-    }
-    
-    func fetchFeedPlans(
-        in dateRange: DateRange,
-        forServiceTypes serviceTypes: Set<MServiceType>,
-        completion: @escaping Completion<[FeedPlan]>
-    ) {
-        let groupedService = ArrayMapService(mapping: self.fetchFeedPlans)
-        let queries = serviceTypes.map { serviceType in
-            FeedPlanQuery(dateRange: dateRange, serviceType: serviceType)
-        }
-        groupedService.fetch(queries) { result in
-            completion(result.map { nestedPlans in
-                nestedPlans.flattened().sorted { a, b in a.sortDate < b.sortDate }
-            })
-        }
-    }
-    
-    struct FeedPlanQuery: Hashable {
-        var dateRange: DateRange
-        var serviceType: MServiceType
     }
     
     func fetchFeedPlans(for query: FeedPlanQuery,
