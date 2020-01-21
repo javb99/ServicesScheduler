@@ -26,7 +26,8 @@ class FeedPlanService {
         var results = Protected(Array<FeedPlan>())
         serviceTypes.forEach { serviceType in
             group.enter()
-            self.fetchFeedPlans(in: dateRange, for: serviceType) { result in
+            let query = FeedPlanQuery(dateRange: dateRange, serviceType: serviceType)
+            self.fetchFeedPlans(for: query) { result in
                 if let plansForServiceType = result.value {
                     results.mutate { $0.append(contentsOf: plansForServiceType) }
                 }
@@ -41,19 +42,22 @@ class FeedPlanService {
         completion(.success(results.value))
     }
     
-    func fetchFeedPlans(
-        in dateRange: DateRange,
-        for serviceType: MServiceType,
+    struct FeedPlanQuery: Hashable {
+        var dateRange: DateRange
+        var serviceType: MServiceType
+    }
+    
+    func fetchFeedPlans(for query: FeedPlanQuery,
         completion: @escaping Completion<[FeedPlan]>
     ) {
-        let plansInRange = Endpoints.services.serviceTypes[id: serviceType.identifer].plans.filter(dateRange)
+        let plansInRange = Endpoints.services.serviceTypes[id: query.serviceType.identifer].plans.filter(query.dateRange)
         network.basicFetch(plansInRange) { result in
             let subGroup = DispatchGroup()
             var results = Protected([FeedPlan]())
             for plan in (result.value ?? []).prefix(4) {
                 // Also wait for each plan to be populated.
                 subGroup.enter()
-                self.populatePlan(plan, in: serviceType) { feedPlanResult in
+                self.populatePlan(plan, in: query.serviceType) { feedPlanResult in
                     if let feedPlan = feedPlanResult.value {
                         results.mutate { $0.append(feedPlan) }
                     }
@@ -107,6 +111,36 @@ class FeedPlanService {
         
         group.notify(queue: .global()) {
             completion(.success(results.value))
+        }
+    }
+}
+
+extension Endpoints.ServiceType.PlanFilter: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .after(date):
+            hasher.combine(date)
+        case let .before(date):
+            hasher.combine(date)
+        case .future:
+            hasher.combine(0)
+        case .past:
+            hasher.combine(1)
+        case .noDates:
+            hasher.combine(2)
+        }
+    }
+    
+    public static func ==(_ lhs: Self, _ rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case let (.after(left), .after(right)),
+             let (.before(left), .before(right)):
+            return left == right
+        case (.noDates, .noDates), (.past, .past), (.future, .future):
+            return true
+        default:
+            return false
         }
     }
 }
