@@ -25,23 +25,12 @@ class FeedPlanService {
         let group = DispatchGroup()
         var results = Protected(Array<FeedPlan>())
         serviceTypes.forEach { serviceType in
-            let plansInRange = Endpoints.services.serviceTypes[id: serviceType.identifer].plans.filter(dateRange)
             group.enter()
-            network.basicFetch(plansInRange) { result in
-                let subGroup = DispatchGroup()
-                for plan in (result.value ?? []).prefix(4) {
-                    // Also wait for each plan to be populated.
-                    subGroup.enter()
-                    self.populatePlan(plan, in: serviceType) { feedPlanResult in
-                        if let feedPlan = feedPlanResult.value {
-                            results.mutate { $0.append(feedPlan) }
-                        }
-                        subGroup.leave()
-                    }
+            self.fetchFeedPlans(in: dateRange, for: serviceType) { result in
+                if let plansForServiceType = result.value {
+                    results.mutate { $0.append(contentsOf: plansForServiceType) }
                 }
-                subGroup.notify(queue: .global()) {
-                    group.leave()
-                }
+                group.leave()
             }
         }
         
@@ -50,6 +39,31 @@ class FeedPlanService {
             $0.sort{ a, b in a.sortDate < b.sortDate }
         }
         completion(.success(results.value))
+    }
+    
+    func fetchFeedPlans(
+        in dateRange: DateRange,
+        for serviceType: MServiceType,
+        completion: @escaping Completion<[FeedPlan]>
+    ) {
+        let plansInRange = Endpoints.services.serviceTypes[id: serviceType.identifer].plans.filter(dateRange)
+        network.basicFetch(plansInRange) { result in
+            let subGroup = DispatchGroup()
+            var results = Protected([FeedPlan]())
+            for plan in (result.value ?? []).prefix(4) {
+                // Also wait for each plan to be populated.
+                subGroup.enter()
+                self.populatePlan(plan, in: serviceType) { feedPlanResult in
+                    if let feedPlan = feedPlanResult.value {
+                        results.mutate { $0.append(feedPlan) }
+                    }
+                    subGroup.leave()
+                }
+            }
+            subGroup.notify(queue: .global()) {
+                completion(.success(results.value))
+            }
+        }
     }
     
     func populatePlan(
