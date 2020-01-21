@@ -79,7 +79,7 @@
 		5CF855D323D652D600C27EDC /* FeedPlanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D223D652D600C27EDC /* FeedPlanService.swift */; };
 		5CF855D523D6564C00C27EDC /* TeamSetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D423D6564C00C27EDC /* TeamSetService.swift */; };
 		5CF855D723D657FC00C27EDC /* ServiceTypeSetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D623D657FC00C27EDC /* ServiceTypeSetService.swift */; };
-		5CF855D923D6654800C27EDC /* SetMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D823D6654800C27EDC /* SetMapService.swift */; };
+		5CF855D923D6654800C27EDC /* MapReduceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855D823D6654800C27EDC /* MapReduceService.swift */; };
 		5CF855DB23D6697100C27EDC /* PrimaryOrSecondaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */; };
 		5CF855DD23D66B2A00C27EDC /* CachedTeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF855DC23D66B2A00C27EDC /* CachedTeamService.swift */; };
 		5CF8784523332A5900B8A2DF /* PlanningCenterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CF8784423332A5900B8A2DF /* PlanningCenterSwift */; };
@@ -182,7 +182,7 @@
 		5CF855D223D652D600C27EDC /* FeedPlanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanService.swift; sourceTree = "<group>"; };
 		5CF855D423D6564C00C27EDC /* TeamSetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSetService.swift; sourceTree = "<group>"; };
 		5CF855D623D657FC00C27EDC /* ServiceTypeSetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeSetService.swift; sourceTree = "<group>"; };
-		5CF855D823D6654800C27EDC /* SetMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMapService.swift; sourceTree = "<group>"; };
+		5CF855D823D6654800C27EDC /* MapReduceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapReduceService.swift; sourceTree = "<group>"; };
 		5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryOrSecondaryService.swift; sourceTree = "<group>"; };
 		5CF855DC23D66B2A00C27EDC /* CachedTeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedTeamService.swift; sourceTree = "<group>"; };
 		5CF8784823336EF100B8A2DF /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 				5C7E430023D299210010FA92 /* FeedController.swift */,
 				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
 				5CF855D623D657FC00C27EDC /* ServiceTypeSetService.swift */,
-				5CF855D823D6654800C27EDC /* SetMapService.swift */,
+				5CF855D823D6654800C27EDC /* MapReduceService.swift */,
 				5CF855D423D6564C00C27EDC /* TeamSetService.swift */,
 				5CF855DA23D6697100C27EDC /* PrimaryOrSecondaryService.swift */,
 				5CF855D223D652D600C27EDC /* FeedPlanService.swift */,
@@ -677,7 +677,7 @@
 				5C6FF0CD23C68FA900369A91 /* NotificationNotSentView.swift in Sources */,
 				5C6C3BB323AAD7C6003DF918 /* WebLink.swift in Sources */,
 				5C9060F023D547EB00380458 /* FeedPlanPresentationAdapter.swift in Sources */,
-				5CF855D923D6654800C27EDC /* SetMapService.swift in Sources */,
+				5CF855D923D6654800C27EDC /* MapReduceService.swift in Sources */,
 				5C7E42FF23D298460010FA92 /* FeedService.swift in Sources */,
 				5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */,
 				5CAD90A623486BA000F02002 /* NeededPositionCircle.swift in Sources */,
