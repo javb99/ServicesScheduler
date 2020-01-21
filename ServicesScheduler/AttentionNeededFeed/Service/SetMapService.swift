@@ -57,13 +57,6 @@ class SetMapService<InputElement: Hashable, OutputElement: Hashable>: MapReduceS
             }
         )
     }
-    
-    func fetchMapped(
-        _ inputSet: Set<InputElement>,
-        completion: @escaping Completion<Set<OutputElement>>
-    ) {
-        super.fetch(inputSet, completion: completion)
-    }
 }
 
 class ArrayMapService<InputElement, OutputElement>: MapReduceService<Array<InputElement>, Array<OutputElement>> {
