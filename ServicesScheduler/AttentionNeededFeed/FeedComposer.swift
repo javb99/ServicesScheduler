@@ -14,10 +14,10 @@ class FeedComposer {
         let feedPlanService = FeedPlanService(network: network)
         
         let teamService = CachedService(
-            service: TeamsService.create(using: network),
+            service: TeamService.create(using: network),
             cache: InMemoryCache()
         ).fetch
-        let teamsService = TeamsService(teamService: teamService).fetchTeams
+        let teamSetService = TeamSetService(mapping: teamService).fetch
         
         let serviceTypesService = ServiceTypesService(network: network)
         
@@ -25,7 +25,7 @@ class FeedComposer {
             feedPlanAdapter: FeedPlanPresentationAdapter.makePresentable,
             feedPlanService: feedPlanService.fetchFeedPlans,
             serviceTypesService: serviceTypesService.fetchServiceTypes,
-            teamsService: teamsService
+            teamsService: teamSetService
         )
         
         let controller = ConcreteFeedController(feedService: service.fetchPlans)
