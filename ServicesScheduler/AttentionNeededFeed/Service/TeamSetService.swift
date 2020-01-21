@@ -10,6 +10,7 @@ import Foundation
 import PlanningCenterSwift
 
 enum TeamService {
+    
     typealias Function = (MTeam.ID, @escaping Completion<MTeam>) -> ()
     
     static func create(using network: PCODownloadService) -> TeamService.Function {
