@@ -9,7 +9,7 @@
 import Foundation
 import PlanningCenterSwift
 
-struct FeedPlan: Identifiable {
+struct FeedPlan: Identifiable, Codable {
     var id: MPlan.ID
     var sortDate: Date
     var date: String

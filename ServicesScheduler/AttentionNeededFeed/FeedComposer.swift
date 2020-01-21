@@ -14,20 +14,20 @@ class FeedComposer {
         let individualFeedPlanService = FeedPlanService(network: network).fetchFeedPlans(for:completion:)
         let cachedIndivFeedPlanService = CachedService(
             service: individualFeedPlanService,
-            cache: InMemoryCache()
+            cache: PersistentCache.loadOrCreate()
         ).fetch
         let feedPlanSetService = MultiServiceTypeFeedPlanService.create(using:
             cachedIndivFeedPlanService)
         
         let teamService = CachedService(
             service: TeamService.create(using: network),
-            cache: InMemoryCache()
+            cache: PersistentCache.loadOrCreate()
         ).fetch
         let teamSetService = TeamSetService(mapping: teamService).fetch
         
         let serviceTypeService = CachedService(
             service: ServiceTypeService.create(using: network),
-            cache: InMemoryCache()
+            cache: PersistentCache.loadOrCreate()
         ).fetch
         let serviceTypeSetService = ServiceTypeSetService(mapping: serviceTypeService).fetch
         

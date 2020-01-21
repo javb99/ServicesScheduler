@@ -29,7 +29,7 @@ enum MultiServiceTypeFeedPlanService {
     }
 }
 
-struct FeedPlanQuery: Hashable {
+struct FeedPlanQuery: Hashable, Codable {
     var dateRange: DateRange
     var serviceType: MServiceType
 }
@@ -144,5 +144,53 @@ extension Endpoints.ServiceType.PlanFilter: Hashable {
         default:
             return false
         }
+    }
+}
+
+extension Endpoints.ServiceType.PlanFilter: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case value
+        case date
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let value = try container.decode(String.self, forKey: .value)
+        let date = try container.decodeIfPresent(Date.self, forKey: .date)
+        switch (value, date) {
+        case ("future", _):
+            self = .future
+        case ("past", _):
+            self = .past
+        case ("noDates", _):
+            self = .noDates
+        case ("before", let .some(endDate)):
+            self = .before(endDate)
+        case ("after", let .some(startDate)):
+            self = .after(startDate)
+        default:
+            throw DecodingError.dataCorruptedError(forKey: .value, in: container, debugDescription: "Unexpected value or missing date")
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var value: String
+        switch self {
+        case .future:
+            value = "future"
+        case .past:
+            value = "past"
+        case .noDates:
+            value = "noDates"
+        case let .before(date):
+            value = "before"
+            try container.encode(date, forKey: .date)
+        case let .after(date):
+            value = "after"
+            try container.encode(date, forKey: .date)
+        }
+        try container.encode(value, forKey: .value)
     }
 }
