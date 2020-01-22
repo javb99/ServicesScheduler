@@ -31,8 +31,7 @@ class ConcreteFeedController: FeedController {
         loadInDateRange([.past], teams) { result in
             DispatchQueue.main.async {
                 if let newPlans = result.value {
-                    self.plans.append(contentsOf: newPlans)
-                    self.plans.sort { $0.sortDate < $1.sortDate }
+                    self.plans.insert(contentsOf: newPlans, at: 0)
                 }
                 self.isLoading = false
             }

@@ -56,7 +56,7 @@ enum FeedError: Error {
 
 class FeedService {
     
-    typealias FeedPlanAdapter = (FeedPlan, Set<MTeam>) -> PresentableFeedPlan
+    typealias FeedPlanAdapter = ([FeedPlan], Set<MTeam>) -> [PresentableFeedPlan]
     let feedPlanAdapter: FeedPlanAdapter
     
     typealias FeedPlanService = (DateRange, Set<MServiceType>, @escaping Completion<[FeedPlan]>) -> ()
@@ -147,14 +147,12 @@ class FeedService {
             return
         }
         
-        let presentablePlans = feedPlans.map { feedPlan in
-            modelToPresentationPlanAdapter(feedPlan, teams)
-        }
+        let presentablePlans = modelToPresentationPlanAdapter(feedPlans, teams)
         completion(.success(presentablePlans))
     }
     
-    func modelToPresentationPlanAdapter(_ feedPlan: FeedPlan, _ allFetchedTeams: Set<MTeam>) -> PresentableFeedPlan {
-        return self.feedPlanAdapter(feedPlan, allFetchedTeams)
+    func modelToPresentationPlanAdapter(_ feedPlans: [FeedPlan], _ allFetchedTeams: Set<MTeam>) -> [PresentableFeedPlan] {
+        return self.feedPlanAdapter(feedPlans, allFetchedTeams)
     }
     
     func fetchFeedPlans(

@@ -11,7 +11,13 @@ import PlanningCenterSwift
 
 class FeedPlanPresentationAdapter {
     
-    static func makePresentable(_ feedPlan: FeedPlan, using allFetchedTeams: Set<MTeam>) -> PresentableFeedPlan {
+    static func makePresentable(_ feedPlans: [FeedPlan], using allFetchedTeams: Set<MTeam>) -> [PresentableFeedPlan] {
+        return feedPlans.map { plan in
+            makePresentablePlan(plan, using: allFetchedTeams)
+        }.sorted(by: sortDateThenServiceTypeName)
+    }
+    
+    static private func makePresentablePlan(_ feedPlan: FeedPlan, using allFetchedTeams: Set<MTeam>) -> PresentableFeedPlan {
         let teams = allFetchedTeams.filter {
             $0.serviceType.data == feedPlan.serviceTypeID
         }
@@ -98,6 +104,15 @@ private func statusThenNameThenPersonId(_ personA: MPlanPerson, _ personB: MPlan
     } else {
         // Protects against different users with the same name.
         return personA.identifer.id < personB.identifer.id
+    }
+}
+
+/// A sort comparison function.
+private func sortDateThenServiceTypeName(_ planA: PresentableFeedPlan, _ planB: PresentableFeedPlan) -> Bool {
+    if planA.sortDate != planB.sortDate {
+        return planA.sortDate < planB.sortDate
+    } else {
+        return planA.serviceTypeName < planB.serviceTypeName
     }
 }
 
