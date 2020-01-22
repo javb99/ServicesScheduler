@@ -117,3 +117,9 @@ class InMemoryCache<Key: Hashable, Value>: SyncCache {
         return storage[key]
     }
 }
+
+extension SyncCache {
+    func wrapInAsync() -> InstantToAsyncCacheAdapter<Self> {
+        InstantToAsyncCacheAdapter(sync: self)
+    }
+}

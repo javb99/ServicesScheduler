@@ -16,10 +16,16 @@ class MyTeamsComposer {
         let teamLoader = NetworkTeamWithServiceTypeService(
             network: network
         ).load
+        let teamCache = TeamWithServiceTypeCache(
+            teamCache: PersistentCache.loadOrCreate(name: "TeamCache"),
+            serviceTypeCache: PersistentCache.loadOrCreate(name: "ServiceTypeCache")
+        )
+        let teamService = teamCache.recordResults(of: teamLoader)
+        
         let myTeamsLoader = NetworkMyTeamsService(
             network: network,
             meService: meLoader,
-            teamService: teamLoader
+            teamService: teamService
         )
         let teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
         return teamPresenter
