@@ -20,13 +20,11 @@ class RootComposer {
     internal init(browserContext: BrowserContext) {
         self.browserContext = browserContext
         
-        // Use OptionalAuthenticationProvider to avoid a circular dependency graph.
-        // URLSessionService needs a auth provider but the OAuth provider doesn't exist until the service is instantiated.
-        let authenticationWrapper = OptionalAuthenticationProvider()
+        let tokenStore = OAuthTokenStore()
         self.service = URLSessionService(
             requestBuilder: JSONRequestBuilder(
                 baseURL: URL(string: "https://api.planningcenteronline.com")!,
-                authenticationProvider: authenticationWrapper,
+                authenticationProvider: tokenStore,
                 encoder: JSONEncoder.pco
             ),
             responseHandler: JSONResponseHandler(
@@ -38,7 +36,7 @@ class RootComposer {
             network: service,
             appConfig: .servicesScheduler
         )
-        let tokenStore = OAuthTokenStore()
+        
         self.logInStateMachine = LogInStateMachine(
             tokenStore: tokenStore,
             browserAuthorizer: BrowserAuthorizer(
@@ -47,7 +45,6 @@ class RootComposer {
             ),
             fetchAuthToken: authTokenService.fetchToken(with:)
         )
-        authenticationWrapper.wrapped = tokenStore
         logInStateMachine.attemptToLoadTokenFromDisk()
     }
     

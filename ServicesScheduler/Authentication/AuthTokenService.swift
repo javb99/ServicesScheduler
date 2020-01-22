@@ -26,13 +26,3 @@ class AuthTokenService {
         return network.future(for: endpoint).map { $0.2 }.eraseToAnyPublisher()
     }
 }
-
-/// Allows setting the provider after intialization.
-class OptionalAuthenticationProvider: AuthenticationProvider {
-    
-    weak var wrapped: (AuthenticationProvider & AnyObject)?
-    
-    var authenticationHeader: (key: String, value: String)? {
-        wrapped?.authenticationHeader
-    }
-}
