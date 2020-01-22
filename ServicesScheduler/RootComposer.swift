@@ -55,10 +55,12 @@ class RootComposer {
     let authTokenService: AuthTokenService
     let logInStateMachine: LogInStateMachine
     
-    lazy var feedPresenter = FeedComposer.createFeedController(network: service) as! ConcreteFeedController//AttentionNeededListPresenter(loader: feedLoader)
+    let coreServices = CoreServicesComposer()
+    
+    lazy var feedPresenter = FeedComposer.createFeedController(network: service, teamCache: coreServices.teamCache, serviceTypeCache: coreServices.serviceTypeCache) as! ConcreteFeedController//AttentionNeededListPresenter(loader: feedLoader)
     lazy var rootFolderLoader = FolderLoader(network: service)
     
-    lazy var teamPresenter = MyTeamsComposer.createPresenter(network: service)
+    lazy var teamPresenter = MyTeamsComposer.createPresenter(network: service, teamObserver: coreServices.observeTeamWithServiceTypeService)
     
     var navigationState = NavigationState()
     

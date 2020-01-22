@@ -11,16 +11,14 @@ import PlanningCenterSwift
 
 class MyTeamsComposer {
     
-    static func createPresenter(network: PCODownloadService) -> MyTeamsScreenPresenter {
+    typealias ObserveTeamService = (@escaping TeamWithServiceTypeService) -> TeamWithServiceTypeService
+    
+    static func createPresenter(network: PCODownloadService, teamObserver: ObserveTeamService) -> MyTeamsScreenPresenter {
         let meLoader = NetworkMeService(network: network)
         let teamLoader = NetworkTeamWithServiceTypeService(
             network: network
         ).load
-        let teamCache = TeamWithServiceTypeCache(
-            teamCache: PersistentCache.loadOrCreate(name: "TeamCache"),
-            serviceTypeCache: PersistentCache.loadOrCreate(name: "ServiceTypeCache")
-        )
-        let teamService = teamCache.recordResults(of: teamLoader)
+        let teamService = teamObserver(teamLoader)
         
         let myTeamsLoader = NetworkMyTeamsService(
             network: network,
