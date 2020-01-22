@@ -59,7 +59,7 @@ class RootComposer {
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var meLoader = NetworkMeService(network: service)
-    lazy var teamLoader = NetworkTeamService(network: service)
+    lazy var teamLoader = NetworkTeamWithServiceTypeService(network: service).load
     lazy var myTeamsLoader = NetworkMyTeamsService(network: service, meService: meLoader, teamService: teamLoader)
     lazy var teamPresenter = MyTeamsScreenPresenter(myTeamsService: myTeamsLoader)
     

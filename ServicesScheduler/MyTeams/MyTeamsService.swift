@@ -15,11 +15,9 @@ protocol MyTeamsService {
     func load(completion: @escaping (Result<[TeamWithServiceType], Error>)->())
 }
 
-protocol TeamServiceProtocol {
-    func load(team teamID: ResourceIdentifier<Models.Team>, completion: @escaping (Result<TeamWithServiceType, Error>)->())
-}
+typealias TeamWithServiceTypeService = (MTeam.ID, @escaping Completion<TeamWithServiceType>)->()
 
-final class NetworkTeamService: TeamServiceProtocol {
+final class NetworkTeamWithServiceTypeService {
     let network: URLSessionService
     
     init(network: URLSessionService) {
@@ -59,9 +57,9 @@ final class NetworkMyTeamsService: MyTeamsService {
     
     let network: URLSessionService
     let meService: MeService
-    let teamService: TeamServiceProtocol
+    let teamService: TeamWithServiceTypeService
     
-    init(network: URLSessionService, meService: MeService, teamService: TeamServiceProtocol) {
+    init(network: URLSessionService, meService: MeService, teamService: @escaping TeamWithServiceTypeService) {
         self.network = network
         self.meService = meService
         self.teamService = teamService
@@ -118,7 +116,7 @@ final class NetworkMyTeamsService: MyTeamsService {
             case let .success(_, _, document):
                 let teamPosition = document.data!
                 let teamID = teamPosition.team.data!
-                self.teamService.load(team: teamID, completion: completion)
+                self.teamService(teamID, completion)
             case let .failure(error):
                 completion(.failure(error))
             }
