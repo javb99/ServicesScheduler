@@ -17,9 +17,9 @@ protocol MeService {
 
 class NetworkMeService: MeService {
     
-    let network: URLSessionService
+    let network: PCODownloadService
     
-    init(network: URLSessionService) {
+    init(network: PCODownloadService) {
         self.network = network
     }
     

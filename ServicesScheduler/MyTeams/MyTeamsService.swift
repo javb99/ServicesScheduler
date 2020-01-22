@@ -18,9 +18,9 @@ protocol MyTeamsService {
 typealias TeamWithServiceTypeService = (MTeam.ID, @escaping Completion<TeamWithServiceType>)->()
 
 final class NetworkTeamWithServiceTypeService {
-    let network: URLSessionService
+    let network: PCODownloadService
     
-    init(network: URLSessionService) {
+    init(network: PCODownloadService) {
         self.network = network
     }
     
@@ -55,11 +55,11 @@ public struct TeamWithServiceType {
 
 final class NetworkMyTeamsService: MyTeamsService {
     
-    let network: URLSessionService
+    let network: PCODownloadService
     let meService: MeService
     let teamService: TeamWithServiceTypeService
     
-    init(network: URLSessionService, meService: MeService, teamService: @escaping TeamWithServiceTypeService) {
+    init(network: PCODownloadService, meService: MeService, teamService: @escaping TeamWithServiceTypeService) {
         self.network = network
         self.meService = meService
         self.teamService = teamService
