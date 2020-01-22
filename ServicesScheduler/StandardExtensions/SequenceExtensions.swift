@@ -72,6 +72,18 @@ extension Sequence {
 }
 
 extension Sequence {
+    func sorted<T: Comparable>(by property: KeyPath<Element, T>, ascending: Bool = true) -> [Element] {
+        sorted(by: {
+            if ascending {
+                return $0[keyPath: property] < $1[keyPath: property]
+            } else {
+                return $0[keyPath: property] > $1[keyPath: property]
+            }
+        })
+    }
+}
+
+extension Sequence {
     func sortedLexographically(on keyPath: KeyPath<Element, String>) -> [Element] {
         return sorted(by: {$0[keyPath: keyPath] < $1[keyPath: keyPath]})
     }

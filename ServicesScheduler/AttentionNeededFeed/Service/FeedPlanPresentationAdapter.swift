@@ -21,7 +21,9 @@ class FeedPlanPresentationAdapter {
         let teamMembersByTeam = feedPlan.teamMembers
             .group(by: \.team.data)
             .mapValues { $0.createPresentableList() }
-        let presentableTeams = teams.compactMap { team -> PresentableFeedTeam? in
+        let presentableTeams = teams
+            .sorted { $0.sequenceIndex ?? $0.identifer.hashValue < $1.sequenceIndex ?? $1.identifer.hashValue }
+            .compactMap { team -> PresentableFeedTeam? in
             guard let name = team.name else { return nil }
             let neededPositions = neededPositionsByTeam[team.identifer] ?? []
             let teamMembers = teamMembersByTeam[team.identifer] ?? []
@@ -68,6 +70,7 @@ extension Collection where Element == MNeededPosition {
     func createPresentableList() -> [PresentableNeededPosition] {
         self
         .uniq(by: \.identifer)
+        .sorted(by: \.positionName)
         .compactMap { (mPosition: MNeededPosition) -> PresentableNeededPosition? in
             return PresentableNeededPosition(
                 id: mPosition.identifer.id,
