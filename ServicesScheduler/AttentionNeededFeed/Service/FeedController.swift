@@ -40,7 +40,6 @@ class ConcreteFeedController: FeedController {
     }
     
     func reset(for teams: Set<MTeam.ID>) {
-        plans.removeAll()
         self.teams = teams
         isLoading = true
         loadInDateRange([.future], teams) { result in

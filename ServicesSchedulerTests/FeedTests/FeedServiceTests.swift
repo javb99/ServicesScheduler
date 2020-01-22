@@ -14,21 +14,21 @@ import JSONAPISpec
 
 class FeedServiceTests: XCTestCase {
 
-    func testEmptyTeamsReturnsNoTeams() {
-        let service = FeedService(network: MockService())
-        var received: Result<[PresentableFeedPlan], UserFacingError>?
-        service.fetchPlans(in: .future, forTeams: []) { result in
-            received = result
-        }
-        XCTAssertEqual(try? received?.get().count, 0)
-    }
-    
-    func testSingleSingleTeamReturnsPlansForTeam() {
-        let service = FeedService(network: MockService())
-        var received: Result<[PresentableFeedPlan], UserFacingError>?
-        service.fetchPlans(in: .future, forTeams: ["1"]) { result in
-            received = result
-        }
-        XCTAssertEqual(try? received?.get().count, 1)
-    }
+//    func testEmptyTeamsReturnsNoTeams() {
+//        let service = FeedService(network: MockService())
+//        var received: Result<[PresentableFeedPlan], UserFacingError>?
+//        service.fetchPlans(in: .future, forTeams: []) { result in
+//            received = result
+//        }
+//        XCTAssertEqual(try? received?.get().count, 0)
+//    }
+//    
+//    func testSingleSingleTeamReturnsPlansForTeam() {
+//        let service = FeedService(network: MockService())
+//        var received: Result<[PresentableFeedPlan], UserFacingError>?
+//        service.fetchPlans(in: .future, forTeams: ["1"]) { result in
+//            received = result
+//        }
+//        XCTAssertEqual(try? received?.get().count, 1)
+//    }
 }
