@@ -287,7 +287,6 @@
 				5C320BB82379E563003CDEE8 /* MeService.swift */,
 				5C320BBA2379E8CC003CDEE8 /* MyTeamsService.swift */,
 				5C7FEC9F23D7F1B2002E864C /* MyTeamsComposer.swift */,
-				5C7FECA123D7F2FA002E864C /* TeamWithServiceTypeCache.swift */,
 			);
 			path = MyTeams;
 			sourceTree = "<group>";
@@ -306,6 +305,14 @@
 				5C7E42FB23D2797F0010FA92 /* FeedServiceTests.swift */,
 			);
 			path = FeedTests;
+			sourceTree = "<group>";
+		};
+		5C7FECA323D7FC54002E864C /* CoreServices */ = {
+			isa = PBXGroup;
+			children = (
+				5C7FECA123D7F2FA002E864C /* TeamWithServiceTypeCache.swift */,
+			);
+			path = CoreServices;
 			sourceTree = "<group>";
 		};
 		5C9060E523D3FE5C00380458 /* Models */ = {
@@ -382,6 +389,7 @@
 				5C11D98D2351AAB3008BCAE4 /* ReusableSwiftUI */,
 				5C11D98C2351AA75008BCAE4 /* StandardExtensions */,
 				5C11D98E2351AB34008BCAE4 /* FolderBrowser */,
+				5C7FECA323D7FC54002E864C /* CoreServices */,
 				5C320BB72379E1FE003CDEE8 /* MyTeams */,
 				5CCFF9B223A9E10200596110 /* Profile */,
 				5C11D9902351AC4B008BCAE4 /* AttentionNeededFeed */,
