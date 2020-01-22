@@ -54,7 +54,7 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
             guard let thisTeams = teamsByServiceType[serviceType.identifer]?
                 .pluck(\.team)
                 .assertMap(MTeam.presentableTeam)
-                .sortedLexographically(on: \.name)
+                .sorted(by: \.sequenceIndex)
             else { return nil }
             
             if thisTeams.isEmpty { return nil }
