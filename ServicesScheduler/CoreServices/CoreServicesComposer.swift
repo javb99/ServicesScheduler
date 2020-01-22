@@ -10,6 +10,13 @@ import Foundation
 import PlanningCenterSwift
 
 class CoreServicesComposer {
+    
+    let network: PCODownloadService
+    
+    init(network: PCODownloadService) {
+        self.network = network
+    }
+    
     /// MARK: Caching
     lazy var teamCache = PersistentCache<MTeam.ID, MTeam>.loadOrCreate(name: "Team")
     lazy var serviceTypeCache = PersistentCache<MServiceType.ID, MServiceType>.loadOrCreate(name: "ServiceType")
@@ -19,4 +26,16 @@ class CoreServicesComposer {
         serviceTypeCache: self.serviceTypeCache
     )
     var observeTeamWithServiceTypeService: (@escaping TeamWithServiceTypeService)->TeamWithServiceTypeService { teamWithServiceTypeCache.recordResults(of:) }
+    
+    /// MARK: Networking
+    
+    lazy var teamService: TeamService.Function = CachedService(
+        service: TeamService.create(using: network),
+        cache: teamCache
+    ).fetch
+    
+    lazy var serviceTypeService: ServiceTypeService.Function = CachedService(
+        service: ServiceTypeService.create(using: network),
+        cache: serviceTypeCache
+    ).fetch
 }

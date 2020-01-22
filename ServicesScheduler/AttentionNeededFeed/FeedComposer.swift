@@ -10,13 +10,12 @@ import Foundation
 import PlanningCenterSwift
 
 class FeedComposer {
-    static func createFeedController<TeamCache, ServiceTypeCache>(network: PCODownloadService, teamCache: TeamCache, serviceTypeCache: ServiceTypeCache) -> some FeedController where
-        TeamCache: AsyncCache,
-        TeamCache.Value == MTeam,
-        TeamCache.Key == MTeam.ID,
-        ServiceTypeCache: AsyncCache,
-        ServiceTypeCache.Value == MServiceType,
-        ServiceTypeCache.Key == MServiceType.ID {
+    
+    static func createFeedController(
+        network: PCODownloadService,
+        teamService: @escaping TeamService.Function,
+        serviceTypeService: @escaping ServiceTypeService.Function
+    ) -> some FeedController {
         
         let individualFeedPlanService = FeedPlanService(network: network).fetchFeedPlans(for:completion:)
         let cachedIndivFeedPlanService = CachedService(
@@ -26,16 +25,8 @@ class FeedComposer {
         let feedPlanSetService = MultiServiceTypeFeedPlanService.create(using:
             cachedIndivFeedPlanService)
         
-        let teamService = CachedService(
-            service: TeamService.create(using: network),
-            cache: teamCache
-        ).fetch
         let teamSetService = TeamSetService(mapping: teamService).fetch
         
-        let serviceTypeService = CachedService(
-            service: ServiceTypeService.create(using: network),
-            cache: serviceTypeCache
-        ).fetch
         let serviceTypeSetService = ServiceTypeSetService(mapping: serviceTypeService).fetch
         
         let service = FeedService(
