@@ -32,10 +32,10 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
         
         myTeamsService.load() { result in
             DispatchQueue.main.async {
-                self.isLoadingMyTeams = false
-                
                 if let teams = try? result.get() {
                     self.processTeams(teams)
+                    self.isLoadingMyTeams = false
+                    self.selectAll()
                 }
             }
         }
