@@ -10,6 +10,7 @@
 		5C044DB523DC217D00CECC39 /* FeedBreakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DB423DC217D00CECC39 /* FeedBreakdown.swift */; };
 		5C044DB723DC21BE00CECC39 /* FeedBreakdownCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DB623DC21BE00CECC39 /* FeedBreakdownCalculator.swift */; };
 		5C044DB923DC2FDA00CECC39 /* FeedPlanSectionsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DB823DC2FDA00CECC39 /* FeedPlanSectionsContent.swift */; };
+		5C044DBB23DC33D900CECC39 /* FeedReloadControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DBA23DC33D900CECC39 /* FeedReloadControls.swift */; };
 		5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */; };
 		5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */; };
 		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
@@ -115,6 +116,7 @@
 		5C044DB423DC217D00CECC39 /* FeedBreakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBreakdown.swift; sourceTree = "<group>"; };
 		5C044DB623DC21BE00CECC39 /* FeedBreakdownCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBreakdownCalculator.swift; sourceTree = "<group>"; };
 		5C044DB823DC2FDA00CECC39 /* FeedPlanSectionsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanSectionsContent.swift; sourceTree = "<group>"; };
+		5C044DBA23DC33D900CECC39 /* FeedReloadControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReloadControls.swift; sourceTree = "<group>"; };
 		5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVisibleView.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			children = (
 				5CAD90A12348650200F02002 /* StatusCircle.swift */,
 				5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */,
+				5C044DBA23DC33D900CECC39 /* FeedReloadControls.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
 				5C7FED2C23DA325E002E864C /* PlanBreakdownView.swift */,
@@ -732,6 +735,7 @@
 				5CF855DF23D6C74F00C27EDC /* PersistentCache.swift in Sources */,
 				5CCFF9A823A8A91600596110 /* KeychainPasswordItem.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
+				5C044DBB23DC33D900CECC39 /* FeedReloadControls.swift in Sources */,
 				5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

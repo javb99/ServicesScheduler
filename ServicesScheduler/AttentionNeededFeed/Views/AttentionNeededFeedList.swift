@@ -28,13 +28,15 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
     var selectedTeams: Set<String>
     
     var body: some View {
-        AttentionNeededFeedList(
-            plans: controller.plans,
-            isLoading: controller.isLoading,
-            canLoadMorePlans: controller.canLoadMorePlans,
-            loadMorePlans: controller.loadMorePlans,
-            breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
-        ).onAppear { self.controller.reset(for: self.selectedTeams) }
+        List {
+            AttentionNeededFeedList(
+                plans: controller.plans,
+                isLoading: controller.isLoading,
+                canLoadMorePlans: controller.canLoadMorePlans,
+                loadMorePlans: controller.loadMorePlans,
+                breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
+            )
+        }.onAppear { self.controller.reset(for: self.selectedTeams) }
     }
 }
 
@@ -55,13 +57,7 @@ struct AttentionNeededFeedList: View {
             
             FeedPlanSectionsContent(plans: plans)
             
-            if isLoading {
-                Text("Loading...")
-            } else if canLoadMorePlans {
-                Button(action: loadMorePlans) {
-                    Text("Load more")
-                }
-            }
+            FeedReloadControls(isLoading: isLoading, canLoadMorePlans: canLoadMorePlans, loadMorePlans: loadMorePlans)
         }
     }
 }
