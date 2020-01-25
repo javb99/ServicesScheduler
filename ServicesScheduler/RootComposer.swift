@@ -10,7 +10,7 @@ import PlanningCenterSwift
 import SwiftUI
 
 class NavigationState: ObservableObject {
-    @Published var currentTab: HomeViewTab = .browse
+    @Published var currentTab: HomeViewTab = .myTeams
 }
 
 class RootComposer {
