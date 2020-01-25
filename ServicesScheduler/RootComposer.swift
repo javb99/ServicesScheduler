@@ -94,6 +94,7 @@ class RootComposer {
         NavigationView {
             FeedListContainer(
                 controller: feedPresenter,
+                feedBreakdownProvider: ArrayFeedBreakdownCalculator(),
                 selectedTeams: self.teamPresenter.selectedTeams
             ).navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)

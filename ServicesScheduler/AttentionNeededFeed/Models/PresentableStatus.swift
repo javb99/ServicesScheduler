@@ -9,7 +9,7 @@
 import SwiftUI
 import PlanningCenterSwift
 
-struct PresentableStatus {
+struct PresentableStatus: Equatable {
     var iconName: String
     var color: Color
 }

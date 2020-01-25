@@ -9,11 +9,7 @@
 import SwiftUI
 
 struct PlanBreakdownView: View {
-    var confirmed: Int
-    var unconfirmed: Int
-    var declined: Int
-    var needed: Int
-    var unsent: Int
+    var breakdown: FeedBreakdown
     
     var body: some View {
         VStack {
@@ -21,27 +17,27 @@ struct PlanBreakdownView: View {
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .confirmed)
                         .frame(width: 50)
-                    ThreeDigitLabel(number: confirmed)
+                    ThreeDigitLabel(number: breakdown.confirmed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .unconfirmed)
                     .frame(width: 50)
-                    ThreeDigitLabel(number: unconfirmed)
+                    ThreeDigitLabel(number: breakdown.unconfirmed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .declined)
                         .frame(width: 50)
-                    ThreeDigitLabel(number: declined)
+                    ThreeDigitLabel(number: breakdown.declined)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "plus.circle"), status: .unconfirmed)
                         .frame(width: 50)
-                    ThreeDigitLabel(number: needed)
+                    ThreeDigitLabel(number: breakdown.needed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "envelope.circle"), status: .unconfirmed)
                         .frame(width: 50)
-                    ThreeDigitLabel(number: unsent)
+                    ThreeDigitLabel(number: breakdown.unsent)
                 }
             }.font(.title)
         }
@@ -106,7 +102,7 @@ struct LabeledCountCircle: View {
 
 struct PlanBreakdownView_Previews: PreviewProvider {
     static var previews: some View {
-        PlanBreakdownView(confirmed: 2, unconfirmed: 3, declined: 1, needed: 5, unsent: 2)
+        PlanBreakdownView(breakdown: FeedBreakdown(confirmed: 2, unconfirmed: 3, declined: 1, needed: 5, unsent: 2))
             .frame(height: 200)
             .previewLayout(.sizeThatFits)
     }

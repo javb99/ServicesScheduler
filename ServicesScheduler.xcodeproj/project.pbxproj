@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C044DB523DC217D00CECC39 /* FeedBreakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DB423DC217D00CECC39 /* FeedBreakdown.swift */; };
+		5C044DB723DC21BE00CECC39 /* FeedBreakdownCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DB623DC21BE00CECC39 /* FeedBreakdownCalculator.swift */; };
 		5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */; };
 		5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */; };
 		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
@@ -109,6 +111,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C044DB423DC217D00CECC39 /* FeedBreakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBreakdown.swift; sourceTree = "<group>"; };
+		5C044DB623DC21BE00CECC39 /* FeedBreakdownCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBreakdownCalculator.swift; sourceTree = "<group>"; };
 		5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVisibleView.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAD90A32348689400F02002 /* PresentableStatus.swift */,
+				5C044DB423DC217D00CECC39 /* FeedBreakdown.swift */,
 				5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */,
 				5C9060E623D3FE6B00380458 /* FeedPlan.swift */,
 			);
@@ -334,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				5C7E430023D299210010FA92 /* FeedController.swift */,
+				5C044DB623DC21BE00CECC39 /* FeedBreakdownCalculator.swift */,
 				5C7E42FD23D297D70010FA92 /* FeedService.swift */,
 				5CF855D623D657FC00C27EDC /* ServiceTypeSetService.swift */,
 				5CF855D823D6654800C27EDC /* MapReduceService.swift */,
@@ -657,12 +663,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CF855D523D6564C00C27EDC /* TeamSetService.swift in Sources */,
+				5C044DB523DC217D00CECC39 /* FeedBreakdown.swift in Sources */,
 				5C9060ED23D4006100380458 /* Result.swift in Sources */,
 				5C320BBB2379E8CC003CDEE8 /* MyTeamsService.swift in Sources */,
 				5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */,
 				5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */,
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5CCFF9B423A9E12400596110 /* ProfileView.swift in Sources */,
+				5C044DB723DC21BE00CECC39 /* FeedBreakdownCalculator.swift in Sources */,
 				5C521D8D2376669200AD2255 /* MyTeamsScreen.swift in Sources */,
 				5C2FF3FE239D9B6900D258CA /* SelectAllButton.swift in Sources */,
 				5CB7270023A72542006BD2F4 /* OAuthAppConfiguration.swift in Sources */,

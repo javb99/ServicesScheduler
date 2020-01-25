@@ -24,6 +24,7 @@ extension FeedController {
 
 struct FeedListContainer<Controller>: View where Controller: FeedController {
     @ObservedObject var controller: Controller
+    var feedBreakdownProvider: FeedBreakdownProvider
     var selectedTeams: Set<String>
     
     var body: some View {
@@ -31,7 +32,8 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
             plans: controller.plans,
             isLoading: controller.isLoading,
             canLoadMorePlans: controller.canLoadMorePlans,
-            loadMorePlans: controller.loadMorePlans
+            loadMorePlans: controller.loadMorePlans,
+            breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
         ).onAppear { self.controller.reset(for: self.selectedTeams) }
     }
 }
@@ -41,13 +43,14 @@ struct AttentionNeededFeedList: View {
     var isLoading: Bool = false
     var canLoadMorePlans: Bool
     var loadMorePlans: ()->()
+    var breakdown: FeedBreakdown
     
     var body: some View {
         List{
             VStack {
                 Text("Next 30 days")
                     .font(.title)
-                PlanBreakdownView(confirmed: 2, unconfirmed: 20, declined: 2, needed: 9, unsent: 10)
+                PlanBreakdownView(breakdown: breakdown)
             }.frame(maxWidth: .greatestFiniteMagnitude)
             
             ForEach(plans) { plan in
@@ -119,7 +122,7 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
         ForEach(Bool.allCases, id: \.self) { canLoadPlans in
             LightAndDark {
                 NavigationView {
-                    AttentionNeededFeedList(plans: .sample, canLoadMorePlans: canLoadPlans, loadMorePlans: {})
+                    AttentionNeededFeedList(plans: .sample, canLoadMorePlans: canLoadPlans, loadMorePlans: {}, breakdown: .sample)
                     .navigationBarTitle("Title")
                 }
             }
@@ -129,6 +132,12 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
 
 extension Bool: CaseIterable {
     public static var allCases = [true, false]
+}
+
+extension FeedBreakdown {
+    static var sample: Self {
+        Self(confirmed: 2, unconfirmed: 20, declined: 2, needed: 9, unsent: 100000)
+    }
 }
 
 extension Array where Element == PresentableFeedPlan {
