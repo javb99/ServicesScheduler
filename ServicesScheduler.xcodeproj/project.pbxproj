@@ -31,6 +31,7 @@
 		5C7FECA023D7F1B2002E864C /* MyTeamsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FEC9F23D7F1B2002E864C /* MyTeamsComposer.swift */; };
 		5C7FECA223D7F2FA002E864C /* TeamWithServiceTypeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FECA123D7F2FA002E864C /* TeamWithServiceTypeCache.swift */; };
 		5C7FECA523D7FC92002E864C /* CoreServicesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FECA423D7FC92002E864C /* CoreServicesComposer.swift */; };
+		5C7FED2D23DA325E002E864C /* PlanBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FED2C23DA325E002E864C /* PlanBreakdownView.swift */; };
 		5C9060E723D3FE6B00380458 /* FeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E623D3FE6B00380458 /* FeedPlan.swift */; };
 		5C9060E923D3FEEE00380458 /* PresentableFeedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */; };
 		5C9060EB23D4001100380458 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9060EA23D4001100380458 /* Protected.swift */; };
@@ -131,6 +132,7 @@
 		5C7FEC9F23D7F1B2002E864C /* MyTeamsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamsComposer.swift; sourceTree = "<group>"; };
 		5C7FECA123D7F2FA002E864C /* TeamWithServiceTypeCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamWithServiceTypeCache.swift; sourceTree = "<group>"; };
 		5C7FECA423D7FC92002E864C /* CoreServicesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreServicesComposer.swift; sourceTree = "<group>"; };
+		5C7FED2C23DA325E002E864C /* PlanBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanBreakdownView.swift; sourceTree = "<group>"; };
 		5C9060E623D3FE6B00380458 /* FeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlan.swift; sourceTree = "<group>"; };
 		5C9060E823D3FEEE00380458 /* PresentableFeedPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableFeedPlan.swift; sourceTree = "<group>"; };
 		5C9060EA23D4001100380458 /* Protected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				5C6FF0CC23C68FA900369A91 /* NotificationNotSentView.swift */,
 				5CAD90A923486F9500F02002 /* AttentionNeededFeedList.swift */,
 				5CAD90A523486BA000F02002 /* NeededPositionCircle.swift */,
+				5C7FED2C23DA325E002E864C /* PlanBreakdownView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				5CF855DD23D66B2A00C27EDC /* CachedTeamService.swift in Sources */,
 				5CAD90A22348650200F02002 /* StatusCircle.swift in Sources */,
 				5CCFF9A623A8A67800596110 /* Completion.swift in Sources */,
+				5C7FED2D23DA325E002E864C /* PlanBreakdownView.swift in Sources */,
 				5C7FECA023D7F1B2002E864C /* MyTeamsComposer.swift in Sources */,
 				5CAD909E2348533000F02002 /* SelectableList.swift in Sources */,
 				5C7E430123D299210010FA92 /* FeedController.swift in Sources */,

@@ -44,6 +44,12 @@ struct AttentionNeededFeedList: View {
     
     var body: some View {
         List{
+            VStack {
+                Text("Next 30 days")
+                    .font(.title)
+                PlanBreakdownView(confirmed: 2, unconfirmed: 20, declined: 2, needed: 9, unsent: 10)
+            }.frame(maxWidth: .greatestFiniteMagnitude)
+            
             ForEach(plans) { plan in
                 self.planSection(for: plan)
             }
