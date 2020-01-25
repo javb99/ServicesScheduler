@@ -54,7 +54,7 @@ class RootComposer {
     
     lazy var coreServices = CoreServicesComposer(network: service)
     
-    lazy var feedPresenter = FeedComposer.createFeedController(network: service, teamService: coreServices.teamService, serviceTypeService: coreServices.serviceTypeService) as! ConcreteFeedController//AttentionNeededListPresenter(loader: feedLoader)
+    lazy var feedPresenter = FeedComposer.createFeedController(network: service, teamService: coreServices.teamService, serviceTypeService: coreServices.serviceTypeService, feedPlanService: coreServices.feedPlanService)
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var teamPresenter = MyTeamsComposer.createPresenter(network: service, teamObserver: coreServices.observeTeamWithServiceTypeService)

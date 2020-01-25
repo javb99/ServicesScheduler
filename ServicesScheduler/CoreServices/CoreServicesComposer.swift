@@ -20,6 +20,8 @@ class CoreServicesComposer {
     /// MARK: Caching
     lazy var teamCache = PersistentCache<MTeam.ID, MTeam>.loadOrCreate(name: "Team")
     lazy var serviceTypeCache = PersistentCache<MServiceType.ID, MServiceType>.loadOrCreate(name: "ServiceType")
+    lazy var feedPlanCache = PersistentCache<FeedPlanQuery, [FeedPlan]>
+        .loadOrCreate(invalidationStrategy: .afterOneHour)
     
     lazy var teamWithServiceTypeCache = TeamWithServiceTypeCache(
         teamCache: self.teamCache,
@@ -37,5 +39,10 @@ class CoreServicesComposer {
     lazy var serviceTypeService: ServiceTypeService.Function = CachedService(
         service: ServiceTypeService.create(using: network),
         cache: serviceTypeCache
+    ).fetch
+    
+    lazy var feedPlanService = CachedService(
+        service: FeedPlanService(network: network).fetchFeedPlans,
+        cache: feedPlanCache
     ).fetch
 }

@@ -36,6 +36,8 @@ struct FeedPlanQuery: Hashable, Codable {
 
 class FeedPlanService {
     
+    typealias Function = (FeedPlanQuery, @escaping Completion<[FeedPlan]>)->()
+    
     let network: PCODownloadService
     
     init(network: PCODownloadService) {

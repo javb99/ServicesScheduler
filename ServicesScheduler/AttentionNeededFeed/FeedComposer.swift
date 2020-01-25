@@ -14,8 +14,9 @@ class FeedComposer {
     static func createFeedController(
         network: PCODownloadService,
         teamService: @escaping TeamService.Function,
-        serviceTypeService: @escaping ServiceTypeService.Function
-    ) -> some FeedController {
+        serviceTypeService: @escaping ServiceTypeService.Function,
+        feedPlanService: @escaping FeedPlanService.Function
+    ) -> ConcreteFeedController {
         
         let individualFeedPlanService = FeedPlanService(network: network).fetchFeedPlans(for:completion:)
         let cachedIndivFeedPlanService = CachedService(
