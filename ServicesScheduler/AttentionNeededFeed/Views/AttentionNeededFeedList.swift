@@ -28,7 +28,7 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
     var selectedTeams: Set<String>
     
     var body: some View {
-        List {
+        Group {
             AttentionNeededFeedList(
                 plans: controller.plans,
                 isLoading: controller.isLoading,
@@ -49,11 +49,7 @@ struct AttentionNeededFeedList: View {
     
     var body: some View {
         List{
-            VStack {
-                Text("Next 30 days")
-                    .font(.title)
-                PlanBreakdownView(breakdown: breakdown)
-            }.frame(maxWidth: .greatestFiniteMagnitude)
+            FeedHeader(breakdown: breakdown)
             
             FeedPlanSectionsContent(plans: plans)
             
