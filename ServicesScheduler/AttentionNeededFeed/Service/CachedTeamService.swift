@@ -116,6 +116,9 @@ class InMemoryCache<Key: Hashable, Value>: SyncCache {
     func getCachedValue(for key: Key) -> Value? {
         return storage[key]
     }
+    func clear() {
+        storage.removeAll()
+    }
 }
 
 extension SyncCache {

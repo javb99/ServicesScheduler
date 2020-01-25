@@ -11,6 +11,10 @@ import PlanningCenterSwift
 import Combine
 import AuthenticationServices
 
+extension Notification.Name {
+    static var userDidLogOut = Notification.Name("com.josephvb.services-scheduler.userDidLogOut")
+}
+
 class LogInStateMachine: ObservableObject {
     
     let tokenStore: OAuthTokenStore
@@ -93,6 +97,7 @@ class LogInStateMachine: ObservableObject {
     func logOut() {
         state = .notLoggedIn
         tokenStore.deleteToken()
+        NotificationCenter.default.post(name: .userDidLogOut, object: nil)
     }
     
     func cancel() {

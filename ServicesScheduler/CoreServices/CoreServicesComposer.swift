@@ -17,11 +17,20 @@ class CoreServicesComposer {
         self.network = network
     }
     
+    lazy var userWatchdog = UserLogOutWatchdog()
+    
     /// MARK: Caching
-    lazy var teamCache = PersistentCache<MTeam.ID, MTeam>.loadOrCreate(name: "Team")
-    lazy var serviceTypeCache = PersistentCache<MServiceType.ID, MServiceType>.loadOrCreate(name: "ServiceType")
+    lazy var teamCache = PersistentCache<MTeam.ID, MTeam>
+        .loadOrCreate(name: "Team")
+        .clearOnUserLogOutNotification(by: userWatchdog)
+    
+    lazy var serviceTypeCache = PersistentCache<MServiceType.ID, MServiceType>
+        .loadOrCreate(name: "ServiceType")
+        .clearOnUserLogOutNotification(by: userWatchdog)
+    
     lazy var feedPlanCache = PersistentCache<FeedPlanQuery, [FeedPlan]>
         .loadOrCreate(invalidationStrategy: .afterOneHour)
+        .clearOnUserLogOutNotification(by: userWatchdog)
     
     lazy var teamWithServiceTypeCache = TeamWithServiceTypeCache(
         teamCache: self.teamCache,

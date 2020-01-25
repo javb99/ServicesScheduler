@@ -73,6 +73,14 @@ final class MyTeamsScreenPresenter: MyTeamsScreenModel {
     }
 }
 
+extension MyTeamsScreenPresenter: UserLinkedStorage {
+    func removeStorageForCurrentUser() {
+        myTeams.removeAll()
+        isLoadingMyTeams = false
+        selectedTeams.removeAll()
+    }
+}
+
 extension Resource where Type == Models.ServiceType {
     func makePresentable() -> PresentableServiceType {
         Identified(self.name ?? "Unnamed", id: identifer.id)

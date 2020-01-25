@@ -48,6 +48,7 @@ class BrowserAuthorizer: Authorizer {
                 }
                 resolve(.success(code))
             }
+            self.session?.prefersEphemeralWebBrowserSession = true
             self.session?.presentationContextProvider = self.uiContext
             self.session?.start()
         }

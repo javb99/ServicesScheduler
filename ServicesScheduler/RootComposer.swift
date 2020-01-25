@@ -9,8 +9,12 @@
 import PlanningCenterSwift
 import SwiftUI
 
-class NavigationState: ObservableObject {
+class NavigationState: ObservableObject, UserLinkedStorage {
     @Published var currentTab: HomeViewTab = .myTeams
+    
+    func removeStorageForCurrentUser() {
+        currentTab = .myTeams
+    }
 }
 
 class RootComposer {
@@ -58,8 +62,10 @@ class RootComposer {
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var teamPresenter = MyTeamsComposer.createPresenter(network: service, teamObserver: coreServices.observeTeamWithServiceTypeService)
+        .clearOnUserLogOutNotification(by: coreServices.userWatchdog)
     
-    var navigationState = NavigationState()
+    lazy var navigationState = NavigationState()
+        .clearOnUserLogOutNotification(by: coreServices.userWatchdog)
     
     func makeRootView() -> some View {
         LogInProtected {
