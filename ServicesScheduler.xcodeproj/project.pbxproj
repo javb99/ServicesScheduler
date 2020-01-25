@@ -119,6 +119,7 @@
 		5C044DB823DC2FDA00CECC39 /* FeedPlanSectionsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPlanSectionsContent.swift; sourceTree = "<group>"; };
 		5C044DBA23DC33D900CECC39 /* FeedReloadControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReloadControls.swift; sourceTree = "<group>"; };
 		5C044DBC23DC350C00CECC39 /* FeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeader.swift; sourceTree = "<group>"; };
+		5C044DBE23DCC87300CECC39 /* privacy-policy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "privacy-policy.md"; sourceTree = "<group>"; };
 		5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVisibleView.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
@@ -377,6 +378,7 @@
 		5C96DED722ED13CC00BB643A = {
 			isa = PBXGroup;
 			children = (
+				5C044DBE23DCC87300CECC39 /* privacy-policy.md */,
 				5C044DB823DC2FDA00CECC39 /* FeedPlanSectionsContent.swift */,
 				5CCFF9A423A8A58C00596110 /* TODO.md */,
 				5C96DEE222ED13CC00BB643A /* ServicesScheduler */,
