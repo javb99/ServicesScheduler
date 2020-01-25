@@ -11,35 +11,37 @@ import SwiftUI
 struct PlanBreakdownView: View {
     var breakdown: FeedBreakdown
     
+    let circleWidth: CGFloat = 40
+    
     var body: some View {
         VStack {
-            HStack(spacing: 16) {
+            HStack(spacing: 24) {
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .confirmed)
-                        .frame(width: 50)
+                        .frame(maxWidth: circleWidth)
                     ThreeDigitLabel(number: breakdown.confirmed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .unconfirmed)
-                    .frame(width: 50)
+                        .frame(maxWidth: circleWidth)
                     ThreeDigitLabel(number: breakdown.unconfirmed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "person.circle"), status: .declined)
-                        .frame(width: 50)
+                        .frame(maxWidth: circleWidth)
                     ThreeDigitLabel(number: breakdown.declined)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "plus.circle"), status: .unconfirmed)
-                        .frame(width: 50)
+                        .frame(maxWidth: circleWidth)
                     ThreeDigitLabel(number: breakdown.needed)
                 }
                 VStack {
                     PersonCircle(image: Image(systemName: "envelope.circle"), status: .unconfirmed)
-                        .frame(width: 50)
+                        .frame(maxWidth: circleWidth)
                     ThreeDigitLabel(number: breakdown.unsent)
                 }
-            }.font(.title)
+            }.font(.headline)
         }
     }
 }
@@ -52,6 +54,7 @@ struct PersonCircle: View {
         image
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .font(Font.caption.weight(.ultraLight))
             .background(
                 Circle().foregroundColor(Color(.systemFill))
             )
@@ -80,11 +83,11 @@ struct ThreeDigitLabel: View {
             
             styleText("\(clampedNumber)")
                 .layoutPriority(-1) // Size based on text with 000
-        }
+        }.layoutPriority(2)
     }
     
     func styleText(_ text: String) -> some View {
-        Text(text)
+        Text(text).lineLimit(1)
     }
 }
 
