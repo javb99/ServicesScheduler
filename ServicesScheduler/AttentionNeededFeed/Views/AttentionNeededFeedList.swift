@@ -56,7 +56,7 @@ struct AttentionNeededFeedList: View {
             // TODO: Maybe use a delegate that listens to plans appearing and disapearing to trigger fetches and load more data.
             
             
-            FeedReloadControls(isLoading: isLoading, canLoadMorePlans: canLoadMorePlans, loadMorePlans: loadMorePlans)
+            //FeedReloadControls(isLoading: isLoading, canLoadMorePlans: canLoadMorePlans, loadMorePlans: loadMorePlans)
         }
     }
 }
