@@ -53,64 +53,14 @@ struct AttentionNeededFeedList: View {
                 PlanBreakdownView(breakdown: breakdown)
             }.frame(maxWidth: .greatestFiniteMagnitude)
             
-            ForEach(plans) { plan in
-                self.planSection(for: plan)
-            }
+            FeedPlanSectionsContent(plans: plans)
+            
             if isLoading {
                 Text("Loading...")
             } else if canLoadMorePlans {
                 Button(action: loadMorePlans) {
                     Text("Load more")
                 }
-            }
-        }
-    }
-    
-    func planHeader(for plan: PresentableFeedPlan) -> some View {
-        VStack(alignment: .leading) {
-            Text(plan.date).font(.headline)
-            Text(plan.serviceTypeName).font(.body)
-        }.padding(.vertical)
-    }
-    
-    func planSection(for plan: PresentableFeedPlan) -> some View {
-        Section(header: planHeader(for: plan)) {
-            ForEach(plan.teams) { team in
-                self.teamSection(for: team)
-            }
-        }
-    }
-    
-    func teamSection(for team: PresentableFeedTeam) -> some View {
-        Group {
-            Text(team.name).font(.headline)
-            ForEach(team.neededPostions, content: neededPositionRow)
-            ForEach(team.teamMembers, content: teamMemberRow)
-        }
-    }
-    
-    func neededPositionRow(for neededPosition: PresentableNeededPosition) -> some View {
-        HStack(spacing: 8) {
-            NeededPositionCircle(count: neededPosition.count)
-                .frame(width: 44, height: 44, alignment: .leading)
-            Text(neededPosition.title)
-        }
-    }
-    
-    func teamMemberRow(for teamMember: PresentableTeamMember) -> some View {
-        HStack(spacing: 8) {
-            StatusCircle(status: teamMember.status)
-                .frame(width: 44, height: 44, alignment: .leading)
-            VStack(alignment: .leading) {
-                Text(teamMember.name).font(.headline)
-                Text(teamMember.position)
-                    .lineLimit(2)
-            }
-            Spacer()
-            if teamMember.hasUnsentNotification {
-                NotificationNotSentView()
-                .fixedSize()
-                .font(.headline)
             }
         }
     }
