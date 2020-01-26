@@ -8,15 +8,20 @@
 
 import Foundation
 import PlanningCenterSwift
+import Combine
 
 class FeedComposer {
     
-    static func createFeedController(
+    let feedService: ConcreteFeedController.FeedService
+    let feedController: ConcreteFeedController
+    let feedStatusPresenter: OperationStatusPresenter
+    
+    init(
         network: PCODownloadService,
         teamService: @escaping TeamService.Function,
         serviceTypeService: @escaping ServiceTypeService.Function,
         feedPlanService: @escaping FeedPlanService.Function
-    ) -> ConcreteFeedController {
+    ) {
         
         let individualFeedPlanService = FeedPlanService(network: network).fetchFeedPlans(for:completion:)
         let cachedIndivFeedPlanService = CachedService(
@@ -36,8 +41,8 @@ class FeedComposer {
             serviceTypesService: serviceTypeSetService,
             teamsService: teamSetService
         )
+        (feedStatusPresenter, feedService) = OperationStatusPresenter.observing(service.fetchPlans(in:forTeams:completion:))
         
-        let controller = ConcreteFeedController(feedService: service.fetchPlans)
-        return controller
+        feedController = ConcreteFeedController(feedService: feedService)
     }
 }

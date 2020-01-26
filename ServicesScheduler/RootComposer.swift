@@ -58,7 +58,7 @@ class RootComposer {
     
     lazy var coreServices = CoreServicesComposer(network: service)
     
-    lazy var feedPresenter = FeedComposer.createFeedController(network: service, teamService: coreServices.teamService, serviceTypeService: coreServices.serviceTypeService, feedPlanService: coreServices.feedPlanService)
+    lazy var feedComposer = FeedComposer(network: service, teamService: coreServices.teamService, serviceTypeService: coreServices.serviceTypeService, feedPlanService: coreServices.feedPlanService)
     lazy var rootFolderLoader = FolderLoader(network: service)
     
     lazy var teamPresenter = MyTeamsComposer.createPresenter(network: service, teamObserver: coreServices.observeTeamWithServiceTypeService)
@@ -100,11 +100,14 @@ class RootComposer {
     func feedScreen() -> some View {
         NavigationView {
             FeedListContainer(
-                controller: feedPresenter,
+                controller: feedComposer.feedController,
                 feedBreakdownProvider: ArrayFeedBreakdownCalculator(),
                 selectedTeams: self.teamPresenter.selectedTeams
             ).navigationBarTitle("Feed")
         }.accentColor(.servicesGreen)
+        .overlay(
+            OperationStatusContainer(presenter: feedComposer.feedStatusPresenter),
+        alignment: .top)
     }
     
     func browserScreen() -> some View {

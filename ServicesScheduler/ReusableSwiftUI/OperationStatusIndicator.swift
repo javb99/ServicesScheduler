@@ -8,30 +8,14 @@
 
 import SwiftUI
 
-public struct OperationStatusView: View {
-    var status: OperationStatus
-    
-    public var body: some View {
-        HStack {
-            Text("\(status.text)")
-                .foregroundColor(status.textColor)
-            if status.shouldShowSpinner {
-                IsVisibleView {
-                    LoadingIndicator(isSpinning: $0){
-                        Image(systemName: "arrow.2.circlepath")
-                    }
-                }
-            }
-        }
-        .padding(.vertical, 4)
-        .padding(.horizontal)
-        .background(
-            Capsule().foregroundColor(status.fillColor)
-        )
+struct OperationStatusContainer: View {
+    @ObservedObject var presenter: OperationStatusPresenter
+    var body: some View {
+        AnimatedOperationStatus(status: presenter.status)
     }
 }
 
-struct AnimatedOperationStatus: View {
+fileprivate struct AnimatedOperationStatus: View {
     var status: OperationStatus
     
     var body: some View {
@@ -51,6 +35,29 @@ struct AnimatedOperationStatus: View {
             .opacity(isVisible(thisStatus) ? 1 : 0)
             .offset(x: 0, y: isVisible(thisStatus) ? 0 : -100)
             .animation(.spring())
+    }
+}
+
+fileprivate struct OperationStatusView: View {
+    var status: OperationStatus
+    
+    var body: some View {
+        HStack {
+            Text("\(status.text)")
+                .foregroundColor(status.textColor)
+            if status.shouldShowSpinner {
+                IsVisibleView {
+                    LoadingIndicator(isSpinning: $0){
+                        Image(systemName: "arrow.2.circlepath")
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal)
+        .background(
+            Capsule().foregroundColor(status.fillColor)
+        )
     }
 }
 
