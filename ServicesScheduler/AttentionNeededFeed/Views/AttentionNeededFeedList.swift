@@ -43,7 +43,7 @@ struct AttentionNeededFeedList: View {
     var plans: [PresentableFeedPlan]
     var canLoadMorePlans: Bool
     var loadMorePlans: ()->()
-    var breakdown: FeedBreakdown
+    var breakdown: FeedBreakdown?
     
     var body: some View {
         List{

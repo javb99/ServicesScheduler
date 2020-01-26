@@ -9,12 +9,14 @@
 import Foundation
 
 protocol FeedBreakdownProvider {
-    func getBreakdown(plans: [PresentableFeedPlan]) -> FeedBreakdown
+    func getBreakdown(plans: [PresentableFeedPlan]) -> FeedBreakdown?
 }
 
 class ArrayFeedBreakdownCalculator: FeedBreakdownProvider {
     
-    func getBreakdown(plans: [PresentableFeedPlan]) -> FeedBreakdown {
+    func getBreakdown(plans: [PresentableFeedPlan]) -> FeedBreakdown? {
+        if plans.isEmpty { return nil }
+        
         let allPeople = plans.flatMap { plan in
             plan.teams.flatMap { $0.teamMembers }
         }

@@ -10,9 +10,13 @@ import SwiftUI
 
 struct FeedHeader: View {
     
-    var breakdown: FeedBreakdown
+    var breakdown: FeedBreakdown?
     
     var body: some View {
+        breakdown.map(body(for:))
+    }
+    
+    func body(for breakdown: FeedBreakdown) -> some View {
         VStack {
             Text("Next 30 days")
                 .font(.title)
