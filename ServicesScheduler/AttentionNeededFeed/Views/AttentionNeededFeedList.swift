@@ -31,7 +31,6 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
         Group {
             AttentionNeededFeedList(
                 plans: controller.plans,
-                isLoading: controller.isLoading,
                 canLoadMorePlans: controller.canLoadMorePlans,
                 loadMorePlans: controller.loadMorePlans,
                 breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
@@ -42,7 +41,6 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
 
 struct AttentionNeededFeedList: View {
     var plans: [PresentableFeedPlan]
-    var isLoading: Bool = false
     var canLoadMorePlans: Bool
     var loadMorePlans: ()->()
     var breakdown: FeedBreakdown
@@ -56,7 +54,7 @@ struct AttentionNeededFeedList: View {
             // TODO: Maybe use a delegate that listens to plans appearing and disapearing to trigger fetches and load more data.
             
             
-            FeedReloadControls(isLoading: isLoading, canLoadMorePlans: false, loadMorePlans: loadMorePlans)
+            FeedReloadControls(canLoadMorePlans: false, loadMorePlans: loadMorePlans)
         }
     }
 }

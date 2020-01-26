@@ -9,15 +9,12 @@
 import SwiftUI
 
 struct FeedReloadControls: View {
-    var isLoading: Bool
     var canLoadMorePlans: Bool
     var loadMorePlans: ()->()
     
     var body: some View {
         Group {
-            if isLoading {
-                Text("Loading...")
-            } else if canLoadMorePlans {
+            if canLoadMorePlans {
                 Button(action: loadMorePlans) {
                     Text("Load more")
                 }
