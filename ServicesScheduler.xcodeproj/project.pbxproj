@@ -15,6 +15,8 @@
 		5C044DC023DCDBB200CECC39 /* UserBoundCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DBF23DCDBB200CECC39 /* UserBoundCache.swift */; };
 		5C11D9922351AFD2008BCAE4 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */; };
 		5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */; };
+		5C15675A23DCF43000AFFE5B /* OperationStatusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C044DC123DCEE2300CECC39 /* OperationStatusPresenter.swift */; };
+		5C15675C23DCF75F00AFFE5B /* OperationStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C15675B23DCF75F00AFFE5B /* OperationStatusIndicator.swift */; };
 		5C17CDBF2336A79D00E4E7C5 /* DynamicFolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */; };
 		5C17CDC12336A95100E4E7C5 /* FolderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */; };
 		5C17CDC32336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */; };
@@ -122,8 +124,10 @@
 		5C044DBC23DC350C00CECC39 /* FeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeader.swift; sourceTree = "<group>"; };
 		5C044DBE23DCC87300CECC39 /* privacy-policy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "privacy-policy.md"; sourceTree = "<group>"; };
 		5C044DBF23DCDBB200CECC39 /* UserBoundCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBoundCache.swift; sourceTree = "<group>"; };
+		5C044DC123DCEE2300CECC39 /* OperationStatusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStatusPresenter.swift; sourceTree = "<group>"; };
 		5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		5C11D9932351BB33008BCAE4 /* IsVisibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVisibleView.swift; sourceTree = "<group>"; };
+		5C15675B23DCF75F00AFFE5B /* OperationStatusIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStatusIndicator.swift; sourceTree = "<group>"; };
 		5C17CDBE2336A79D00E4E7C5 /* DynamicFolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderContentView.swift; sourceTree = "<group>"; };
 		5C17CDC02336A95100E4E7C5 /* FolderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLoader.swift; sourceTree = "<group>"; };
 		5C17CDC22336A9D000E4E7C5 /* NetworkRecursiveFolderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecursiveFolderFactory.swift; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				5CAD909A2348198C00F02002 /* PreviewHelpers.swift */,
 				5CAD909D2348533000F02002 /* SelectableList.swift */,
 				5C11D9912351AFD2008BCAE4 /* LoadingIndicator.swift */,
+				5C15675B23DCF75F00AFFE5B /* OperationStatusIndicator.swift */,
+				5C044DC123DCEE2300CECC39 /* OperationStatusPresenter.swift */,
 			);
 			path = ReusableSwiftUI;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 				5C320BBB2379E8CC003CDEE8 /* MyTeamsService.swift in Sources */,
 				5C521D8F2376893D00AD2255 /* HomeView.swift in Sources */,
 				5C11D9942351BB33008BCAE4 /* IsVisibleView.swift in Sources */,
+				5C15675A23DCF43000AFFE5B /* OperationStatusPresenter.swift in Sources */,
 				5CAFDD152349827700162DE0 /* SequenceExtensions.swift in Sources */,
 				5CCFF9B423A9E12400596110 /* ProfileView.swift in Sources */,
 				5C044DB723DC21BE00CECC39 /* FeedBreakdownCalculator.swift in Sources */,
@@ -743,6 +750,7 @@
 				5CCFF9A023A8332400596110 /* BrowserContext.swift in Sources */,
 				5CB7270F23A7361F006BD2F4 /* LogInState.swift in Sources */,
 				5CF855DF23D6C74F00C27EDC /* PersistentCache.swift in Sources */,
+				5C15675C23DCF75F00AFFE5B /* OperationStatusIndicator.swift in Sources */,
 				5CCFF9A823A8A91600596110 /* KeychainPasswordItem.swift in Sources */,
 				5C96DEE822ED13CC00BB643A /* FolderContentView.swift in Sources */,
 				5C044DBB23DC33D900CECC39 /* FeedReloadControls.swift in Sources */,

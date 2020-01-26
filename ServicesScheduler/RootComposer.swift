@@ -72,7 +72,8 @@ class RootComposer {
             DerivedBinding(for: \.currentTab, on: self.navigationState) {
                 HomeView(selectedTab: $0, makeTeamsView: self.teamsScreen, makeFeedView: self.feedScreen, makeBrowserView: self.browserScreen, makeProfileView: self.profileScreen)
             }
-        }.edgesIgnoringSafeArea(.top)
+        }
+        .edgesIgnoringSafeArea(.top)
         .environmentObject(logInStateMachine)
         .environmentObject(PresentableLogInStateMachine(logInState: logInStateMachine.$state.eraseToAnyPublisher()))
     }
