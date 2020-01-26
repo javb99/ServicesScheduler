@@ -33,7 +33,7 @@ fileprivate struct AnimatedOperationStatus: View {
     func view(for thisStatus: OperationStatus) -> some View {
         OperationStatusView(status: thisStatus)
             .opacity(isVisible(thisStatus) ? 1 : 0)
-            .offset(x: 0, y: isVisible(thisStatus) ? 0 : -100)
+            .offset(x: 0, y: isVisible(thisStatus) ? 0 : 100)
             .animation(.spring())
     }
 }

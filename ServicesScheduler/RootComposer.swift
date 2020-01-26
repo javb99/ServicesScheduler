@@ -105,7 +105,7 @@ class RootComposer {
         )
         .overlay(
             OperationStatusContainer(presenter: feedComposer.feedStatusPresenter),
-            alignment: .top
+            alignment: .bottom
         )
         .accentColor(.servicesGreen)
     }
