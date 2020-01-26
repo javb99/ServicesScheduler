@@ -98,16 +98,16 @@ class RootComposer {
     }
     
     func feedScreen() -> some View {
-        NavigationView {
-            FeedListContainer(
-                controller: feedComposer.feedController,
-                feedBreakdownProvider: ArrayFeedBreakdownCalculator(),
-                selectedTeams: self.teamPresenter.selectedTeams
-            ).navigationBarTitle("Feed")
-        }.accentColor(.servicesGreen)
+        FeedListContainer(
+            controller: feedComposer.feedController,
+            feedBreakdownProvider: ArrayFeedBreakdownCalculator(),
+            selectedTeams: self.teamPresenter.selectedTeams
+        )
         .overlay(
             OperationStatusContainer(presenter: feedComposer.feedStatusPresenter),
-        alignment: .top)
+            alignment: .top
+        )
+        .accentColor(.servicesGreen)
     }
     
     func browserScreen() -> some View {

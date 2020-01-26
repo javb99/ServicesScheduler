@@ -28,14 +28,13 @@ struct FeedListContainer<Controller>: View where Controller: FeedController {
     var selectedTeams: Set<String>
     
     var body: some View {
-        Group {
-            AttentionNeededFeedList(
-                plans: controller.plans,
-                canLoadMorePlans: controller.canLoadMorePlans,
-                loadMorePlans: controller.loadMorePlans,
-                breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
-            )
-        }.onAppear { self.controller.reset(for: self.selectedTeams) }
+        AttentionNeededFeedList(
+            plans: controller.plans,
+            canLoadMorePlans: controller.canLoadMorePlans,
+            loadMorePlans: controller.loadMorePlans,
+            breakdown: feedBreakdownProvider.getBreakdown(plans: controller.plans)
+        )
+        .onAppear { self.controller.reset(for: self.selectedTeams) }
     }
 }
 
@@ -46,16 +45,17 @@ struct AttentionNeededFeedList: View {
     var breakdown: FeedBreakdown?
     
     var body: some View {
-        List{
+        VStack {
             FeedHeader(breakdown: breakdown)
-            
-            FeedPlanSectionsContent(plans: plans)
-            
-            // TODO: Maybe use a delegate that listens to plans appearing and disapearing to trigger fetches and load more data.
-            
-            
-            FeedReloadControls(canLoadMorePlans: false, loadMorePlans: loadMorePlans)
+            List{
+                FeedPlanSectionsContent(plans: plans)
+                
+                // TODO: Maybe use a delegate that listens to plans appearing and disapearing to trigger fetches and load more data.
+                
+                FeedReloadControls(canLoadMorePlans: false, loadMorePlans: loadMorePlans)
+            }
         }
+        
     }
 }
 
@@ -64,10 +64,7 @@ struct AttentionNeededFeedList_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(Bool.allCases, id: \.self) { canLoadPlans in
             LightAndDark {
-                NavigationView {
-                    AttentionNeededFeedList(plans: .sample, canLoadMorePlans: canLoadPlans, loadMorePlans: {}, breakdown: .sample)
-                    .navigationBarTitle("Title")
-                }
+                AttentionNeededFeedList(plans: .sample, canLoadMorePlans: canLoadPlans, loadMorePlans: {}, breakdown: .sample)
             }
         }
     }

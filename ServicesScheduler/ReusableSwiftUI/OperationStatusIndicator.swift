@@ -67,9 +67,9 @@ extension OperationStatus {
         case .notActive:
             return Color(.systemFill)
         case .errorDisplayed:
-            return Color(.systemRed).opacity(0.5)
+            return Color(.systemRed)
         case .successDisplayed:
-            return Color(.systemGreen).opacity(0.5)
+            return Color(.systemGreen)
         case .active:
             return Color(.systemFill)
         }
