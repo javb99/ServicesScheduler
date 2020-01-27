@@ -934,7 +934,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ServicesScheduler/Scheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "ServicesScheduler/Preview\\ Content";
 				DEVELOPMENT_TEAM = ZRHLCAHG9L;
 				ENABLE_PREVIEWS = YES;
@@ -956,7 +956,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ServicesScheduler/Scheduler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "ServicesScheduler/Preview\\ Content";
 				DEVELOPMENT_TEAM = ZRHLCAHG9L;
 				ENABLE_PREVIEWS = YES;
