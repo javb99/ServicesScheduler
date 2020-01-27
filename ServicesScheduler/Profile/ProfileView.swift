@@ -16,9 +16,9 @@ struct ProfileView: View {
         NavigationView {
             VStack {
                 Spacer()
-                WebLink(url: URL.constant("http://josephvb.com/services-scheduler/privacy-policy"), label: Text("privacy policy"))
+                WebLink(url: URL.constant("http://josephvb.com/servicesScheduler/privacy-policy"), label: Text("privacy policy"))
                     .padding()
-                WebLink(url: URL.constant("http://josephvb.com/about"), label: Text("about the developer"))
+                WebLink(url: URL.constant("http://josephvb.com"), label: Text("about the developer"))
                     .padding()
                 WebLink(url: URL.constant("https://api.planningcenteronline.com/access_tokens"), label: Text("revoke access"))
                     .padding()
