@@ -27,7 +27,8 @@ struct LogInProtected<Content: View>: View {
 
 struct DisclaimerOverlay: View {
     var body: some View {
-        Text("Services Scheduler is not developed by Planning Center")
+        Text("Services Scheduler is not developed by Planning Center")
+            .multilineTextAlignment(.center)
             .padding(.vertical)
             .font(.footnote)
     }
