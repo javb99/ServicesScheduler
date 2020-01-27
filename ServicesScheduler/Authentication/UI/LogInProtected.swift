@@ -25,6 +25,14 @@ struct LogInProtected<Content: View>: View {
     }
 }
 
+struct DisclaimerOverlay: View {
+    var body: some View {
+        Text("Services Scheduler is not developed by Planning Center")
+            .padding(.vertical)
+            .font(.footnote)
+    }
+}
+
 func PrimaryButton(action: @escaping ()->(), label: String) -> some View {
     Button(action: action) {
         Text(verbatim: label)
@@ -62,6 +70,9 @@ private struct _LogInProtected<Content: View>: View {
                         PrimaryButton(action: logIn, label: "Log In")
                     }
                 }
+                .frame(maxWidth: .greatestFiniteMagnitude, maxHeight: .greatestFiniteMagnitude)
+                .overlay(DisclaimerOverlay(), alignment: .bottom)
+                
             } else if state == .loggedIn {
                 content()
             } else {
