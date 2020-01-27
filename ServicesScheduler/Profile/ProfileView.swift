@@ -15,11 +15,14 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
+                
                 WebLink(url: URL.constant("http://josephvb.com/servicesScheduler/privacy-policy"), label: Text("privacy policy"))
                     .padding()
                 WebLink(url: URL.constant("http://josephvb.com"), label: Text("about the developer"))
                     .padding()
+                
+                Spacer()
+                
                 WebLink(url: URL.constant("https://api.planningcenteronline.com/access_tokens"), label: Text("revoke access"))
                     .padding()
                     .accentColor(.red)
